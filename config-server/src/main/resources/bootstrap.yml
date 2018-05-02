@@ -4,11 +4,7 @@ management:
     
 spring:
   application:
-    name: web-api
-  cloud:
-    config:
-      uri: http://localhost:8081
-      label: develop    
+    name: config-server
         
 security:
   ignored: /**

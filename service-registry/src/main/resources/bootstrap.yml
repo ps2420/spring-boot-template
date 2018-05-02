@@ -5,10 +5,12 @@ management:
 spring:
   application:
     name: service-registry
+  boot:
+    admin:
+      context-path: /admin  
   cloud:
     config:
       uri: http://localhost:8081
-      label: develop    
         
 security:
   ignored: /**
