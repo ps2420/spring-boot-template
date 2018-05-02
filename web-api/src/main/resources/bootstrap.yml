@@ -1,0 +1,24 @@
+management:
+  security:
+    enabled: false
+    
+spring:
+  application:
+    name: web-api
+  cloud:
+    config:
+      uri: http://localhost:8081
+      label: develop    
+        
+security:
+  ignored: /**
+  basic:
+    enabled: false
+    
+endpoints:
+  jmx:
+    enabled: false
+    
+info:
+  version: ${APP_VERSION}
+  name: ${spring.application.name}                

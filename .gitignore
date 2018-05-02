@@ -8,6 +8,10 @@
 ./service-registry/target
 ./web-api/target
 ./config-server/target
+./config-server/target
+./config-server/bin
+./web-api/bin
+./service-registry/bin
 # dependencies
 /node_modules
 
