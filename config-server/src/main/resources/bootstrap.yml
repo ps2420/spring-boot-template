@@ -1,20 +1,26 @@
 management:
   security:
+    enabled: true
+
+endpoints:
+  jmx:
     enabled: false
-    
+
 spring:
   application:
     name: config-server
+  security:
+    user:
+      name: ${DEFAULT_USER:admin}
+      password: ${DEFAULT_PASSWORD:admin}  
         
 security:
-  ignored: /**
   basic:
-    enabled: false
-    
-endpoints:
-  jmx:
     enabled: false
     
 info:
   version: ${APP_VERSION}
-  name: ${spring.application.name}                
+  name: ${spring.application.name}
+  
+server:
+  port: ${SERVER_PORT:5011}                

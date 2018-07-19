@@ -1,10 +1,10 @@
 server:
-  port: ${SERVER_PORT:5016}
-
+  port: ${SERVER_PORT:5013}
+  
 eureka:
  instance:
    hostname: ${SERVER_HOST:localhost}
-   preferIpAddress: false
+   prefer-ip-address: false
    leaseRenewalIntervalInSeconds: 5
  client:
    registerWithEureka: true
@@ -13,6 +13,6 @@ eureka:
    enabled: ${EUREKA_CLIENT_ENABLED:true}
    leaseRenewalIntervalInSeconds: 5
    serviceUrl:
-      defaultZone: ${EUREKA_URL:http://@${SERVER_HOST:localhost}:${EUREKA_SERVER_PORT:5012}/eureka/}
+      defaultZone: ${EUREKA_URL:http://${SERVER_HOST:localhost}:${EUREKA_SERVER_PORT:5012}/eureka/}
  server:
    waitTimeInMsWhenSyncEmpty: 0
