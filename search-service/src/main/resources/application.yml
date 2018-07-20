@@ -25,8 +25,8 @@ elastic:
     protocol: http
     elasticHostConfigs:
       -  
-        host: 1.2.3
-        port: 123
+        host: 192.168.1.119
+        port: 9200
       - 
-        host: a.b.c
-        port: 567
+        host: 192.168.1.35
+        port: 9200

@@ -52,10 +52,11 @@ public class ElasticSearchClient {
   }
 
   private HttpHost[] getHostConfigArray() {
-    final List<HttpHost> httpHost = elasticClientConfiguration.getElasticHostConfigs().stream().map(hostConfig -> {
+    final List<HttpHost> httpHostL = elasticClientConfiguration.getElasticHostConfigs().stream().map(hostConfig -> {
       return new HttpHost(hostConfig.getHost(), hostConfig.getPort(), elasticClientConfiguration.getProtocol());
     }).collect(Collectors.toList());
-    return (HttpHost[]) httpHost.toArray();
+    final HttpHost[] hostArray = new HttpHost[httpHostL.size()];
+    return httpHostL.toArray(hostArray);
   }
 
   private CredentialsProvider getCredentialProvider() {
