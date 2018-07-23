@@ -1,27 +1,26 @@
 spring:
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 10MB
+      max-file-size: 100MB
+      max-request-size: 120MB
   application:
-    name: api-gateway
+    name: file-upload
   cloud:
     config:
       uri: ${CONFIG_SERVER_URI:http://${SERVER_HOST:localhost}:${CONFIG_SERVER_PORT:5011}}
       username: ${DEFAULT_USER:admin}
       password: ${DEFAULT_PASSWORD:admin}
         
-management:
-  security:
-    enabled: false
-    
 endpoints:
   jmx:
     enabled: false
+
+management:
+  security:
+    enabled: true
     
 info:
   version: ${APP_VERSION}
-  name: ${spring.application.name}  
-  
-zuul:
-  routes:
-    dashboard:
-      serviceId: web-api
-  host:
-    socket-timeout-millis: 30000                
+  name: ${spring.application.name}                  

@@ -1,0 +1,24 @@
+.container-header {
+    height : 10%;    
+    padding:2px;    
+	background: #E6E6E6; 
+}
+
+.container-content {
+    height: 80%;    
+    padding:2px;
+    margin: 1px;
+    background: #E6E6E6; 
+}
+
+.container-footer {
+	height:5%;
+	padding:2px;
+	background: #E6E6E6;
+	font-size: 15px;
+	font-style: italic;
+}
+
+.height-full {
+	height: 100%;
+}

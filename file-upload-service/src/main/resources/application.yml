@@ -1,0 +1,35 @@
+server:
+  port: ${SERVER_PORT:5017}
+
+eureka:
+ instance:
+   hostname: ${SERVER_HOST:localhost}
+   preferIpAddress: false
+   leaseRenewalIntervalInSeconds: 5
+ client:
+   registerWithEureka: true
+   fetchRegistry: true
+   registryFetchIntervalSeconds: 5
+   enabled: ${EUREKA_CLIENT_ENABLED:false}
+   leaseRenewalIntervalInSeconds: 5
+   healthcheck:
+     enabled: true
+   serviceUrl:
+     defaultZone: ${EUREKA_URL:http://${SERVER_HOST:localhost}:${EUREKA_SERVER_PORT:5012}/eureka/}
+ server:
+   waitTimeInMsWhenSyncEmpty: 0
+   
+file:
+  uploadDir: /tmp/file-upload
+
+elastic:
+  client:
+    authenticated: false
+    protocol: http
+    elasticHostConfigs:
+      -  
+        host: 192.168.1.119
+        port: 9200
+      - 
+        host: 192.168.1.35
+        port: 9200
