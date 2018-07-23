@@ -1,0 +1,6 @@
+#drag-drop-border {
+	height: 6rem;
+	border: 2px dashed #dee2e6;
+	color : #dee2e6;
+	font-style: italic;
+}

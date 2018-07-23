@@ -22,26 +22,19 @@ export class UploadDocumentComponent implements OnInit {
 
    ngOnInit() : void {
     
-    this.uploader.onErrorItem = (item, response, status, headers) => this.onErrorItem(item, response, status, headers);
+    //this.uploader.onErrorItem = (item, response, status, headers) => this.onErrorItem(item, response, status, headers);
     
-    this.uploader.onSuccessItem = (item, response, status, headers) => this.onSuccessItem(item, response, status, headers);
+    //this.uploader.onSuccessItem = (item, response, status, headers) => this.onSuccessItem(item, response, status, headers);
   }
  
- 
-  onSuccessItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): void {
-    let data = JSON.parse(response); //success server response
-    console.log("File has been uploaded successfully : " + response + "==>" + data);
+  
+  public changeDnDBorderColor(type: string, e:any): void {
+    this.hasBaseDropZoneOver = (type === 'mouseleave') ? false : true;
   }
-
-  onErrorItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): void {
-    let error = JSON.parse(response); //error server response
-    console.log("Error in file uploading " + error);
-  }
-
  
   public fileOverBase(e:any):void {
     this.hasBaseDropZoneOver = e;
-    console.log("is running for HTML 5" + this.uploader.isHTML5);
+    console.log("fileoverBASE....")
   }
 
 

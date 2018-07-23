@@ -1,12 +1,14 @@
 <div class="" style="margin:10px;">
-    <div class="" style="height:6rem;border:2px dashed gray;">
+    <div id="drag-drop-border" (mouseleave) ="changeDnDBorderColor('mouseleave',$event)" (mouseenter) ="changeDnDBorderColor('mouseenter', $event)"
+         [ngStyle]="{'border': hasBaseDropZoneOver ? '2px dashed #6c757d' : '2px dashed #dee2e6',
+                     'color' : hasBaseDropZoneOver ? '#6c757d' : '#dee2e6'}">
         <div ng2FileDrop
-             [ngClass]=" hasBaseDropZoneOver ? 'nv-file-over h-100':'my-drop-zone h-100'"
+             [ngClass]="hasBaseDropZoneOver ? 'nv-file-over':'my-drop-zone'"
              (fileOver)="fileOverBase($event)"
              [uploader]="uploader"
              class="well my-drop-zone" 
              [ngStyle]="{'line-height':'5rem','text-align':'center'}"
-               (click)="fileInput.click()" class="file-picker ">
+               (click)="fileInput.click()" class="file-picker h-100">
             Drag and Drop Files
         </div>
     </div>
