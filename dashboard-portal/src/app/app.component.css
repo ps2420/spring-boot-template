@@ -22,3 +22,38 @@
 .height-full {
 	height: 100%;
 }
+
+.participant{
+    border-style: inset;
+    background-color: white;
+    display: inline-block;
+    height: 200px;
+    border-radius: 25px;
+    border: 2px solid #0c2438;
+    padding: 20px;
+}
+
+.bodybackground {
+    text-align: center;
+}
+
+.participantButton {
+    background-color: #0c2438;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+p {
+    display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+}

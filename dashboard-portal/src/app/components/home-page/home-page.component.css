@@ -1,62 +1,37 @@
-/*******************************
-* ACCORDION WITH TOGGLE ICONS
-* Does not work properly if "in" is added after "collapse".
-*******************************/
-.panel-group .panel {
-	border-radius: 0;
-	box-shadow: none;
-	border-color: #EEEEEE;
+
+
+.participant{
+    border-style: inset;
+    background-color: white;
+    display: inline-block;
+    height: 200px;
+    border-radius: 20px;
+    border: 2px solid #0c2438;
+    padding: 20px;
 }
 
-.panel-default > .panel-heading {
-	padding: 0;
-	border-radius: 0;
-	color: #212121;
-	background-color: #FAFAFA;
-	border-color: #EEEEEE;
+.bodybackground {
+    text-align: center;
 }
 
-.panel-title {
-	font-size: 14px;
+.participantButton {
+    background-color: #0c2438;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 15px
 }
 
-.panel-title > a {
-	display: block;
-	padding: 15px;
-	text-decoration: none;
-}
-
-.more-less {
-	float: right;
-	color: #212121;
-}
-
-.panel-default > .panel-heading + .panel-collapse > .panel-body {
-	border-top-color: #EEEEEE;
-}
- 
-
-.panel,
-.panel-body {
-  box-shadow: none;
-}
-
-.panel-group .panel-heading {
-  padding: 0;
-}
-
-.panel-group .panel-heading a {
-  display: block;
-  padding: 10px 15px;
-  text-decoration: none;
-  position: relative;
-}
-
-.panel-group .panel-heading a:after {
-  content: '-';
-  float: right;
-}
-
-.panel-group .panel-heading a.collapsed:after {
-  content: '+';
+p {
+    display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
 }

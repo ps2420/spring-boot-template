@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FileSelectDirective, FileUploader } from 'ng2-file-upload/ng2-file-upload';
 
-@Component({
-  selector: 'app-upload-document',
-  templateUrl: './upload-document.component.html',
-  styleUrls: ['./upload-document.component.css']
-})
 
-export class UploadDocumentComponent implements OnInit {
+@Component({
+  selector: 'app-upload',
+  templateUrl: './upload.component.html',
+  styleUrls: ['./upload.component.css']
+})
+export class UploadComponent implements OnInit {
 
   public title: String = "Equity Debt Ratio File Upload";
   public hasBaseDropZoneOver:boolean = false; 
@@ -37,5 +37,5 @@ export class UploadDocumentComponent implements OnInit {
     console.log("fileoverBASE....")
   }
 
-
 }
+

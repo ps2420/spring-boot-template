@@ -3,21 +3,23 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
-import { AppRoutingModule } from './app-routing.module';
-import { UploadDocumentComponent } from './components/upload-document/upload-document.component';
+import { AppRoutingModule } from './app-routing.module'; 
 
 import { FileUploadModule } from 'ng2-file-upload/ng2-file-upload'; 
- 
 import { FormsModule } from '@angular/forms';
 
-
-import { LogService } from './service/log/log.service';
+import { LogService } from './service/log/log.service'; 
+import { SearchComponent } from './components/search/search.component';
+import { DownloadComponent } from './components/download/download.component';
+import { UploadComponent } from './components/upload/upload.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomePageComponent,
-    UploadDocumentComponent
+    HomePageComponent, 
+    SearchComponent,
+    DownloadComponent,
+    UploadComponent
   ],
   imports: [
     BrowserModule,

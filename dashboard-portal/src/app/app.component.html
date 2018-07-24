@@ -1,17 +1,18 @@
-<div>
-    <div style="height:5vh;">
-	   <img src="assets/images/amaris_logo.png" width="150" class="h-100"/>
-    </div>    
-    <div class="col-sm-12" style="height:70vh;">  
-		<section id="main-content" class="h-100">
-		    <router-outlet></router-outlet>
-		</section>  
-	</div>
-	 <div style="height:5vh"> 
-        <div class="container-footer col-sm-12" [ngStyle]="{'text-align':'center', 'height' : '100%'}">
-	        <footer>
-	            <h5><p style="margin-top: 3px;">© Copyright 2018 Amaris AI Pvt. Ltd.</p></h5>
-	        </footer>    
-	    </div>
-	</div>
+<nav class="navbar navbar-inverse navbar2" style="background-color: #0c2438;color:white;">
+  <div class="container-fluid row">
+  	<div style="height:5vh;" class="col-sm-6">
+	   <img src="assets/images/amaris_logo.png" width="150" class=""/>
+	</div> 
+    
+    <div class="col-sm-6" style="float: right;text-align: right;">
+      <a class="navbar-brand navfont" href="#" style="color:white;">
+         <i class="fa fa-file-image-o" aria-hidden="true"></i> Document Management System
+      </a>
+    </div> 
+  </div>
+</nav>
+ <div class="container-fluid">  
+	<section id="main-content">
+	    <router-outlet></router-outlet>
+	</section>  
 </div>
