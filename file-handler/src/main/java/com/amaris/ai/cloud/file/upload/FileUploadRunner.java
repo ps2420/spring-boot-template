@@ -1,19 +1,16 @@
-package com.amaris.ai.cloud.dashboard;
+package com.amaris.ai.cloud.file.upload;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@EnableDiscoveryClient
 @EnableAutoConfiguration
 @SpringBootApplication
-public class DashboardServiceRunner {
+public class FileUploadRunner {
 
   public static void main(String[] args) {
-    SpringApplication.run(DashboardServiceRunner.class, args);
+    SpringApplication.run(FileUploadRunner.class, args);
   }
-
 }

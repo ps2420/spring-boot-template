@@ -1,4 +1,4 @@
-package com.amaris.ai.cloud.search;
+package com.amaris.ai.web;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -10,10 +10,10 @@ import org.springframework.context.annotation.Configuration;
 @EnableDiscoveryClient
 @EnableAutoConfiguration
 @SpringBootApplication
-public class SearchServiceRunner {
+public class WebApiRunner {
 
   public static void main(String[] args) {
-    SpringApplication.run(SearchServiceRunner.class, args);
+    SpringApplication.run(WebApiRunner.class, args);
   }
 
 }

@@ -1,0 +1,20 @@
+[
+	{
+		"label": "Equity",
+		"description": "Equity",
+		"selected": false,
+		"fieldid": "equity"
+	},
+	{
+		"label": "Option",
+		"description": "Option (FX/Equity/FI..)",
+		"selected": false,
+		"fieldid": "option"
+	},
+	{
+		"label": "Derivative",
+		"description": "Derivative (Equity/FX/OTC..)",
+		"selected": false,
+		"fieldid": "derivative"
+	}
+]

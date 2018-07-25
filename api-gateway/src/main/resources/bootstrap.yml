@@ -44,8 +44,13 @@ hystrix:
               timeoutInMilliseconds: 41000
 
 zuul:
+  routes:
+    file-handler:
+      serviceId: file-handler
+    search-service:
+      serviceId: search-service
+    web-api:
+      serviceId: web-api
   host:
     max-total-connections: 10000
     max-per-route-connections: 50
-    
-                  

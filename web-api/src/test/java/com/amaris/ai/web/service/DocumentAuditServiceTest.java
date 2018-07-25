@@ -1,33 +1,32 @@
-package com.amaris.ai.cloud.search.configuration;
+package com.amaris.ai.web.service;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
-import com.amaris.ai.cloud.search.ITTestSetup;
-import com.amaris.ai.cloud.search.configuration.elastic.ElasticSearchClient;
+import com.amaris.ai.web.ITTestSetup;
+import com.amaris.ai.web.model.DocumentAudit;
+import com.amaris.ai.web.util.WebUtil;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {ITTestSetup.class}, webEnvironment = WebEnvironment.RANDOM_PORT)
 @ActiveProfiles({"local"})
-public class ElasticSearchClientTest {
-
-  private static final Logger LOGGER = LoggerFactory.getLogger(ElasticSearchClientTest.class);
+public class DocumentAuditServiceTest {
 
   @Autowired
-  private ElasticSearchClient elasticSearchClient;
+  private DocumentAuditService documentAuditService;
 
   @Test
-  public void testElasticClientInitialization() {
-    assertNotNull(elasticSearchClient);
-    assertNotNull(elasticSearchClient.searchClient());
+  public void testDocumentAuditData() throws Exception {
+    final List<DocumentAudit> docList = documentAuditService.listDocumentAudits(null);
+    WebUtil.objectMapper().writeValueAsString(docList);
+    assertNotNull(docList);
+    assertTrue(docList.size() > 0);
   }
-
-
 }

@@ -1,0 +1,16 @@
+[
+  {
+    "product"   : "Equity",
+    "document"  : "Equity_Debt_Ratio.pdf",
+    "uploadedBy": "amaris",
+    "comments"  : "data is mocked, ignore it..",
+    "uploadDate": 1532487845164
+  },
+  {
+    "product"   : "Finance",
+    "document"  : "Financial_report.pdf",
+    "uploadedBy": "test_user",
+    "comments"  : "data is mocked, ignore it..",
+    "uploadDate": 1532489845164
+  }
+]
