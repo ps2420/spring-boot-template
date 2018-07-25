@@ -5,11 +5,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.amaris.ai</groupId>
-	<artifactId>dashboard-service</artifactId>
+	<artifactId>web-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>dashboard-service</name>
+	<name>web-api</name>
 	<description>eureka service discovery management server</description>
 
 	<parent>
