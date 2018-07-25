@@ -96,7 +96,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<!-- <configuration> <mainClass></mainClass> </configuration> -->
+				<configuration>
+					<mainClass>com.amaris.ai.cloud.web.WebApiRunner</mainClass>
+				</configuration>
 				<executions>
 					<execution>
 						<goals>

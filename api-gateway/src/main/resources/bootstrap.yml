@@ -21,7 +21,7 @@ endpoints:
     enabled: false
     
 info:
-  version: ${APP_VERSION}
+  version: ${APP_VERSION:0.0.1}
   name: ${spring.application.name}  
   
 ribbon:

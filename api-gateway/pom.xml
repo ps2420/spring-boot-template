@@ -93,7 +93,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<!-- <configuration> <mainClass></mainClass> </configuration> -->
+				<configuration>
+					<mainClass>com.amaris.ai.cloud.api.gateway.ApiGatewayRunner</mainClass>
+				</configuration>
 				<executions>
 					<execution>
 						<goals>
@@ -104,5 +106,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
