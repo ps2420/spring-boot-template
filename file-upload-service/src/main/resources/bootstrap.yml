@@ -2,9 +2,9 @@ spring:
   servlet:
     multipart:
       enabled: true
-      file-size-threshold: 10MB
-      max-file-size: 100MB
-      max-request-size: 120MB
+      file-size-threshold: 50MB
+      max-file-size: 50MB
+      max-request-size: 50MB
   application:
     name: file-upload
   cloud:

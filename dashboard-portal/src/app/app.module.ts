@@ -7,6 +7,9 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { FileUploadModule } from 'ng2-file-upload/ng2-file-upload'; 
 import { FormsModule } from '@angular/forms';
+import { AgGridModule } from 'ag-grid-angular';
+
+import { HttpClientModule } from '@angular/common/http';
 
 import { LogService } from './service/log/log.service'; 
 import { SearchComponent } from './components/search/search.component';
@@ -23,9 +26,11 @@ import { UploadComponent } from './components/upload/upload.component';
   ],
   imports: [
     BrowserModule,
+    AgGridModule.withComponents([]),
     AppRoutingModule,
     FormsModule,
-    FileUploadModule
+    FileUploadModule,
+    HttpClientModule,
   ],
   providers: [LogService],
   bootstrap: [AppComponent]

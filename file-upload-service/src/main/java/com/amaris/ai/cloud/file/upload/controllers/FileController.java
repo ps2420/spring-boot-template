@@ -1,8 +1,5 @@
 package com.amaris.ai.cloud.file.upload.controllers;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,16 +15,12 @@ public class FileController {
   private FileStorageService fileStorageService;
 
   @PostMapping("/uploadSingleFile")
-  public UploadFileResponse uploadFile(final @RequestParam("file") MultipartFile file) {
+  public UploadFileResponse uploadFile(@RequestParam(name = "domain", defaultValue = "") String domain,
+      final @RequestParam("file") MultipartFile file) {
     final String fileName = fileStorageService.storeFile(file);
     // final String fileDownloadUri =
     // ServletUriComponentsBuilder.fromCurrentContextPath().path("/downloadFile/").path(fileName).toUriString();
     return new UploadFileResponse(fileName, "", file.getContentType(), file.getSize());
-  }
-
-  @PostMapping("/uploadMultipleFile")
-  public List<UploadFileResponse> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
-    return Arrays.asList(files).stream().map(file -> uploadFile(file)).collect(Collectors.toList());
   }
 
 }

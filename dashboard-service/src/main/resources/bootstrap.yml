@@ -1,6 +1,6 @@
 spring:
   application:
-    name: dashboard-service
+    name: web-api
   cloud:
     config:
       uri: ${CONFIG_SERVER_URI:http://${SERVER_HOST:localhost}:${CONFIG_SERVER_PORT:5011}}

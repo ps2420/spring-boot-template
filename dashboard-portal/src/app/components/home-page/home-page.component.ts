@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UploadDocumentComponent } from '../upload-document/upload-document.component';
-
 import { HomePageService } from '../../service/home-page.service';
 import { LogService } from '../../service/log/log.service';
 

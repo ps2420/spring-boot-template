@@ -1,6 +1,11 @@
 spring:
   application:
     name: api-gateway
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 50MB
+      max-request-size: 50MB
   cloud:
     config:
       uri: ${CONFIG_SERVER_URI:http://${SERVER_HOST:localhost}:${CONFIG_SERVER_PORT:5011}}
@@ -19,9 +24,28 @@ info:
   version: ${APP_VERSION}
   name: ${spring.application.name}  
   
+ribbon:
+  ConnectTimeout: 10000
+  ReadTimeout: 30000
+
+hystrix:
+  threadpool:
+    default:
+      coreSize: 1000
+      maximumSize: 10000
+      queueSizeRejectionThreshold: -1
+      maxQueueSize: -1
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: THREAD
+          thread:
+              timeoutInMilliseconds: 41000
+
 zuul:
-  routes:
-    dashboard:
-      serviceId: web-api
   host:
-    socket-timeout-millis: 30000                
+    max-total-connections: 10000
+    max-per-route-connections: 50
+    
+                  

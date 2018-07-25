@@ -1,0 +1,11 @@
+.list-group-item:hover {
+	color: #ffffff;
+	text-shadow:  0 0 1em #337ab7;
+	cursor: pointer;
+	background-color: #337ab7;
+} 
+
+.list-group: {
+	position: relative;
+	z-index:  200;
+} 
