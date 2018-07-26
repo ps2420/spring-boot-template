@@ -21,7 +21,8 @@ eureka:
    
 file:
   uploadDir: /tmp/file-upload
-
+  downloadDir: /tmp/file-upload/zip
+  
 elastic:
   client:
     authenticated: false

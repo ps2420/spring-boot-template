@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 public class FileStorageProperties {
 
   protected String uploadDir;
+  protected String downloadDir;
 
   public String getUploadDir() {
     return uploadDir;
@@ -16,4 +17,13 @@ public class FileStorageProperties {
   public void setUploadDir(String uploadDir) {
     this.uploadDir = uploadDir;
   }
+
+  public String getDownloadDir() {
+    return downloadDir;
+  }
+
+  public void setDownloadDir(String downloadDir) {
+    this.downloadDir = downloadDir;
+  }
+
 }

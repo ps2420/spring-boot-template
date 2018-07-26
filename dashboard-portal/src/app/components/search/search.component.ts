@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {GridOptions} from "ag-grid";
 
 import { LogService } from './../../service/shared/log.service';
 import { SearchService } from './../../service/search/search.service';
@@ -17,20 +18,36 @@ export class SearchComponent implements OnInit {
 
     public financialProducts: any[] = []; 
     public financialProducts_data: any[] = []; 
- 
-    public columnDefs: any[] = [];
-    public rowData: any[] = [];
+    
+    private app_context: any = {};
 
-    app_context: any = {};
+    private gridOptions: GridOptions;
+    private gridApi: any;
+    private columnApi: any;
  
     constructor(private logService: LogService, private searchService: SearchService) { 
       this.app_context = this.searchService.getAppContext();
       this.productSearch = this.app_context['app_config']['app_name'];
+ 
+      this.gridOptions = <GridOptions> {
+          rowData  : [],
+          columnDefs: this.searchService.getSearchDocumentGridColumDefs(),
+          enableColResize: true,
+          onGridReady : this.onGridReady,
+          enableSorting: true
+      };
+    }
+
+    onGridReady(params: any): void {
+      this.gridApi = params.api;
+      this.columnApi = params.columnApi; 
     }
 
     ngOnInit() {
       this.loadFinancialproducts();
       this.loadGridData();
+      this.gridOptions.api = this.gridApi;
+      this.gridOptions.columnApi = this.columnApi;
     }
 
     public financialProductSelected(item: MenuItem): void {
@@ -49,12 +66,15 @@ export class SearchComponent implements OnInit {
       return this.financialProducts;
     }
 
+    public keywordSearchChange(): void {
+      this.logService.log("keyword search: " + this.keywordSearch);
+    }
+ 
+
     loadGridData() : void {
-      this.columnDefs = this.searchService.getColumnDefs();
       this.searchService.loadGridData(this.productSearch, this.keywordSearch).subscribe (
-        (data: any) => { 
-          this.rowData = data;
-          this.logService.logJson(this.rowData);
+        (data: any) => {
+          this.gridOptions.api.setRowData(data);
       });
     }
 
@@ -65,4 +85,19 @@ export class SearchComponent implements OnInit {
       });
     } 
 
+    onColumnSelection(object: any, params: any) : void {
+      if(params['colDef'].field == "document") {
+          this.downloadFile(params.data);
+      }
+    }
+
+    downloadFile(data: any): void {
+      this.searchService.downloadFile(data.document);    
+    }
 }
+
+
+
+
+
+

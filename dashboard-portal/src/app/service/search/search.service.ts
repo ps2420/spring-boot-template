@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { LogService } from '../shared/log.service';
 import { AppContextService } from '../shared/app-context.service';
 
+import { DocumentService } from '../shared/document.service';
+
 import { MenuItem } from './../../model/menu-item';
 import { HttpClient } from '@angular/common/http';
 
@@ -14,14 +16,11 @@ export class SearchService {
     app_context: any = {};
 
     constructor(private logService: LogService, private http: HttpClient, 
-        private appContextService: AppContextService) {
+        private appContextService: AppContextService, private documentService: DocumentService) {
+
         this.app_context = this.appContextService.getAppContext();
     }
-
-    getColumnDefs(): any {
-        return this.appContextService.getSearchDocumentGridColumDefs();
-    }
-
+ 
     getAppContext(): any {
         return this.app_context;
     }
@@ -35,4 +34,37 @@ export class SearchService {
         let url = this.app_context['api_config']['finance-product'];
         return this.http.get(url);
     }
+
+    downloadFile(filename: string): void {
+        this.documentService.downloadFile(filename);
+    }
+
+
+    getSearchDocumentGridColumDefs () : any {
+        let columnDefs = [
+         {
+            headerName: 'Product',    field: 'product' },
+          {
+            headerName: 'Document',   field: 'document', 'downloadDocument' : true,
+            cellRenderer : function(params) {
+              if(params.value === '' || !params.value) {
+                   return '<div></div>';
+              }
+              return '<div title="Click to download" style="cursor:pointer;">' + '<i class="fa fa-download" aria-hidden="true" (click)="downloadFile()"></i>&nbsp;<span title="Download">'+params.value+'</span></div>';
+            }
+          },
+          {
+            headerName: 'Description', field: 'content'
+          },
+          {
+            headerName: 'Page Number', field: 'pageNumber'
+          }
+        ];
+        return columnDefs;
+    }
 }
+
+
+
+
+

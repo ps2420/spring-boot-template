@@ -8,7 +8,7 @@ export class LogService {
 	constructor() { }
 
 	logJson(value: any): void {
-	    console.log("json ==> " + JSON.stringify(value))
+	    console.log("json ==> " + JSON.stringify(value));
 	}
 
 	info(value: string): void {

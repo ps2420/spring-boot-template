@@ -27,7 +27,7 @@ export class AppContextService {
        'search-grid'       : this.buildUrl('/search-service/..'),
        
        'upload-document'   : this.buildUrl('/file-handler/uploadFile'),
-       'download-document' : this.buildUrl('/file-handler/download')
+       'download-document' : this.buildUrl('/file-handler/downloadFile')
     }
 
     getAppContext(): any {
@@ -45,16 +45,6 @@ export class AppContextService {
     buildUrl(url: string): string { 
        return this.APP_CONFIG.api_gateway + url;
     } 
-
-    getSearchDocumentGridColumDefs () : any {
-	    let columnDefs = [
-	       {headerName: 'Product',     field: 'product' },
-	       {headerName: 'Document',    field: 'document'},
-	       {headerName: 'Description', field: 'content'},
-	       {headerName: 'Page Number', field: 'pageNumber'}
-	    ];
-	    return columnDefs;
-    }
  
     getDownloadDocumentGridColumDefs(): any {
         let columnDefs = [

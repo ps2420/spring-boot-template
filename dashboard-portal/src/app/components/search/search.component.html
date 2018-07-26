@@ -15,23 +15,24 @@
 				</li>
 			</ul>
 		</div>
-		<div class="col-sm-9" style="align:left">
+		<div class="col-sm-1" style="align:left"> &nbsp;&nbsp;</div>
+		<div class="col-sm-8" style="align:left">
 		    <input type="text" style="width:20rem;" placeholder="Enter keyword.." class="form-control" 
-		        style="width:15rem;display:inline;position: fixed;"
+		        style="width:15rem;display:inline;"
 		        [(ngModel)]="keywordSearch" (ngModelChange)="keywordSearchChange()" /> 
-               &nbsp;<i class="fa fa-search search-icon" aria-hidden="true" style="position:relative;"></i>&nbsp; 
+		        <!--
+                   &nbsp;<i class="fa fa-search search-icon" aria-hidden="true"></i>&nbsp; 
+                -->
 		</div>
 	</div>
 
 	<div style="margin-top:2rem;">
         <h5 style="color:#6c757d" class="">Search Result </h5>
-        <ag-grid-angular 
+        <ag-grid-angular #agGrid 
 		    [ngStyle]="{'width':'90%','height':'50vh', 'position':''}" 
-		    class="ag-theme-balham"
-		    [enableSorting]="true"
-            [enableFilter]="true"
-		    [rowData]="rowData" 
-		    [columnDefs]="columnDefs">
+		    class="ag-theme-balham" [gridOptions]="gridOptions"
+		    [suppressRowClickSelection]="true"
+            (cellClicked)= "onColumnSelection(this, $event)" >
 		</ag-grid-angular>
 
 	</div>

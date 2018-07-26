@@ -27,12 +27,16 @@ public class FileStorageService {
   private FileStorageProperties fileStorageProperties;
 
   private Path fileStorageLocation;
+  private Path fileDownloadLocation;
 
   @PostConstruct
   private void postConstruct() {
     try {
       this.fileStorageLocation = Paths.get(fileStorageProperties.getUploadDir()).toAbsolutePath().normalize();
       Files.createDirectories(this.fileStorageLocation);
+      
+      this.fileDownloadLocation = Paths.get(fileStorageProperties.getDownloadDir()).toAbsolutePath().normalize();
+      Files.createDirectories(this.fileDownloadLocation);
     } catch (Exception ex) {
       throw new RuntimeException("Could not create the directory where the uploaded files will be stored." + ex, ex);
     }
@@ -56,7 +60,7 @@ public class FileStorageService {
 
   public Resource loadFileAsResource(final String fileName) {
     try {
-      final Path filePath = this.fileStorageLocation.resolve(fileName).normalize();
+      final Path filePath = this.fileDownloadLocation.resolve(fileName).normalize();
       final Resource resource = new UrlResource(filePath.toUri());
       if (resource.exists()) {
         return resource;
