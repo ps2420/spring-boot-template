@@ -11,28 +11,28 @@ import { HttpClient } from '@angular/common/http';
 })
 export class SearchService {
 
+    const api_config : any = {} ;
+
     constructor(private logService: LogService, private http: HttpClient, 
         private htmlContentService: HtmlContentService) {
-
+        this.api_config = this.htmlContentService.apiConfig();
     }
 
-    getColumnDefs() : any {
+    getColumnDefs(): any {
         return this.htmlContentService.getSearchDocumentGridColumDefs();
     }
 
-    loadGridData(): any[] {
-        let grid_data: any[] = [];
-        grid_data.push({domain: 'Equity Debt Ratio', document: 'random_document.pdf', content: '.......', pageNumber: 1});
-        grid_data.push({domain: 'Equity Debt Ratio', document: 'random_document.pdf', content: '.......', pageNumber: 2});
-        grid_data.push({domain: 'Equity Debt Ratio', document: 'random_document.pdf', content: '.......', pageNumber: 100});
-        return grid_data;
+    getAppConfig(): any {
+        return this.htmlContentService.appConfig();
     }
 
-    loadDomainValues(searchkey: string) : MenuItem[] {
-        const dmainValues: MenuItem[] = this.htmlContentService.getFinancialDomainValues();;
-        if(searchkey === '') {
-           return tdmainValues; 
-        }
-        return dmainValues.filter(item =>  item.label.toLowerCase().indexOf(searchkey.toLowerCase()) >= 0);
-    } 
+    loadGridData(product: string, keyword: string) : any[] {
+        let url = this.api_config['search-document'] + "?product=" + product + "&keyword=" + keyword;
+        return this.http.get(url);
+    }
+ 
+    loadFinancialproducts() : any {
+        let url = this.api_config['finance-product'];
+        return this.http.get(url);
+    }
 }

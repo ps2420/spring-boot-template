@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FileSelectDirective, FileUploader } from 'ng2-file-upload/ng2-file-upload';
 
 
+import { LogService } from './../../service/log/log.service';
+import { UploadDocumentService } from './../../service/document/upload-document.service';
+
 @Component({
   selector: 'app-upload',
   templateUrl: './upload.component.html',
@@ -12,33 +15,24 @@ export class UploadComponent implements OnInit {
   public title: String = "Equity Debt Ratio File Upload";
   public hasBaseDropZoneOver:boolean = false; 
  
-  URL: string = "http://localhost:5013/file-upload/uploadSingleFile";
+  public uploader:FileUploader;
 
-  public domainValue: String = "PK";
-  
-  public uploader:FileUploader = new FileUploader({
-      url: this.URL,
-      additionalParameter: {
-         domain: this.domainValue
-      }
-  });
- 
-  constructor() { 
-     
+  constructor(private logService: LogService, private uploadService: UploadDocumentService) { 
+    this.uploader = new FileUploader({
+      url: this.uploadService.apiConfig()['upload-document']
+    });
   }
 
-   ngOnInit() : void { 
-
+  ngOnInit() : void { 
     this.uploader.onBuildItemForm = (fileItem, form) => {
        form.append('another_field', 'another_value');
        return {fileItem, form};
     };
 
     this.uploader.onErrorItem = (item, response, status, headers) => this.onErrorItem(item, response, status, headers);
-    
     this.uploader.onSuccessItem = (item, response, status, headers) => this.onSuccessItem(item, response, status, headers);
   }
- 
+
 
   public onSuccessItem (item: any, response: string, status: number, headers: any) : void {
      console.log("File has been uploaded successfully..")

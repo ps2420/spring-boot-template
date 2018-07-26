@@ -9,3 +9,10 @@
 	position: relative;
 	z-index:  200;
 } 
+
+.search-icon {
+	position: relative;
+    margin-left: 13.5rem;
+    margin-top: 0.7rem;
+    color: #6c757d;
+}

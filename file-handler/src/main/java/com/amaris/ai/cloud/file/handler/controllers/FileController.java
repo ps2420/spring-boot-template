@@ -1,7 +1,10 @@
 package com.amaris.ai.cloud.file.handler.controllers;
 
+import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,13 +17,15 @@ public class FileController {
   @Autowired
   private FileStorageService fileStorageService;
 
-  @PostMapping("/upload")
-  public UploadFileResponse upload(@RequestParam(name = "domain", defaultValue = "") String domain,
-      final @RequestParam("file") MultipartFile file) {
+  @PostMapping("/uploadFile")
+  public UploadFileResponse uploadFile(final @RequestParam("file") MultipartFile file) {
     final String fileName = fileStorageService.storeFile(file);
-    // final String fileDownloadUri =
-    // ServletUriComponentsBuilder.fromCurrentContextPath().path("/downloadFile/").path(fileName).toUriString();
     return new UploadFileResponse(fileName, "", file.getContentType(), file.getSize());
+  }
+
+  @RequestMapping(value = "/health", method = RequestMethod.GET)
+  public Response health() {
+    return Response.ok("200").build();
   }
 
 }

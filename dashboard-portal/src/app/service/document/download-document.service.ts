@@ -12,24 +12,32 @@ import { MenuItem } from './../../model/menu-item';
 })
 export class DownloadDocumentService {
 
+    const api_config : any;
+
     constructor(private logService: LogService, private http: HttpClient, 
         private htmlContentService: HtmlContentService) {
+        this.api_config = this.htmlContentService.apiConfig();
+    }
 
+    apiConfig() : any {
+       return this.api_config;
+    }
+
+    getAppConfig(): any {
+      return this.htmlContentService.appConfig();
     }
 
     getColumnDefs() : any {
-        return this.htmlContentService.getDownloadDocumentGridColumDefs();
+      return this.htmlContentService.getDownloadDocumentGridColumDefs();
     }
 
-    loadGridData(): any[] {
-        return this.htmlContentService.getDownloadDocumentGridMockData();
+    loadGridDataFromServer(fproduct: string) : any {
+      let url = this.api_config['doc-audit'] + "?product=" + fproduct;
+      return this.http.get(url);
     }
-
-    loadDomainValues(searchkey: string) : MenuItem[] {
-        const domainValues: MenuItem[] = this.htmlContentService.getFinancialDomainValues();;
-        if(searchkey === '') {
-           return domainValues; 
-        }
-        return domainValues.filter(item =>  item.label.toLowerCase().indexOf(searchkey.toLowerCase()) >= 0);
-    } 
+  
+    loadFinancialproducts() : any {
+      let url = this.api_config['finance-product'];
+      return this.http.get(url);
+    }
 }

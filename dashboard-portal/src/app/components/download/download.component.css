@@ -6,6 +6,6 @@
 } 
 
 .list-group: {
-	position: relative;
+	//position: relative;
 	z-index:  200;
 } 

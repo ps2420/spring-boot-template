@@ -7,10 +7,10 @@
 	 
 	<div style="margin-top:10px;" class="row">
 		<div class="col-sm-3" >
-             <input type="text" placeholder="Select Domain.." class="form-control" style="width:15rem;"
-		    [(ngModel)]="domainSearch" (ngModelChange)="domainSearchChange()"> 
-			 <ul class="list-group">
-			    <li class="list-group-item" *ngFor="let item of domainList; let i = index" (click)="domainSearchSelected(item)">
+             <input type="text" placeholder="Select Finacial Product.." class="form-control" style="width:15rem;"
+		    [(ngModel)]="productSearch" (ngModelChange)="filterFinancialProducts()" disabled> 
+			 <ul class="list-group" id="download-document-id">
+			    <li class="list-group-item" *ngFor="let item of financialProducts; let i = index" (click)="financialProductSelected(item)">
 				     {{item.label}} 
 				</li>
 			</ul>

@@ -16,8 +16,13 @@ import { LeftNavMenu } from '../../model/left-nav-menu';
 export class HomePageComponent implements OnInit {
 
     childMenuItems : LeftNavMenu [];
-    constructor(private homePageService: HomePageService, private logService: LogService) {
 
+    title: String = 'Financial';
+
+    constructor(private homePageService: HomePageService, private logService: LogService) {
+        if(this.homePageService.getAppConfig()['app_name']) {
+            this.title = this.homePageService.getAppConfig()['app_name'];
+        }
     }
 
     ngOnInit() { 

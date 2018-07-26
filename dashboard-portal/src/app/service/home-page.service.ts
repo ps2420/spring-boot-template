@@ -5,13 +5,21 @@ import { LeftNavMenu } from '../model/left-nav-menu';
 
 import { LogService } from './log/log.service';
 
+import { HtmlContentService } from './static-contents/html-content.service';
+
 @Injectable({
   providedIn: 'root'
 })
 
 export class HomePageService {
 
-    constructor(private logService: LogService) { }
+    constructor(private logService: LogService, private htmlContentService: HtmlContentService) { 
+       
+    }
+
+    getAppConfig(): any {
+       return this.htmlContentService.appConfig();
+    }
 
     loadMenuItems() : LeftNavMenu[] {
 		var options = [];

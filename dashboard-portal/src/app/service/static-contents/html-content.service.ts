@@ -1,58 +1,68 @@
 import { Injectable } from '@angular/core';
 
 import { MenuItem } from './../../model/menu-item';
+import { LogService } from '../log/log.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HtmlContentService {
 
-    constructor() { }
+    constructor(private logService: LogService) { }
+  
+    const app_config_local = {
+        'app_name'   : 'Debt Equity Ratio', 
+        'api_gateway': 'http://localhost:5013', 
+        'mock_data'  : false ,
+        'page_title' : 'Financial Datalake Document Management System'
+    } ;
+
+    const APP_CONFIG: any  = (app_config != null) ? app_config : this.app_config_local;
+
+    const api_config : any = {
+       'finance-product'   : this.buildUrl('/web-api/html/financeProducts'),
+       'search-document'   : this.buildUrl('/web-api/search/documents'),
+       
+       'doc-audit'         : this.buildUrl('/web-api/docaudit/list'),
+       'search-grid'       : this.buildUrl('/search-service/..'),
+       
+       'upload-document'   : this.buildUrl('/file-handler/uploadFile'),
+       'download-document' : this.buildUrl('/file-handler/download')
+    }
+
+    buildUrl(url: string): string { 
+       return this.APP_CONFIG.api_gateway + url;
+    }
+
+    apiConfig(): any { 
+       return this.api_config;
+    }
+
+    appConfig(): any {
+       return this.APP_CONFIG;
+    }
 
     getSearchDocumentGridColumDefs () : any {
 	    let columnDefs = [
-	       {headerName: 'Domain',      field: 'domain' },
+	       {headerName: 'Product',     field: 'product' },
 	       {headerName: 'Document',    field: 'document'},
 	       {headerName: 'Description', field: 'content'},
 	       {headerName: 'Page Number', field: 'pageNumber'}
 	    ];
 	    return columnDefs;
     }
-
-    getSearchDocumentGridMockData(): any[] {
-        let grid_data: any[] = [];
-        grid_data.push({domain: 'Equity Debt Ratio', document: 'random_document.pdf', content: '.......', pageNumber: 1});
-        grid_data.push({domain: 'Equity Debt Ratio', document: 'random_document.pdf', content: '.......', pageNumber: 2});
-        grid_data.push({domain: 'Equity Debt Ratio', document: 'random_document.pdf', content: '.......', pageNumber: 100});
-        return grid_data;
-    }
-
+ 
     getDownloadDocumentGridColumDefs(): any {
         let columnDefs = [
-           {headerName: 'Domain',      field: 'domain' },
+           {headerName: 'Product',     field: 'product' },
            {headerName: 'Uploaded By', field: 'uploadedBy'},
            {headerName: 'Document',    field: 'document'},
-           {headerName: 'Upload Date', field: 'uploadDate'}
+           {headerName: 'Upload Date', field: 'uploadDate'},
+           {headerName: 'Comment',     field: 'comments'}
         ];
         return columnDefs;
     }
-
-    getDownloadDocumentGridMockData(): any[] {
-        let grid_data: any[] = [];
-        grid_data.push({domain: 'Equity Debt Ratio', document: 'random_document.pdf', uploadedBy: 'amaris', uploadDate: new Date()});
-        grid_data.push({domain: 'Equity Debt Ratio', document: 'random_document.pdf', uploadedBy: 'amaris', uploadDate: new Date()});
-        grid_data.push({domain: 'Equity Debt Ratio', document: 'random_document.pdf', uploadedBy: 'amaris', uploadDate: new Date()});
-        return grid_data;
-    }
-
-    getFinancialDomainValues(): MenuItem[] {
-        let domain_data: any[] = [];
-        domain_data.push(this.prepareMenuItem('Equity', '_equity', false));
-        domain_data.push(this.prepareMenuItem('Derivatives', 'derivatives', false));
-        domain_data.push(this.prepareMenuItem('Options', 'options', false)); 
-        return domain_data;
-    }
-
+ 
     prepareMenuItem(_label : string, _field : string, _selected: boolean) : MenuItem {
         let childMenu = new MenuItem();
         childMenu.label = _label;

@@ -12,34 +12,56 @@ import { MenuItem } from '../../model/menu-item';
 })
 export class DownloadComponent implements OnInit {
 
-    public domainSearch: string;
-    public domainList: MenuItem[] = []; 
+    public productSearch: string = '';
+    public financialProducts: any[] = []; 
+    public financialProducts_data: any[] = []; 
  
     public columnDefs: any[] = [];
     public rowData: any[] = [];
  
     constructor(private logService: LogService, private downloadService: DownloadDocumentService) { 
-      
+      this.productSearch = this.downloadService.getAppConfig()['app_name'];
     }
 
     ngOnInit() {
-       this.loadGridData();
+      this.loadFinancialproducts();
+      this.loadGridData();
     }
 
+    public financialProductSelected(item: MenuItem): void {
+      this.productSearch = item.label;
+      this.financialProducts = this.filterFinancialProducts();
+    }
 
+    public filterFinancialProducts(): any[] {
+      if(this.productSearch === '') {
+        this.financialProducts = this.financialProducts_data;
+      } else {
+        this.financialProducts = this.financialProducts_data.filter(item => {
+          return item.label.toLowerCase().indexOf(this.productSearch.toLowerCase()) >= 0; 
+        });
+      }
+    }
+
+    /**
+      //Service calls are starting from here..
+    **/
     loadGridData() : void {
-       this.columnDefs = this.downloadService.getColumnDefs();  
-       this.rowData = this.downloadService.loadGridData();
-       this.logService.logJson(this.rowData);
+      this.columnDefs = this.downloadService.getColumnDefs();
+      this.loadGridDataFromServer();
     }
 
-    public domainSearchChange(): void {
-       this.domainList = this.downloadService.loadDomainValues(this.domainSearch);
+    loadFinancialproducts(): void {
+      this.downloadService.loadFinancialproducts().subscribe(
+        (data: any) => {
+          this.financialProducts_data = data;
+      });
     } 
 
-    public domainSearchSelected(item: MenuItem): void {
-       this.domainSearch = item.label;
-       this.domainList = [];
+    loadGridDataFromServer(): void {
+      this.downloadService.loadGridDataFromServer(this.productSearch).subscribe(
+        (data: any) => {
+          this.rowData = data;
+      });
     }
-
 }

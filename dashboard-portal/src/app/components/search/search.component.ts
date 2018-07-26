@@ -12,36 +12,55 @@ import { MenuItem } from '../../model/menu-item';
 })
 export class SearchComponent implements OnInit {
 
-    public domainSearch: string;
+    public productSearch: string;
     public keywordSearch: string;
 
-    public domainList: MenuItem[] = []; 
+    public financialProducts: any[] = []; 
+    public financialProducts_data: any[] = []; 
  
     public columnDefs: any[] = [];
     public rowData: any[] = [];
  
     constructor(private logService: LogService, private searchService: SearchService) { 
-      
+      this.productSearch = this.searchService.getAppConfig()['app_name'];
     }
 
     ngOnInit() {
+      this.loadFinancialproducts();
       this.loadGridData();
     }
 
+    public financialProductSelected(item: MenuItem): void {
+      this.productSearch = item.label;
+      this.financialProducts = this.filterFinancialProducts();
+    }
+
+    public filterFinancialProducts(): any[] {
+      this.logService.log("selected input value : " + this.productSearch);
+      if(this.productSearch === '') {
+        this.financialProducts = this.financialProducts_data;
+      } else {
+        this.financialProducts = this.financialProducts_data.filter(item => {
+          return item.label.toLowerCase().indexOf(this.productSearch.toLowerCase()) >= 0; 
+        });
+        this.logService.logJson(this.financialProducts);
+      }
+    }
 
     loadGridData() : void {
-      this.columnDefs = this.searchService.getColumnDefs();  
-      this.rowData = this.searchService.loadGridData();
+      this.columnDefs = this.searchService.getColumnDefs();
+      this.searchService.loadGridData().subscribe (
+        (data: any) => { 
+          this.rowData = data;
+          this.logService.logJson(this.rowData);
+      });
     }
 
-    public domainSearchChange(): void {
-      this.domainList = this.searchService.loadDomainValues(this.domainSearch);
-      this.logService.logJson(this.domainList);
+    loadFinancialproducts(): void {
+      this.searchService.loadFinancialproducts().subscribe (
+        (data: any) => {
+          this.financialProducts_data = data;
+      });
     } 
-
-    public domainSearchSelected(item: MenuItem): void {
-      this.domainSearch = item.label;
-      this.domainList = [];
-    }
 
 }

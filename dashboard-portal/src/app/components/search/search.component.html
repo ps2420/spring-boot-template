@@ -7,18 +7,19 @@
 	 
 	<div style="margin-top:10px;" class="row">
 		<div class="col-sm-3" >
-             <input type="text" placeholder="Select Domain.." class="form-control" style="width:20rem;"
-		    [(ngModel)]="domainSearch" (ngModelChange)="domainSearchChange()"> 
+             <input type="text" placeholder="Select financial product.." class="form-control" style="width:15rem;font-style: italic"
+		    [(ngModel)]="productSearch" (ngModelChange)="filterFinancialProducts()" disabled> 
 			 <ul class="list-group">
-			    <li class="list-group-item" *ngFor="let item of domainList; let i = index" (click)="domainSearchSelected(item)">
+			    <li class="list-group-item" *ngFor="let item of financialProducts; let i = index" (click)="financialProductSelected(item)">
 				     {{item.label}} 
 				</li>
 			</ul>
 		</div>
-		<div class="col-sm-1"></div> 
-		<div class="col-sm-8" style="align:left">
-		    <input type="text" style="width:20rem;" placeholder="Enter keyword.." class="form-control" style="width:20rem;"
-		        [(ngModel)]="keywordSearch" (ngModelChange)="keywordSearchChange()" />
+		<div class="col-sm-9" style="align:left">
+		    <input type="text" style="width:20rem;" placeholder="Enter keyword.." class="form-control" 
+		        style="width:15rem;display:inline;position: fixed;"
+		        [(ngModel)]="keywordSearch" (ngModelChange)="keywordSearchChange()" /> 
+               &nbsp;<i class="fa fa-search search-icon" aria-hidden="true" style="position:relative;"></i>&nbsp; 
 		</div>
 	</div>
 
