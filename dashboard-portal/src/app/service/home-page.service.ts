@@ -3,9 +3,8 @@ import { Injectable } from '@angular/core';
 import { LeftNavChildMenu } from '../model/left-nav-child-menu';
 import { LeftNavMenu } from '../model/left-nav-menu';
 
-import { LogService } from './log/log.service';
-
-import { HtmlContentService } from './static-contents/html-content.service';
+import { LogService } from './shared/log.service';
+import { AppContextService} from './shared/app-context.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,17 +12,16 @@ import { HtmlContentService } from './static-contents/html-content.service';
 
 export class HomePageService {
 
-    constructor(private logService: LogService, private htmlContentService: HtmlContentService) { 
+    constructor(private logService: LogService, private appContextService: AppContextService) { 
        
     }
 
-    getAppConfig(): any {
-       return this.htmlContentService.appConfig();
+    getAppContext(): any {
+       return this.appContextService.getAppContext();
     }
 
     loadMenuItems() : LeftNavMenu[] {
 		var options = [];
-		
 		options.push(this.prepareMenuItem('Upload Document', 'leftNavUploadDocument', true));
 		options.push(this.prepareMenuItem('Download Document', 'leftNavDownloadDocument', true));
 		options.push(this.prepareMenuItem('Search Document', 'leftNavSearchDocument', true));

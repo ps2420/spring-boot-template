@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { LogService } from './../../service/log/log.service';
-import { DownloadDocumentService } from './../../service/document/download-document.service';
-
+import { LogService } from './../../service/shared/log.service';
+import { DocumentService } from './../../service/shared/document.service';
+ 
 import { MenuItem } from '../../model/menu-item';
 
 @Component({
@@ -18,9 +18,12 @@ export class DownloadComponent implements OnInit {
  
     public columnDefs: any[] = [];
     public rowData: any[] = [];
+
+    app_context: any = {};
  
-    constructor(private logService: LogService, private downloadService: DownloadDocumentService) { 
-      this.productSearch = this.downloadService.getAppConfig()['app_name'];
+    constructor(private logService: LogService, private documentService: DocumentService) { 
+      this.app_context = this.documentService.getAppContext();
+       this.productSearch = this.app_context['app_config']['app_name'];
     }
 
     ngOnInit() {
@@ -41,25 +44,26 @@ export class DownloadComponent implements OnInit {
           return item.label.toLowerCase().indexOf(this.productSearch.toLowerCase()) >= 0; 
         });
       }
+      return this.financialProducts;
     }
 
     /**
       //Service calls are starting from here..
     **/
     loadGridData() : void {
-      this.columnDefs = this.downloadService.getColumnDefs();
+      this.columnDefs = this.documentService.getColumnDefs();
       this.loadGridDataFromServer();
     }
 
     loadFinancialproducts(): void {
-      this.downloadService.loadFinancialproducts().subscribe(
+      this.documentService.loadFinancialproducts().subscribe(
         (data: any) => {
           this.financialProducts_data = data;
       });
     } 
 
     loadGridDataFromServer(): void {
-      this.downloadService.loadGridDataFromServer(this.productSearch).subscribe(
+      this.documentService.loadFinancialProdutsAudit(this.productSearch).subscribe(
         (data: any) => {
           this.rowData = data;
       });

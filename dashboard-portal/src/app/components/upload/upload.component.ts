@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FileSelectDirective, FileUploader } from 'ng2-file-upload/ng2-file-upload';
 
 
-import { LogService } from './../../service/log/log.service';
-import { UploadDocumentService } from './../../service/document/upload-document.service';
+import { LogService } from './../../service/shared/log.service';
+import { DocumentService } from './../../service/shared/document.service';
 
 @Component({
   selector: 'app-upload',
@@ -17,17 +17,22 @@ export class UploadComponent implements OnInit {
  
   public uploader:FileUploader;
 
-  constructor(private logService: LogService, private uploadService: UploadDocumentService) { 
+  app_context: any = {};
+
+  constructor(private logService: LogService, private documentService: DocumentService) { 
+    this.app_context = this.documentService.getAppContext();
     this.uploader = new FileUploader({
-      url: this.uploadService.apiConfig()['upload-document']
+      url: this.app_context['api_config']['upload-document']
     });
   }
 
   ngOnInit() : void { 
+    /**
     this.uploader.onBuildItemForm = (fileItem, form) => {
        form.append('another_field', 'another_value');
        return {fileItem, form};
     };
+    **/
 
     this.uploader.onErrorItem = (item, response, status, headers) => this.onErrorItem(item, response, status, headers);
     this.uploader.onSuccessItem = (item, response, status, headers) => this.onSuccessItem(item, response, status, headers);
@@ -47,8 +52,7 @@ export class UploadComponent implements OnInit {
   }
  
   public fileOverBase(e:any):void {
-    this.hasBaseDropZoneOver = e;
-    console.log("fileoverBASE....")
+    this.hasBaseDropZoneOver = e; 
   }
 
 }

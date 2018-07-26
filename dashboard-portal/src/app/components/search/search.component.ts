@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { LogService } from './../../service/log/log.service';
+import { LogService } from './../../service/shared/log.service';
 import { SearchService } from './../../service/search/search.service';
 
 import { MenuItem } from '../../model/menu-item';
@@ -20,9 +20,12 @@ export class SearchComponent implements OnInit {
  
     public columnDefs: any[] = [];
     public rowData: any[] = [];
+
+    app_context: any = {};
  
     constructor(private logService: LogService, private searchService: SearchService) { 
-      this.productSearch = this.searchService.getAppConfig()['app_name'];
+      this.app_context = this.searchService.getAppContext();
+      this.productSearch = this.app_context['app_config']['app_name'];
     }
 
     ngOnInit() {
@@ -35,21 +38,20 @@ export class SearchComponent implements OnInit {
       this.financialProducts = this.filterFinancialProducts();
     }
 
-    public filterFinancialProducts(): any[] {
-      this.logService.log("selected input value : " + this.productSearch);
+    public filterFinancialProducts(): any[] { 
       if(this.productSearch === '') {
         this.financialProducts = this.financialProducts_data;
       } else {
         this.financialProducts = this.financialProducts_data.filter(item => {
           return item.label.toLowerCase().indexOf(this.productSearch.toLowerCase()) >= 0; 
         });
-        this.logService.logJson(this.financialProducts);
       }
+      return this.financialProducts;
     }
 
     loadGridData() : void {
       this.columnDefs = this.searchService.getColumnDefs();
-      this.searchService.loadGridData().subscribe (
+      this.searchService.loadGridData(this.productSearch, this.keywordSearch).subscribe (
         (data: any) => { 
           this.rowData = data;
           this.logService.logJson(this.rowData);

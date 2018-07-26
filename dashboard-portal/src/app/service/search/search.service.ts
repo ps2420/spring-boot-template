@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { LogService } from '../log/log.service';
-import { HtmlContentService } from '../static-contents/html-content.service';
+import { LogService } from '../shared/log.service';
+import { AppContextService } from '../shared/app-context.service';
 
 import { MenuItem } from './../../model/menu-item';
 import { HttpClient } from '@angular/common/http';
@@ -10,29 +10,29 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class SearchService {
-
-    const api_config : any = {} ;
+ 
+    app_context: any = {};
 
     constructor(private logService: LogService, private http: HttpClient, 
-        private htmlContentService: HtmlContentService) {
-        this.api_config = this.htmlContentService.apiConfig();
+        private appContextService: AppContextService) {
+        this.app_context = this.appContextService.getAppContext();
     }
 
     getColumnDefs(): any {
-        return this.htmlContentService.getSearchDocumentGridColumDefs();
+        return this.appContextService.getSearchDocumentGridColumDefs();
     }
 
-    getAppConfig(): any {
-        return this.htmlContentService.appConfig();
+    getAppContext(): any {
+        return this.app_context;
     }
 
-    loadGridData(product: string, keyword: string) : any[] {
-        let url = this.api_config['search-document'] + "?product=" + product + "&keyword=" + keyword;
+    loadGridData(product: string, keyword: string) : any{
+        let url = this.app_context['api_config']['search-document'] + "?product=" + product + "&keyword=" + keyword;
         return this.http.get(url);
     }
  
     loadFinancialproducts() : any {
-        let url = this.api_config['finance-product'];
+        let url = this.app_context['api_config']['finance-product'];
         return this.http.get(url);
     }
 }

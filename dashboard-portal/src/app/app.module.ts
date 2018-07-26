@@ -10,8 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { AgGridModule } from 'ag-grid-angular';
 
 import { HttpClientModule } from '@angular/common/http';
-
-import { LogService } from './service/log/log.service'; 
+ 
 import { SearchComponent } from './components/search/search.component';
 import { DownloadComponent } from './components/download/download.component';
 import { UploadComponent } from './components/upload/upload.component';
@@ -32,7 +31,7 @@ import { UploadComponent } from './components/upload/upload.component';
     FileUploadModule,
     HttpClientModule,
   ],
-  providers: [LogService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

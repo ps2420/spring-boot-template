@@ -1,25 +1,25 @@
 import { Injectable } from '@angular/core';
 
 import { MenuItem } from './../../model/menu-item';
-import { LogService } from '../log/log.service';
+import { LogService } from './log.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class HtmlContentService {
+export class AppContextService {
 
     constructor(private logService: LogService) { }
   
-    const app_config_local = {
+    app_config_local: any = {
         'app_name'   : 'Debt Equity Ratio', 
         'api_gateway': 'http://localhost:5013', 
         'mock_data'  : false ,
         'page_title' : 'Financial Datalake Document Management System'
     } ;
 
-    const APP_CONFIG: any  = (app_config != null) ? app_config : this.app_config_local;
+    APP_CONFIG: any  = this.app_config_local;
 
-    const api_config : any = {
+    api_config : any = {
        'finance-product'   : this.buildUrl('/web-api/html/financeProducts'),
        'search-document'   : this.buildUrl('/web-api/search/documents'),
        
@@ -30,17 +30,21 @@ export class HtmlContentService {
        'download-document' : this.buildUrl('/file-handler/download')
     }
 
+    getAppContext(): any {
+        let context = {
+          'api_config'   : this.api_config,
+          'app_config'   : this.APP_CONFIG
+        };
+        return context;
+    }
+
+    getUrl(url_param: string): string {
+        return this.api_config[url_param];
+    }
+
     buildUrl(url: string): string { 
        return this.APP_CONFIG.api_gateway + url;
-    }
-
-    apiConfig(): any { 
-       return this.api_config;
-    }
-
-    appConfig(): any {
-       return this.APP_CONFIG;
-    }
+    } 
 
     getSearchDocumentGridColumDefs () : any {
 	    let columnDefs = [

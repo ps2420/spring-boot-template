@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HomePageService } from '../../service/home-page.service';
-import { LogService } from '../../service/log/log.service';
+
+import { LogService } from '../../service/shared/log.service';
 
 import { LeftNavChildMenu } from '../../model/left-nav-child-menu';
 import { LeftNavMenu } from '../../model/left-nav-menu';
@@ -18,21 +19,20 @@ export class HomePageComponent implements OnInit {
     childMenuItems : LeftNavMenu [];
 
     title: String = 'Financial';
+    app_context: any = {};
 
     constructor(private homePageService: HomePageService, private logService: LogService) {
-        if(this.homePageService.getAppConfig()['app_name']) {
-            this.title = this.homePageService.getAppConfig()['app_name'];
-        }
+      this.app_context = this.homePageService.getAppContext(); 
+      this.title = this.app_context['app_config']['app_name']; 
     }
 
     ngOnInit() { 
-       this.initMenuItems();
+      this.initMenuItems();
     }
 
     initMenuItems(): void {
-        let _childMenuItems : LeftNavMenu[] = this.homePageService.loadMenuItems();
-        this.childMenuItems = _childMenuItems; 
-        //this.logService.logJson(this.childMenuItems);
-     }
+      let _childMenuItems : LeftNavMenu[] = this.homePageService.loadMenuItems();
+      this.childMenuItems = _childMenuItems;  
+    }
  
 }
