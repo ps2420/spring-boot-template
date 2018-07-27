@@ -2,7 +2,6 @@ package com.amaris.ai.cloud.file.handler.controllers;
 
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.core.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,12 +32,7 @@ public class FileController {
     final String fileName = fileStorageService.storeFile(file);
     return new UploadFileResponse(fileName, "", file.getContentType(), file.getSize());
   }
-
-  @RequestMapping(value = "/health", method = RequestMethod.GET)
-  public Response health() {
-    return Response.ok("200").build();
-  }
-
+ 
   @GetMapping("/downloadFile")
   public ResponseEntity<Resource> downloadFile(final @RequestParam("fileName") String fileName, HttpServletRequest request) {
     final Resource resource = fileStorageService.loadFileAsResource(fileName);

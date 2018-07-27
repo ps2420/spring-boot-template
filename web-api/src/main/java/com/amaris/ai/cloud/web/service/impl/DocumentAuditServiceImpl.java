@@ -31,7 +31,7 @@ public class DocumentAuditServiceImpl implements DocumentAuditService {
   @Override
   public List<DocumentAudit> listDocumentAudits() {
     final List<DocumentAudit> docList = new ArrayList<>();
-    final Resource resource = this.resourceLoader.getResource("classpath:mock-data/download_document.json");
+    final Resource resource = this.resourceLoader.getResource(WebUtil.MOCK_CONTENT + "download_document.json");
     try {
       try (final InputStream ios = resource.getInputStream();) {
         final String jsondata = IOUtils.toString(ios, Charset.defaultCharset());

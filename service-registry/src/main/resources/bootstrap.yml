@@ -3,7 +3,9 @@ spring:
     name: service-registry
   boot:
     admin:
-      context-path: /admin  
+      context-path: /admin
+      client:
+        url: http://localhost:5012/admin
   cloud:
     config:
       uri: ${CONFIG_SERVER_URL:http://${SERVER_HOST:localhost}:${CONFIG_SERVER_PORT:5011}}
@@ -15,9 +17,14 @@ endpoints:
     enabled: false
 
 management:
-  security:
-    enabled: true
-    
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS    
+
 info:
   version: ${APP_VERSION:0.0.1}
   name: ${spring.application.name}        

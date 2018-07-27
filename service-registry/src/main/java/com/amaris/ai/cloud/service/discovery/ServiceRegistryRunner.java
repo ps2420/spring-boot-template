@@ -8,6 +8,7 @@ import de.codecentric.boot.admin.server.config.EnableAdminServer;
 @EnableEurekaServer
 @SpringBootApplication
 @EnableAdminServer
+//@EnableDiscoveryClient
 public class ServiceRegistryRunner {
 
     public static void main(String[] args) {

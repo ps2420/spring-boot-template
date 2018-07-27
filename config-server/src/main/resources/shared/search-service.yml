@@ -6,6 +6,7 @@ eureka:
    hostname: ${SERVER_HOST:localhost}
    preferIpAddress: false
    leaseRenewalIntervalInSeconds: 5
+   health-check-url-path: /actuator/health
  client:
    registerWithEureka: true
    fetchRegistry: true

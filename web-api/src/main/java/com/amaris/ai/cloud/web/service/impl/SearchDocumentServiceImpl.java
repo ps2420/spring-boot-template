@@ -21,15 +21,13 @@ public class SearchDocumentServiceImpl implements SearchDocumentService {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(HtmlContentService.class);
 
-  private final String HTML_CONTENT = "classpath:mock-data/";
-
   @Autowired
   private ResourceLoader resourceLoader;
 
   @Override
   public List<SearchDocument> listSearchDocument(String product, String keyword) {
     final List<SearchDocument> searchResults = new ArrayList<>();
-    final Resource resource = this.resourceLoader.getResource(HTML_CONTENT + "search-result.json");
+    final Resource resource = this.resourceLoader.getResource(WebUtil.MOCK_CONTENT + "search-result.json");
     try {
       try (final InputStream ios = resource.getInputStream();) {
         final String jsondata = IOUtils.toString(ios, Charset.defaultCharset());
