@@ -1,4 +1,8 @@
 spring:
+  boot:
+    admin:
+      client:
+        url: ${ADMIN_SERVER_URL:http://${SERVER_HOST:localhost}:${EUREKA_SERVER_PORT:5012}}/admin
   application:
     name: search-service
   cloud:
@@ -13,7 +17,14 @@ endpoints:
 
 management:
   security:
-    enabled: true
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
     
 info:
   version: ${APP_VERSION:0.0.1}

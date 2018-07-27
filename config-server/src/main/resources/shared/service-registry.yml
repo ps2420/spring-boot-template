@@ -13,6 +13,6 @@ eureka:
    fetchRegistry: true
    leaseRenewalIntervalInSeconds: 5
    serviceUrl:
-     defaultZone: ${EUREKA_URL:http://${SERVER_HOST:localhost}:${EUREKA_SERVER_PORT:5012}/eureka/}  
+     defaultZone: ${EUREKA_URL:http://${SERVER_HOST:localhost}:${EUREKA_SERVER_PORT:5012}}/eureka/
  server:
    waitTimeInMsWhenSyncEmpty: 0      

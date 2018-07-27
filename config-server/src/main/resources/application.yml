@@ -4,16 +4,18 @@ eureka:
    preferIpAddress: false
    leaseRenewalIntervalInSeconds: 5
    health-check-url-path: /actuator/health
+   metadataMap:
+      password: ${DEFAULT_PASSWORD:admin}
  client:
    registerWithEureka: true
    fetchRegistry: true
    registryFetchIntervalSeconds: 5
-   enabled: ${EUREKA_CLIENT_ENABLED:true}
+   enabled: ${EUREKA_CLIENT_ENABLED:false}
    leaseRenewalIntervalInSeconds: 5
    healthcheck:
      enabled: true
    serviceUrl:
-     defaultZone: ${EUREKA_URL:http://${SERVER_HOST:localhost}:${EUREKA_SERVER_PORT:5012}/eureka/}
+     defaultZone: ${EUREKA_URL:http://${SERVER_HOST:localhost}:${EUREKA_SERVER_PORT:5012}}/eureka/
  server:
    waitTimeInMsWhenSyncEmpty: 0
 

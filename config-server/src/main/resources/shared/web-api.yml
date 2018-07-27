@@ -16,6 +16,6 @@ eureka:
    healthcheck:
      enabled: true
    serviceUrl:
-     defaultZone: ${EUREKA_URL:http://${SERVER_HOST:localhost}:${EUREKA_SERVER_PORT:5012}/eureka/}
+     defaultZone: ${EUREKA_URL:http://${SERVER_HOST:localhost}:${EUREKA_SERVER_PORT:5012}}/eureka/
  server:
    waitTimeInMsWhenSyncEmpty: 0
