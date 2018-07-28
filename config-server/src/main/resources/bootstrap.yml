@@ -14,10 +14,6 @@ endpoints:
     enabled: false
 
 spring:
-  boot:
-    admin:
-      client:
-        url: ${ADMIN_SERVER_URL:http://${SERVER_HOST:localhost}:${EUREKA_SERVER_PORT:5012}}/admin
   application:
     name: config-server
   cloud:
@@ -25,6 +21,10 @@ spring:
     #  preferred-networks:
     #    - localhost
     #    - 127.0.0.1
+  boot:
+    admin:
+      client:
+        url: ${ADMIN_SERVER_URL:http://${SERVER_HOST:localhost}:${EUREKA_SERVER_PORT:5012}}/admin
   security:
     user:
       name: ${DEFAULT_USER:admin}

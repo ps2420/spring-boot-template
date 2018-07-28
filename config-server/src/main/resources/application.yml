@@ -10,7 +10,7 @@ eureka:
    registerWithEureka: true
    fetchRegistry: true
    registryFetchIntervalSeconds: 5
-   enabled: ${EUREKA_CLIENT_ENABLED:false}
+   enabled: ${EUREKA_CLIENT_ENABLED:true}
    leaseRenewalIntervalInSeconds: 5
    healthcheck:
      enabled: true
