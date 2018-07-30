@@ -52,7 +52,7 @@ hystrix:
         isolation:
           strategy: THREAD
           thread:
-              timeoutInMilliseconds: 41000
+              timeoutInMilliseconds: 100000
 
 zuul:
   routes:
