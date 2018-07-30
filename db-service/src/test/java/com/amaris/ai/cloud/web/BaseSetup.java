@@ -1,8 +1,8 @@
 package com.amaris.ai.cloud.web;
 
-import com.amaris.ai.cloud.web.model.FileItem;
-import com.amaris.ai.cloud.web.model.FinacialProduct;
-import com.amaris.ai.cloud.web.model.SearchDocument;
+import com.amaris.ai.cloud.db.model.FileItem;
+import com.amaris.ai.cloud.db.model.FinacialProduct;
+import com.amaris.ai.cloud.db.model.SearchDocument;
 
 public class BaseSetup {
 

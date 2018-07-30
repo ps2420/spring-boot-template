@@ -11,6 +11,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import com.amaris.ai.cloud.db.model.DocumentAudit;
+import com.amaris.ai.cloud.db.model.FileItem;
+import com.amaris.ai.cloud.db.model.SearchDocument;
 import com.amaris.ai.cloud.web.BaseSetup;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

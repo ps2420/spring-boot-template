@@ -1,4 +1,4 @@
-package com.amaris.ai.cloud.web.config;
+package com.amaris.ai.cloud.db.config;
 
 import java.io.Serializable;
 import org.springframework.boot.context.properties.ConfigurationProperties;

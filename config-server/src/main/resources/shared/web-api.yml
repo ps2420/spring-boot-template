@@ -1,5 +1,5 @@
 server:
-  port: ${SERVER_PORT:5016}
+  port: ${SERVER_PORT:5024}
 
 eureka:
  instance:
@@ -23,4 +23,5 @@ eureka:
 environment:
   matrix:
     protocol: http
-    searchReference: search-service   
+    searchReference: search-service
+    dbReference: db-service   

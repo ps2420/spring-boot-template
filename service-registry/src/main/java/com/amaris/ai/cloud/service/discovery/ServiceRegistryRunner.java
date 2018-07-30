@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 import de.codecentric.boot.admin.server.config.EnableAdminServer;
 
-
 @EnableEurekaServer
 @SpringBootApplication
 @EnableAdminServer

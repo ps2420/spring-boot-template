@@ -12,6 +12,7 @@ public class EnvironmentMatrix implements Serializable {
 
   private String protocol;
   private String searchReference;
+  private String dbReference;
 
   public String getProtocol() {
     return protocol;
@@ -27,5 +28,13 @@ public class EnvironmentMatrix implements Serializable {
 
   public void setSearchReference(String searchReference) {
     this.searchReference = searchReference;
+  }
+
+  public String getDbReference() {
+    return dbReference;
+  }
+
+  public void setDbReference(String dbReference) {
+    this.dbReference = dbReference;
   }
 }

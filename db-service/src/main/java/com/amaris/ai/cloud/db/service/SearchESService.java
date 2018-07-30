@@ -1,7 +1,7 @@
-package com.amaris.ai.cloud.web.service;
+package com.amaris.ai.cloud.db.service;
 
 import java.util.List;
-import com.amaris.ai.cloud.web.model.SearchDocument;
+import com.amaris.ai.cloud.db.model.SearchDocument;
 
 public interface SearchESService {
 

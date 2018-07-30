@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
-import com.amaris.ai.cloud.web.config.EnvironmentMatrix;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -70,7 +69,4 @@ public class WebUtil {
     }
   }
 
-  public static String urlPrefix(final EnvironmentMatrix envMatrix) {
-    return envMatrix.getProtocol() + "://" + envMatrix.getSearchReference();
-  }
 }

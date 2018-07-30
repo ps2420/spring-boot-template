@@ -1,4 +1,4 @@
-package com.amaris.ai.cloud.web.service.impl;
+package com.amaris.ai.cloud.db.service.impl;
 
 import java.io.InputStream;
 import java.nio.charset.Charset;
@@ -11,9 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
-import com.amaris.ai.cloud.web.model.DocumentAudit;
-import com.amaris.ai.cloud.web.service.DocumentAuditService;
-import com.amaris.ai.cloud.web.util.WebUtil;
+import com.amaris.ai.cloud.db.model.DocumentAudit;
+import com.amaris.ai.cloud.db.service.DocumentAuditService;
+import com.amaris.ai.cloud.db.util.CommonUtil;
 
 @Service
 public class DocumentAuditServiceImpl implements DocumentAuditService {
@@ -31,11 +31,11 @@ public class DocumentAuditServiceImpl implements DocumentAuditService {
   @Override
   public List<DocumentAudit> listDocumentAudits() {
     final List<DocumentAudit> docList = new ArrayList<>();
-    final Resource resource = this.resourceLoader.getResource(WebUtil.MOCK_CONTENT + "download_document.json");
+    final Resource resource = this.resourceLoader.getResource(CommonUtil.MOCK_CONTENT + "download_document.json");
     try {
       try (final InputStream ios = resource.getInputStream();) {
         final String jsondata = IOUtils.toString(ios, Charset.defaultCharset());
-        docList.addAll(WebUtil.readListData(jsondata, DocumentAudit.class));
+        docList.addAll(CommonUtil.readListData(jsondata, DocumentAudit.class));
       }
     } catch (final Exception ex) {
       LOGGER.error("Error in converting json data back to object " + ex, ex);

@@ -41,8 +41,7 @@ export class SearchService {
     }
 
     listFilesByProduct(product: string) : Observable<any> {
-        this.logService.log("Inside listFilesByProduct function..");
-        let url = this.app_context['api_config']['file_by_product'] + '?product=' + product;
+        let url = this.app_context['api_config']['file_by_product'] + '/' + product;
         return this.http.get(url);
     }
 

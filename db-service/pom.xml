@@ -99,7 +99,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<mainClass>com.amaris.ai.cloud.web.WebApiRunner</mainClass>
+					<mainClass>com.amaris.ai.cloud.db.DBServiceRunner</mainClass>
 				</configuration>
 				<executions>
 					<execution>

@@ -1,6 +1,6 @@
 server:
-  port: ${SERVER_PORT:5012}  
-  
+  port: ${SERVER_PORT:5012}
+
 eureka:
  instance:
    prefer-ip-address: false

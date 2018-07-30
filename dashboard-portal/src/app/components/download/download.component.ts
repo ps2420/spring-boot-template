@@ -72,7 +72,6 @@ export class DownloadComponent implements OnInit {
           rowData  : [],
           columnDefs: this.colDefBuilder.buildDownloadGridColDef(),
           enableColResize: true,
-          //onGridReady : this.onGridReady,
           enableSorting : true,
           enableFilter  : true
       };
@@ -86,7 +85,8 @@ export class DownloadComponent implements OnInit {
     } 
 
     loadGridDataFromServer(): void {
-      this.documentService.loadFinancialProdutsAudit(this.productSearch)
+      let product_id = this.app_context['app_config']['product_id'];
+      this.documentService.loadFinancialProdutsAudit(product_id)
         .subscribe(
             (data: any) =>   {
               this.gridOptions.api.setRowData(data);

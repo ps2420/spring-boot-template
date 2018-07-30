@@ -1,4 +1,4 @@
-package com.amaris.ai.cloud.web.config;
+package com.amaris.ai.cloud.db.config;
 
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;

@@ -1,4 +1,4 @@
-package com.amaris.ai.cloud.web.model;
+package com.amaris.ai.cloud.db.model;
 
 import java.io.Serializable;
 import java.util.Date;

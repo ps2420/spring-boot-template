@@ -1,4 +1,4 @@
-package com.amaris.ai.cloud.web;
+package com.amaris.ai.cloud.db;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -10,10 +10,10 @@ import org.springframework.context.annotation.Configuration;
 @EnableDiscoveryClient
 @EnableAutoConfiguration
 @SpringBootApplication
-public class WebApiRunner {
+public class DBServiceRunner {
 
   public static void main(String[] args) {
-    SpringApplication.run(WebApiRunner.class, args);
+    SpringApplication.run(DBServiceRunner.class, args);
   }
 
 }

@@ -1,4 +1,4 @@
-package com.amaris.ai.cloud.web.util;
+package com.amaris.ai.cloud.db.util;
 
 import java.io.InputStream;
 import java.nio.charset.Charset;
@@ -9,17 +9,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
-import com.amaris.ai.cloud.web.config.EnvironmentMatrix;
+import com.amaris.ai.cloud.db.config.EnvironmentMatrix;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class WebUtil {
+public class CommonUtil {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(WebUtil.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(CommonUtil.class);
 
   private static ObjectMapper objectMapper;
-  public static final String HTML_CONTENT = "classpath:html-contents/";
   public static final String MOCK_CONTENT = "classpath:mock-data/";
 
   static {
@@ -29,12 +28,12 @@ public class WebUtil {
   }
 
   public static ObjectMapper objectMapper() {
-    return WebUtil.objectMapper;
+    return CommonUtil.objectMapper;
   }
 
   public static void writeJsonData(final Object data) {
     try {
-      final String jsonData = WebUtil.objectMapper.writeValueAsString(data);
+      final String jsonData = CommonUtil.objectMapper.writeValueAsString(data);
       LOGGER.info("Class:[{}], data:[{}]", data.getClass(), jsonData);
     } catch (final Exception ex) {
     }
@@ -42,7 +41,7 @@ public class WebUtil {
 
   public static <T> T readData(final String jsondata, final Class<T> clazz) {
     try {
-      return WebUtil.objectMapper.readValue(jsondata.getBytes(), clazz);
+      return CommonUtil.objectMapper.readValue(jsondata.getBytes(), clazz);
     } catch (final Exception ex) {
       LOGGER.error("Error in converting to class:[{}], json-data:[{}]", clazz, jsondata);
     }
@@ -52,7 +51,7 @@ public class WebUtil {
   public static <T> List<T> readListData(final String jsondata, final Class<T> clazz) {
     try {
       final TypeReference<List<T>> mapType = new TypeReference<List<T>>() {};
-      return WebUtil.objectMapper.readValue(jsondata.getBytes(), mapType);
+      return CommonUtil.objectMapper.readValue(jsondata.getBytes(), mapType);
     } catch (final Exception ex) {
       LOGGER.error("Error in converting to class:[{}], json-data:[{}]", clazz, jsondata);
     }

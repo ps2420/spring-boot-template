@@ -26,7 +26,7 @@ export class DocumentService {
     }
  
     loadFinancialProdutsAudit(fproduct: string) : any {
-        let url = this.app_context['api_config']['doc-audit'] + "?product=" + fproduct;
+        let url = this.app_context['api_config']['doc-audit'] + "/" + fproduct;
         return this.http.get(url);
     }
   
@@ -38,7 +38,7 @@ export class DocumentService {
     downloadFile(filename: string): Observable<any> {
         let url = this.app_context['api_config']['download-document'] + '?fileName=test.zip'; 
         return this.http.get(url, {
-            responseType: "blob"
+           responseType: "blob"
         });
     } 
 }

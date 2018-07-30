@@ -60,6 +60,8 @@ zuul:
       serviceId: file-handler
     search-service:
       serviceId: search-service
+    db-service:
+      serviceId: db-service
     web-api:
       serviceId: web-api
   host:
