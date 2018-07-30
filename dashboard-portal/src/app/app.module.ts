@@ -15,6 +15,9 @@ import { SearchComponent } from './components/search/search.component';
 import { DownloadComponent } from './components/download/download.component';
 import { UploadComponent } from './components/upload/upload.component';
 
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +33,8 @@ import { UploadComponent } from './components/upload/upload.component';
     FormsModule,
     FileUploadModule,
     HttpClientModule,
+    TypeaheadModule.forRoot(),
+    TooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]

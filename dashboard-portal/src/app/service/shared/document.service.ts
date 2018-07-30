@@ -53,7 +53,7 @@ export class DocumentService {
         let headers = new HttpHeaders();
         headers = headers.set('Accept', 'application/zip');
         return this.http.get(path, { headers: headers, responseType: 'blob' })
-            .map((response: Response) => response ;
+            .map((response: Response) => response );
     }
 }
 

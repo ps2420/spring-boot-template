@@ -15,21 +15,37 @@
 				</li>
 			</ul>
 		</div>
-		<div class="col-sm-1" style="align:left"> &nbsp;&nbsp;</div>
-		<div class="col-sm-8" style="align:left">
-		    <input type="text" style="width:20rem;" placeholder="Enter keyword.." class="form-control" 
+		<div class="col-sm-5" style="align:left" title="{{fileNameSelected}}">
+			<ng-template #customItemTemplate let-model="item" let-index="index">
+			    <div title="{{model.filename}}">{{model.filename}} </div>
+			</ng-template>
+			<input [(ngModel)]="fileNameSelected"
+			       [typeahead]="dataSource"
+			       (typeaheadLoading)="changeTypeaheadLoading($event)"
+			       (typeaheadOnSelect)="typeaheadOnSelect($event)"
+			       [typeaheadItemTemplate]="customItemTemplate"
+			       [typeaheadScrollable]="true"
+       			   [typeaheadOptionsInScrollableView]="10"
+       			   [typeaheadWaitMs]="500"
+			       placeholder="Search for file names"
+			       class="form-control">
+		</div>
+
+		<div class="col-sm-4" style="align:left">
+		    <input type="text" style="width:20rem;" 
+		        placeholder="Key in text to search.." 
+		        class="form-control" 
 		        style="width:15rem;display:inline;"
 		        [(ngModel)]="keywordSearch" (ngModelChange)="keywordSearchChange()" /> 
-		        <!--
-                   &nbsp;<i class="fa fa-search search-icon" aria-hidden="true"></i>&nbsp; 
-                -->
 		</div>
+
+		
 	</div>
 
 	<div style="margin-top:2rem;">
         <h5 style="color:#6c757d" class="">Search Result </h5>
         <ag-grid-angular #agGrid 
-		    [ngStyle]="{'width':'90%','height':'50vh', 'position':''}" 
+		    [ngStyle]="{'width':'94%','height':'50vh', 'position':''}" 
 		    class="ag-theme-balham" [gridOptions]="gridOptions"
 		    [suppressRowClickSelection]="true"
             (cellClicked)= "onColumnSelection(this, $event)" >

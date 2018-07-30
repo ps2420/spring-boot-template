@@ -8,6 +8,8 @@ import { DocumentService } from '../shared/document.service';
 import { MenuItem } from './../../model/menu-item';
 import { HttpClient } from '@angular/common/http';
 
+import { Observable, of } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,7 +19,6 @@ export class SearchService {
 
     constructor(private logService: LogService, private http: HttpClient, 
         private appContextService: AppContextService, private documentService: DocumentService) {
-
         this.app_context = this.appContextService.getAppContext();
     }
  
@@ -25,7 +26,7 @@ export class SearchService {
         return this.app_context;
     }
 
-    loadGridData(product: string, keyword: string) : any{
+    loadGridData(product: string, keyword: string) : any {
         let url = this.app_context['api_config']['search-document'] + "?product=" + product + "&keyword=" + keyword;
         return this.http.get(url);
     }
@@ -35,10 +36,15 @@ export class SearchService {
         return this.http.get(url);
     }
 
-    downloadFile(filename: string): void {
+    downloadFile(filename: string) : void {
         this.documentService.downloadFile(filename);
     }
 
+    listFilesByProduct(product: string) : Observable<any> {
+        this.logService.log("Inside listFilesByProduct function..");
+        let url = this.app_context['api_config']['file_by_product'] + '?product=' + product;
+        return this.http.get(url);
+    }
 
     getSearchDocumentGridColumDefs () : any {
         let columnDefs = [

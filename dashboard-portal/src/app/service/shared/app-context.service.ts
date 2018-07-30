@@ -22,6 +22,7 @@ export class AppContextService {
     api_config : any = {
        'finance-product'   : this.buildUrl('/web-api/html/financeProducts'),
        'search-document'   : this.buildUrl('/web-api/search/documents'),
+       'file_by_product'   : this.buildUrl('/web-api/html/files'),
        
        'doc-audit'         : this.buildUrl('/web-api/docaudit/list'),
        'search-grid'       : this.buildUrl('/search-service/..'),
