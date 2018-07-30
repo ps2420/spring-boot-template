@@ -19,3 +19,8 @@ eureka:
      defaultZone: ${EUREKA_URL:http://${SERVER_HOST:localhost}:${EUREKA_SERVER_PORT:5012}}/eureka/
  server:
    waitTimeInMsWhenSyncEmpty: 0
+   
+environment:
+  matrix:
+    protocol: http
+    searchReference: search-service   

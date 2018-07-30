@@ -1,4 +1,4 @@
-package com.amaris.ai.cloud.web.service.impl;
+package com.amaris.ai.cloud.search.services.impl;
 
 import java.io.InputStream;
 import java.nio.charset.Charset;
@@ -11,32 +11,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
-import com.amaris.ai.cloud.web.model.SearchDocument;
-import com.amaris.ai.cloud.web.service.HtmlContentService;
-import com.amaris.ai.cloud.web.service.SearchDocumentService;
-import com.amaris.ai.cloud.web.util.WebUtil;
+import com.amaris.ai.cloud.search.model.SearchDocument;
+import com.amaris.ai.cloud.search.services.ElasticSearchService;
+import com.amaris.ai.cloud.search.services.SearchDocumentService;
+import com.amaris.ai.cloud.search.util.SearchUtil;
 
 @Service
 public class SearchDocumentServiceImpl implements SearchDocumentService {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(HtmlContentService.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(SearchDocumentService.class);
 
   @Autowired
   private ResourceLoader resourceLoader;
 
+  @Autowired
+  private ElasticSearchService elasticSearchService;
+
   @Override
-  public List<SearchDocument> listSearchDocument(String product, String keyword) {
+  public List<SearchDocument> listSearchDocument(final String product, final String keyword) {
     final List<SearchDocument> searchResults = new ArrayList<>();
-    final Resource resource = this.resourceLoader.getResource(WebUtil.MOCK_CONTENT + "search-result.json");
+    final Resource resource = this.resourceLoader.getResource(SearchUtil.MOCK_CONTENT + "search-result.json");
     try {
       try (final InputStream ios = resource.getInputStream();) {
         final String jsondata = IOUtils.toString(ios, Charset.defaultCharset());
-        searchResults.addAll(WebUtil.readListData(jsondata, SearchDocument.class));
+        searchResults.addAll(SearchUtil.readListData(jsondata, SearchDocument.class));
       }
     } catch (final Exception ex) {
       LOGGER.error("Error in converting json data back to object " + ex, ex);
     }
     return searchResults;
   }
+
 
 }

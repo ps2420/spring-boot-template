@@ -1,4 +1,4 @@
-package com.amaris.ai.cloud.web.util;
+package com.amaris.ai.cloud.search.util;
 
 import java.io.InputStream;
 import java.nio.charset.Charset;
@@ -9,14 +9,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
-import com.amaris.ai.cloud.web.config.EnvironmentMatrix;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class WebUtil {
+public class SearchUtil {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(WebUtil.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(SearchUtil.class);
+
 
   private static ObjectMapper objectMapper;
   public static final String HTML_CONTENT = "classpath:html-contents/";
@@ -29,12 +29,12 @@ public class WebUtil {
   }
 
   public static ObjectMapper objectMapper() {
-    return WebUtil.objectMapper;
+    return SearchUtil.objectMapper;
   }
 
   public static void writeJsonData(final Object data) {
     try {
-      final String jsonData = WebUtil.objectMapper.writeValueAsString(data);
+      final String jsonData = objectMapper().writeValueAsString(data);
       LOGGER.info("Class:[{}], data:[{}]", data.getClass(), jsonData);
     } catch (final Exception ex) {
     }
@@ -42,7 +42,7 @@ public class WebUtil {
 
   public static <T> T readData(final String jsondata, final Class<T> clazz) {
     try {
-      return WebUtil.objectMapper.readValue(jsondata.getBytes(), clazz);
+      return objectMapper().readValue(jsondata.getBytes(), clazz);
     } catch (final Exception ex) {
       LOGGER.error("Error in converting to class:[{}], json-data:[{}]", clazz, jsondata);
     }
@@ -52,7 +52,7 @@ public class WebUtil {
   public static <T> List<T> readListData(final String jsondata, final Class<T> clazz) {
     try {
       final TypeReference<List<T>> mapType = new TypeReference<List<T>>() {};
-      return WebUtil.objectMapper.readValue(jsondata.getBytes(), mapType);
+      return objectMapper().readValue(jsondata.getBytes(), mapType);
     } catch (final Exception ex) {
       LOGGER.error("Error in converting to class:[{}], json-data:[{}]", clazz, jsondata);
     }
@@ -68,9 +68,5 @@ public class WebUtil {
     } catch (final Exception ex) {
       throw new RuntimeException("Error in loading data from file :" + filename, ex);
     }
-  }
-
-  public static String urlPrefix(final EnvironmentMatrix envMatrix) {
-    return envMatrix.getProtocol() + "://" + envMatrix.getSearchReference();
   }
 }
