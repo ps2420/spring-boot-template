@@ -46,18 +46,7 @@ export class AppContextService {
     buildUrl(url: string): string { 
        return this.APP_CONFIG.api_gateway + url;
     } 
- 
-    getDownloadDocumentGridColumDefs(): any {
-        let columnDefs = [
-           {headerName: 'Product',     field: 'product' },
-           {headerName: 'Uploaded By', field: 'uploadedBy'},
-           {headerName: 'Document',    field: 'document'},
-           {headerName: 'Upload Date', field: 'uploadDate'},
-           {headerName: 'Comment',     field: 'comments'}
-        ];
-        return columnDefs;
-    }
- 
+  
     prepareMenuItem(_label : string, _field : string, _selected: boolean) : MenuItem {
         let childMenu = new MenuItem();
         childMenu.label = _label;

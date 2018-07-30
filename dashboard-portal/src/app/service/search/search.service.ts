@@ -46,28 +46,7 @@ export class SearchService {
         return this.http.get(url);
     }
 
-    getSearchDocumentGridColumDefs () : any {
-      let columnDefs = [
-         {
-          headerName: 'Product',    field: 'product' },
-          {
-            headerName: 'Document',   field: 'document', 'downloadDocument' : true,
-            cellRenderer : function(params) {
-              if(params.value === '' || !params.value) {
-                   return '<div></div>';
-              }
-              return '<div title="Click to download" style="cursor:pointer;">' + '<i class="fa fa-download" aria-hidden="true" (click)="downloadFile()"></i>&nbsp;<span title="Download">'+params.value+'</span></div>';
-            }
-          },
-          {
-            headerName: 'Description', field: 'content'
-          },
-          {
-            headerName: 'Page Number', field: 'pageNumber'
-          }
-      ];
-      return columnDefs;
-    }
+    
 }
 
 

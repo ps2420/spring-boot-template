@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GridOptions} from "ag-grid";
 
 import { LogService } from './../../service/shared/log.service';
+import { ColDefBuilderService } from './../../service/shared/col-def-builder.service';
 import { SearchService } from './../../service/search/search.service';
 
 import { MenuItem } from '../../model/menu-item';
@@ -32,7 +33,7 @@ export class SearchComponent implements OnInit {
     getStatesAsObservable(token: string): Observable<any> {
       const query = new RegExp(token, 'ig');
       return  this.searchService.listFilesByProduct(this.fileNameSelected)
-        .map((response: Response) =>  <any>response).do(data => this.logService.logJson(data))
+        .map((response: Response) =>  <any>response)
         .catch(error => of("Error in retrieving records.."));
     }
    
@@ -55,13 +56,14 @@ export class SearchComponent implements OnInit {
     //private gridApi: any;
     //private columnApi: any;
  
-    constructor(private logService: LogService, private searchService: SearchService) { 
+    constructor(private logService: LogService, private searchService: SearchService,
+      private colDefBuilder: ColDefBuilderService) { 
       this.app_context = this.searchService.getAppContext();
       this.productSearch = this.app_context['app_config']['app_name'];
  
       this.gridOptions = <GridOptions> {
           rowData  : [],
-          columnDefs: this.searchService.getSearchDocumentGridColumDefs(),
+          columnDefs: this.colDefBuilder.buildSearchGridColDef(),
           enableColResize: true,
           onGridReady : this.onGridReady,
           enableSorting: true

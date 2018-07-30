@@ -19,14 +19,11 @@
 
 	<div style="margin-top:2rem;">
         <h5 style="color:#6c757d" class="">Search Result </h5>
-        <ag-grid-angular id="download-document-grid"
+        <ag-grid-angular #agGrid id="download-document-grid"
 		    [ngStyle]="{'width':'94%','height':'50vh', 'position':''}" 
-		    class="ag-theme-balham"
-		    [enableSorting]="true"
-            [enableFilter]="true"
-		    [rowData]="rowData" 
-		    [columnDefs]="columnDefs">
+		    class="ag-theme-balham" [gridOptions]="gridOptions"
+		    [suppressRowClickSelection]="true"
+            (cellClicked)= "onColumnSelection(this, $event)" >
 		</ag-grid-angular>
-
 	</div>
 </div>

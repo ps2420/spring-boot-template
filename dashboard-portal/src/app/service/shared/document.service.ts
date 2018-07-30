@@ -24,11 +24,7 @@ export class DocumentService {
     getAppContext(): any {
        return this.app_context;
     }
-
-    getColumnDefs() : any {
-        return this.appContextService.getDownloadDocumentGridColumDefs();
-    }
-
+ 
     loadFinancialProdutsAudit(fproduct: string) : any {
         let url = this.app_context['api_config']['doc-audit'] + "?product=" + fproduct;
         return this.http.get(url);
