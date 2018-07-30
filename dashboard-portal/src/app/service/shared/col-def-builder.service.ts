@@ -41,7 +41,7 @@ export class ColDefBuilderService {
               if(params.value === '' || !params.value) {
                    return '<div></div>';
               }
-              return '<div style="cursor:pointer;">' + '<i class="fa fa-address-card-o" aria-hidden="true"></i>&nbsp;&nbsp;' +
+              return '<div title="Address Book (TO DO..)" style="cursor:pointer;">' + '<i class="fa fa-address-card-o" aria-hidden="true"></i>&nbsp;&nbsp;' +
               '<span title="">'+params.value+'</span></div>';
               }
             },

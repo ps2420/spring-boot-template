@@ -115,7 +115,7 @@ export class SearchComponent implements OnInit {
  
 
     loadGridData() : void {
-      this.searchService.loadGridData(this.productSearch, this.keywordSearch).subscribe (
+      this.searchService.loadGridData("eq", this.keywordSearch).subscribe (
         (data: any) => {
           this.gridOptions.api.setRowData(data);
       });

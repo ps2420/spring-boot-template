@@ -27,7 +27,7 @@ export class SearchService {
     }
 
     loadGridData(product: string, keyword: string) : any {
-        let url = this.app_context['api_config']['search-document'] + "?product=" + product + "&keyword=" + keyword;
+        let url = this.app_context['api_config']['search-document'] + "/" + product + "?keyword=" + keyword;
         return this.http.get(url);
     }
  
