@@ -36,8 +36,8 @@ export class SearchService {
         return this.http.get(url);
     }
 
-    downloadFile(filename: string) : void {
-        this.documentService.downloadFile(filename);
+    downloadFile(filename: string): Observable<any> {
+        return this.documentService.downloadFile(filename);
     }
 
     listFilesByProduct(product: string) : Observable<any> {
@@ -47,9 +47,9 @@ export class SearchService {
     }
 
     getSearchDocumentGridColumDefs () : any {
-        let columnDefs = [
+      let columnDefs = [
          {
-            headerName: 'Product',    field: 'product' },
+          headerName: 'Product',    field: 'product' },
           {
             headerName: 'Document',   field: 'document', 'downloadDocument' : true,
             cellRenderer : function(params) {
@@ -65,8 +65,8 @@ export class SearchService {
           {
             headerName: 'Page Number', field: 'pageNumber'
           }
-        ];
-        return columnDefs;
+      ];
+      return columnDefs;
     }
 }
 

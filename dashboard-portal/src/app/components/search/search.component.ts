@@ -128,12 +128,15 @@ export class SearchComponent implements OnInit {
 
     onColumnSelection(object: any, params: any) : void {
       if(params['colDef'].field == "document") {
-          this.downloadFile(params.data);
+        this.searchService.downloadFile(params.data.document)
+          //.map((response: Response) => response )
+          .subscribe(response => {
+            let b:any = new Blob([response], { type: response.type });
+            var url= window.URL.createObjectURL(b);
+              window.open(url);
+          }
+        );
       }
-    }
-
-    downloadFile(data: any): void {
-      this.searchService.downloadFile(data.document);    
     }
 }
 

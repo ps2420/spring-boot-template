@@ -39,22 +39,12 @@ export class DocumentService {
         return this.http.get(url);
     }
 
-    downloadFile(filename: string): void {
+    downloadFile(filename: string): Observable<any> {
         let url = this.app_context['api_config']['download-document'] + '?fileName=test.zip'; 
-        this.getFile(url).subscribe(fileData => {
-            let b:any = new Blob([fileData], { type: 'application/zip' });
-            var url= window.URL.createObjectURL(b);
-              window.open(url);
-            }
-        );
-    }
-
-    getFile(path: string): Observable<any> {
-        let headers = new HttpHeaders();
-        headers = headers.set('Accept', 'application/zip');
-        return this.http.get(path, { headers: headers, responseType: 'blob' })
-            .map((response: Response) => response );
-    }
+        return this.http.get(url, {
+            responseType: "blob"
+        });
+    } 
 }
 
 
