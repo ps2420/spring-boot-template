@@ -3,13 +3,9 @@ package com.amaris.ai.cloud.search.configuration;
 import org.apache.http.HttpHost;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class ESMultipleFieldQueryTest {
-
-  private static final Logger LOGGER = LoggerFactory.getLogger(ESSingleFieldQueryTest.class);
-
+ 
   static RestHighLevelClient esclient;
   final static String INDEX_NAME = "searchpdf";
    

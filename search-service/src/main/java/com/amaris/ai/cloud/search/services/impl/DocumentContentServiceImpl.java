@@ -11,12 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
-import com.amaris.ai.cloud.search.request.DocumentCountRequest;
 import com.amaris.ai.cloud.search.request.SearchDocumentRequest;
-import com.amaris.ai.cloud.search.response.DocumentCountResponse;
 import com.amaris.ai.cloud.search.response.SearchDocumentResponse;
-import com.amaris.ai.cloud.search.services.ElasticSearchService;
 import com.amaris.ai.cloud.search.services.DocumentContentService;
+import com.amaris.ai.cloud.search.services.ElasticSearchService;
 import com.amaris.ai.cloud.search.util.SearchUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
 

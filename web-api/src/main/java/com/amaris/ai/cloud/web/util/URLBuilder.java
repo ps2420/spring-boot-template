@@ -23,8 +23,12 @@ public class URLBuilder {
     return urlPrefix() + envMatrix.getDbReference();
   }
 
-  public String searchDocumentUrl(final String product, final String keyword) {
-    return esUrlPrefix() + "/search/documents" + "/" + product + "/?keyword=" + keyword;
+  public String searchDocumentContentUrl(final String product, final String keyword) {
+    return esUrlPrefix() + "/search/listContent" + "/" + product + "/?keyword=" + keyword;
+  }
+  
+  public String searchDocumentCountUrl(final String product) {
+    return esUrlPrefix() + "/search/documentCount" + "/" + product;
   }
 
   public String docListAuditUril(final String product) {

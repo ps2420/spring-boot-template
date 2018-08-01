@@ -47,7 +47,7 @@ public class ElasticSearchServiceImpl implements ElasticSearchService {
 
       final SearchResponse response = esClient.searchClient().search(searchRequest);
       Arrays.asList(response.getHits().getHits()).forEach(searchhit -> {
-        final String jsonData = searchhit.getSourceAsString().replaceAll("\\s+", "\\s").trim();
+        final String jsonData = searchhit.getSourceAsString().replaceAll("\\s+", " ").trim();
         final SearchDocumentResponse searchDocument = SearchUtil.readData(jsonData, SearchDocumentResponse.class);
         searchResults.add(searchDocument);
       });

@@ -2,7 +2,7 @@ package com.amaris.ai.cloud.web;
 
 import com.amaris.ai.cloud.web.model.FileItem;
 import com.amaris.ai.cloud.web.model.FinacialProduct;
-import com.amaris.ai.cloud.web.model.SearchDocument;
+import com.amaris.ai.cloud.web.response.SearchDocumentResponse;
 
 public class BaseSetup {
 
@@ -14,8 +14,8 @@ public class BaseSetup {
     return fp;
   }
 
-  protected SearchDocument mockSearchDocument(final String product, final String document, final String content) {
-    final SearchDocument result = new SearchDocument();
+  protected SearchDocumentResponse mockSearchDocument(final String product, final String document, final String content) {
+    final SearchDocumentResponse result = new SearchDocumentResponse();
     result.setProjectName(product);
     result.setContent(content);
     result.setDocument(document);

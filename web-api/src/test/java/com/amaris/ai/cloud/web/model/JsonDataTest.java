@@ -44,14 +44,6 @@ public class JsonDataTest extends BaseSetup {
   }
 
   @Test
-  public void searchDocumentTest() throws Exception {
-    final SearchDocument sdoc1 = super.mockSearchDocument(EQUITY, java.util.UUID.randomUUID().toString() + ".pdf", MOCK_DATA);
-    final SearchDocument sdoc2 = super.mockSearchDocument(OPTION, java.util.UUID.randomUUID().toString() + ".pdf", MOCK_DATA);
-    final SearchDocument sdoc3 = super.mockSearchDocument(DERIVATIVES, java.util.UUID.randomUUID().toString() + ".pdf", MOCK_DATA);
-    LOGGER.info("\n" + mapper.writeValueAsString(Arrays.asList(sdoc1, sdoc2, sdoc3)));
-  }
-
-  @Test
   public void fileItemJsonData() throws Exception {
     final List<FileItem> fileItemList = new ArrayList<>();
     IntStream.range(2, 20).forEach(index -> {
