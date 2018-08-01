@@ -25,6 +25,9 @@
 		<java.version>1.8</java.version>
 		<spring-cloud.version>Finchley.RELEASE</spring-cloud.version>
 		<spring.boot.admin>2.0.1</spring.boot.admin>
+		<kafka.clients>0.10.2.0</kafka.clients>
+		<commons.io>2.6</commons.io>
+		<spring-kafka.version>1.2.1.RELEASE</spring-kafka.version>
 	</properties>
 
 	<dependencies>
@@ -53,16 +56,25 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
-			<version>2.6</version>
+			<version>${commons.io}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
+			<groupId>org.apache.kafka</groupId>
+			<artifactId>kafka-clients</artifactId>
+			<version>${kafka.clients}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.kafka</groupId>
+			<artifactId>connect-json</artifactId>
+			<version>0.10.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.kafka</groupId>
+			<artifactId>kafka-streams</artifactId>
+			<version>0.10.2.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

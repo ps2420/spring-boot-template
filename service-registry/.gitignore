@@ -11,7 +11,8 @@ ELFTesting.properties
 .idea/
 out/
 local.properties
-
+LOG_DIR_IS_UNDEFINED/
+./LOG_DIR_IS_UNDEFINED
 # Generic Android ignores #
 ###########################
 bin/

@@ -1,0 +1,17 @@
+{
+  "query": 
+   {
+	  "bool" : {
+	    "must" : [
+	       
+	      {
+	        "query_string" : {
+	          "query" : "content:dossier"  
+	        }
+	      }
+	    ],
+	    "adjust_pure_negative" : true,
+	    "boost" : 1.0
+	  }
+	}
+}

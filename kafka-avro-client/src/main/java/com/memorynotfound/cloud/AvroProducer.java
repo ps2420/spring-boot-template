@@ -16,7 +16,7 @@ public class AvroProducer {
 
   private static Producer<Long, Employee> createProducer() {
     Properties props = new Properties();
-    props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+    props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.1.119:6067,192.168.1.35:6067");
     props.put(ProducerConfig.CLIENT_ID_CONFIG, "AvroProducer");
     props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, LongSerializer.class.getName());
     // Configure the KafkaAvroSerializer.

@@ -24,6 +24,8 @@ elastic:
   client:
     authenticated: false
     protocol: http
+    documentIndex: search_pdf
+    resultSize: 100
     elasticHostConfigs:
       -  
         host: 192.168.1.119

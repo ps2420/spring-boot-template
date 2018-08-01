@@ -25,7 +25,6 @@ public class SearchUtil {
   static {
     objectMapper = new ObjectMapper();
     objectMapper.setSerializationInclusion(Include.NON_NULL);
-
   }
 
   public static ObjectMapper objectMapper() {

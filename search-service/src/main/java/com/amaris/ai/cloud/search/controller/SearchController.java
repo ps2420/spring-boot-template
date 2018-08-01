@@ -1,5 +1,6 @@
 package com.amaris.ai.cloud.search.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,11 @@ public class SearchController {
   @RequestMapping(value = "/documents/{product}", method = RequestMethod.GET)
   public List<SearchDocument> listDocuments(@PathVariable String product, @RequestParam(name = "keyword", defaultValue = "") final String keyword) {
     return this.searchDocumentService.listSearchDocument(product, keyword);
+  }
+  
+  @RequestMapping(value = "/documentList", method = RequestMethod.GET)
+  public List<String> documentList() {
+    return new ArrayList<>();
   }
 
 }

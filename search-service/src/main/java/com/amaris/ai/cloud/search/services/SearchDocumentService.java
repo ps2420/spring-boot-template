@@ -6,5 +6,7 @@ import com.amaris.ai.cloud.search.model.SearchDocument;
 public interface SearchDocumentService {
 
   List<SearchDocument> listSearchDocument(final String product, final String keyword);
+  
+  List<SearchDocument> mockSearchDocument(final String product, final String keyword);
 
 }

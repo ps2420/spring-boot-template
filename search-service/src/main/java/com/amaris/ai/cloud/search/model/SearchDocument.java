@@ -6,11 +6,12 @@ public class SearchDocument implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
-  protected String product;
-  protected String document;
-  protected String content;
-  protected String content_document;
-  protected Integer pageNumber;
+  private String product;
+  private String document;
+  private String content;
+  private String content_document;
+  private Integer pageNumber;
+  private Integer documentNumber;
 
   public String getProduct() {
     return product;
@@ -51,4 +52,13 @@ public class SearchDocument implements Serializable {
   public void setContent_document(String content_document) {
     this.content_document = content_document;
   }
+
+  public Integer getDocumentNumber() {
+    return documentNumber;
+  }
+
+  public void setDocumentNumber(Integer documentNumber) {
+    this.documentNumber = documentNumber;
+  }
+
 }

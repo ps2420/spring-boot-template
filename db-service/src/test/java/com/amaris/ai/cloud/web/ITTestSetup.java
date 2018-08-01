@@ -3,9 +3,9 @@ package com.amaris.ai.cloud.web;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
-import com.amaris.ai.cloud.db.DBServiceRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
+import com.amaris.ai.cloud.db.DBServiceRunner;
 
 @SpringBootApplication
 @Configuration

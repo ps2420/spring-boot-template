@@ -30,6 +30,13 @@ public class SearchDocumentServiceImpl implements SearchDocumentService {
   @Override
   public List<SearchDocument> listSearchDocument(final String product, final String keyword) {
     final List<SearchDocument> searchResults = new ArrayList<>();
+    
+    return searchResults;
+  }
+
+  @Override
+  public List<SearchDocument> mockSearchDocument(final String product, final String keyword) {
+    final List<SearchDocument> searchResults = new ArrayList<>();
     final Resource resource = this.resourceLoader.getResource(SearchUtil.MOCK_CONTENT + "search-result.json");
     try {
       try (final InputStream ios = resource.getInputStream();) {

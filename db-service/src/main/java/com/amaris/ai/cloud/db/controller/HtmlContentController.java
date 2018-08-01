@@ -1,6 +1,7 @@
 package com.amaris.ai.cloud.db.controller;
 
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,8 +23,9 @@ public class HtmlContentController {
     return htmlContentService.listFinancialProducts();
   }
 
-  @RequestMapping(value = "/files/{product}", method = RequestMethod.GET)
-  public List<FileItem> listFilesByProduct(final @PathVariable String product) {
+  @RequestMapping(value =  {"/files/{product}", "/files"}, method = RequestMethod.GET)
+  public List<FileItem> listFilesByProduct(final @PathVariable Optional<String> productOpt) {
+    final String product = productOpt.isPresent() ? productOpt.get() : "";
     return htmlContentService.listFilesByProduct(product);
   }
 }

@@ -9,4 +9,6 @@ public interface DocumentAuditService {
 
   List<DocumentAudit> listDocumentAudits();
 
+  void auditDocument(final DocumentAudit docAudit);
+
 }

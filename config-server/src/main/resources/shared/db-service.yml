@@ -23,4 +23,11 @@ eureka:
 environment:
   matrix:
     protocol: http
-    searchReference: search-service   
+    searchReference: search-service
+    
+kafka:
+  brokers:
+    servers: 192.168.1.119:6067,192.168.1.35:6067
+    file_topic: t_file_upload_file_event
+    clientId: ${spring.application.name}
+         

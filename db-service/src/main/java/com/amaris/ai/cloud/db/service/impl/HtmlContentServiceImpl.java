@@ -8,6 +8,7 @@ import com.amaris.ai.cloud.db.model.FileItem;
 import com.amaris.ai.cloud.db.model.FinacialProduct;
 import com.amaris.ai.cloud.db.service.HtmlContentService;
 import com.amaris.ai.cloud.db.util.CommonUtil;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 @Service
 public class HtmlContentServiceImpl implements HtmlContentService {
@@ -18,13 +19,15 @@ public class HtmlContentServiceImpl implements HtmlContentService {
   @Override
   public List<FinacialProduct> listFinancialProducts() {
     final String jsondata = CommonUtil.loadJsonData(resourceLoader, CommonUtil.MOCK_CONTENT + "financial-product.json");
-    return CommonUtil.readListData(jsondata, FinacialProduct.class);
+    final TypeReference<List<FinacialProduct>> mapType = new TypeReference<List<FinacialProduct>>() {};
+    return CommonUtil.readListData(jsondata, mapType);
   }
 
   @Override
   public List<FileItem> listFilesByProduct(final String product) {
     final String jsondata = CommonUtil.loadJsonData(resourceLoader, CommonUtil.MOCK_CONTENT + "file-list.json");
-    return CommonUtil.readListData(jsondata, FileItem.class);
+    final TypeReference<List<FileItem>> mapType = new TypeReference<List<FileItem>>() {};
+    return CommonUtil.readListData(jsondata, mapType);
   }
 
 }

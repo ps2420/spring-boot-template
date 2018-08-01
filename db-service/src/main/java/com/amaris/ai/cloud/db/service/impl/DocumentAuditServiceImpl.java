@@ -13,7 +13,9 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 import com.amaris.ai.cloud.db.model.DocumentAudit;
 import com.amaris.ai.cloud.db.service.DocumentAuditService;
+import com.amaris.ai.cloud.db.service.KafkaService;
 import com.amaris.ai.cloud.db.util.CommonUtil;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 @Service
 public class DocumentAuditServiceImpl implements DocumentAuditService {
@@ -22,6 +24,9 @@ public class DocumentAuditServiceImpl implements DocumentAuditService {
 
   @Autowired
   private ResourceLoader resourceLoader;
+
+  @Autowired
+  private KafkaService kafkaService;
 
   @Override
   public List<DocumentAudit> listDocumentAudits(final String domain) {
@@ -35,12 +40,23 @@ public class DocumentAuditServiceImpl implements DocumentAuditService {
     try {
       try (final InputStream ios = resource.getInputStream();) {
         final String jsondata = IOUtils.toString(ios, Charset.defaultCharset());
-        docList.addAll(CommonUtil.readListData(jsondata, DocumentAudit.class));
+        final TypeReference<List<DocumentAudit>> mapType = new TypeReference<List<DocumentAudit>>() {};
+        docList.addAll(CommonUtil.readListData(jsondata, mapType));
       }
     } catch (final Exception ex) {
       LOGGER.error("Error in converting json data back to object " + ex, ex);
     }
     return docList;
+  }
+
+  @Override
+  public void auditDocument(final DocumentAudit docAudit) {
+    try {
+      kafkaService.sendDocumentAuditEvent(docAudit);
+    } catch (final Exception ex) {
+      LOGGER.error("Error in auditing document " + ex, ex);
+      throw new RuntimeException("Error in auditing document " + ex, ex);
+    }
   }
 
 }

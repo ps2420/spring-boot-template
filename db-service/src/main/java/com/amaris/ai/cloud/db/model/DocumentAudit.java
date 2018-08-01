@@ -7,11 +7,20 @@ public class DocumentAudit implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
-  protected String product;
-  protected String document;
-  protected String uploadedBy;
-  protected String comments;
-  protected Date uploadDate;
+  private String id;
+  private String product;
+  private String document;
+  private String uploadedBy;
+  private String comments;
+  private Date uploadDate;
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
 
   public String getProduct() {
     return product;

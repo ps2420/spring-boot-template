@@ -7,15 +7,17 @@ import org.springframework.stereotype.Component;
 
 @Component
 @ConfigurationProperties(prefix = "elastic.client", ignoreUnknownFields = true)
-public class ElasticClientConfiguration implements Serializable {
+public class ESConfiguration implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
-  protected String userid;
-  protected String password;
-  protected boolean authenticated;
-  protected String protocol = "http";
-  protected List<ElasticHostConfig> elasticHostConfigs;
+  private String userid;
+  private String password;
+  private boolean authenticated;
+  private String documentIndex;
+  private Integer resultSize = 50;
+  private String protocol = "http";
+  private List<ElasticHostConfig> elasticHostConfigs;
 
   public String getUserid() {
     return userid;
@@ -39,6 +41,22 @@ public class ElasticClientConfiguration implements Serializable {
 
   public void setAuthenticated(boolean authenticated) {
     this.authenticated = authenticated;
+  }
+
+  public String getDocumentIndex() {
+    return documentIndex;
+  }
+
+  public void setDocumentIndex(String documentIndex) {
+    this.documentIndex = documentIndex;
+  }
+
+  public Integer getResultSize() {
+    return resultSize;
+  }
+
+  public void setResultSize(Integer resultSize) {
+    this.resultSize = resultSize;
   }
 
   public String getProtocol() {

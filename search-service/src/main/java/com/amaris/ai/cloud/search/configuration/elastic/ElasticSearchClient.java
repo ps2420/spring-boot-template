@@ -25,7 +25,7 @@ public class ElasticSearchClient {
   private static final Logger LOGGER = LoggerFactory.getLogger(ElasticSearchClient.class);
 
   @Autowired
-  private ElasticClientConfiguration elasticClientConfiguration;
+  private ESConfiguration elasticClientConfiguration;
 
   private RestHighLevelClient restHighLevelClient;
 
