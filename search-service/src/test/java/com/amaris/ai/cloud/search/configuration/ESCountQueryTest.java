@@ -19,7 +19,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
 import com.amaris.ai.cloud.search.BaseSetup;
-import com.amaris.ai.cloud.search.model.SearchCountResponse;
+import com.amaris.ai.cloud.search.response.SearchCountResponse;
 import com.amaris.ai.cloud.search.util.QueryBuilder;
 import com.amaris.ai.cloud.search.util.SearchUtil;
 
@@ -30,8 +30,7 @@ public class ESCountQueryTest extends BaseSetup {
   private static final Logger LOGGER = LoggerFactory.getLogger(ESCountQueryTest.class);
 
   static RestHighLevelClient esclient;
-  final static String INDEX_NAME = "searchpdf";
-  final static String INDEX_TYPE = "_doc";
+  final static String INDEX_NAME = "searchpdf"; 
 
   static String COUNT_QUERY_TEMPLATE = "{\n\"query\":\nCOUNT_QUERY\n}";
 
@@ -69,7 +68,7 @@ public class ESCountQueryTest extends BaseSetup {
     final HttpEntity<?> entity = new HttpEntity<>(headers);
 
     final RestTemplate restTemplate = new RestTemplate();
-    final String esCountUrl = esCountURL(INDEX_NAME, INDEX_TYPE);
+    final String esCountUrl = esCountURL(INDEX_NAME, SearchUtil.DEFAULT_INDEX_TYPE);
     LOGGER.info("\n-URL:[{}], \nJSON-Query:[{}]", esCountUrl, jsonQuery);
     final ResponseEntity<String> response = restTemplate.exchange(esCountUrl, HttpMethod.GET, entity, String.class, jsonQuery);
     return SearchUtil.readData(response.getBody(), SearchCountResponse.class);

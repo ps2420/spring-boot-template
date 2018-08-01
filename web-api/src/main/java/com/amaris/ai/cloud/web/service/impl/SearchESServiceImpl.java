@@ -12,6 +12,7 @@ import com.amaris.ai.cloud.web.model.SearchDocument;
 import com.amaris.ai.cloud.web.service.SearchESService;
 import com.amaris.ai.cloud.web.util.URLBuilder;
 import com.amaris.ai.cloud.web.util.WebUtil;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 @Service
 public class SearchESServiceImpl implements SearchESService {
@@ -31,7 +32,8 @@ public class SearchESServiceImpl implements SearchESService {
       final String endpoint = urlBuilder.searchDocumentUrl(product, keyword);
       final String jsondata = restTemplate.exchange(endpoint, HttpMethod.GET, null, String.class).getBody();
       LOGGER.info("end-point:[{}], response : [{}]", endpoint, jsondata);
-      searchResults.addAll(WebUtil.readListData(jsondata, SearchDocument.class));
+      final TypeReference<List<SearchDocument>> mapType = new TypeReference<List<SearchDocument>>() {};
+      searchResults.addAll(WebUtil.readListData(jsondata, mapType));
     } catch (final Exception ex) {
       LOGGER.error("Error in converting json data back to object " + ex, ex);
     }

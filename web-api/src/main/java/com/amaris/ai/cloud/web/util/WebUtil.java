@@ -48,12 +48,11 @@ public class WebUtil {
     return null;
   }
 
-  public static <T> List<T> readListData(final String jsondata, final Class<T> clazz) {
+  public static <T> List<T> readListData(final String jsondata, final TypeReference<List<T>> mapType) {
     try {
-      final TypeReference<List<T>> mapType = new TypeReference<List<T>>() {};
       return WebUtil.objectMapper.readValue(jsondata.getBytes(), mapType);
     } catch (final Exception ex) {
-      LOGGER.error("Error in converting to class:[{}], json-data:[{}]", clazz, jsondata);
+      LOGGER.error("Error in converting to class:[{}], json-data:[{}]", mapType, jsondata);
     }
     return new ArrayList<T>();
   }

@@ -1,15 +1,12 @@
 package com.amaris.ai.cloud.search.services;
 
 import java.util.List;
-import com.amaris.ai.cloud.search.model.SearchDocument;
-import com.amaris.ai.cloud.search.model.SearchDocumentRequest;
+import com.amaris.ai.cloud.search.request.DocumentCountRequest;
+import com.amaris.ai.cloud.search.response.DocumentCountResponse;
 
 public interface SearchDocumentService {
 
-  List<SearchDocument> listSearchDocument(final String product, final String keyword);
-  
-  List<SearchDocument> mockSearchDocument(final String product, final String keyword);
+  List<DocumentCountResponse> documentCountInfo(final String product) throws Exception;
 
-  List<SearchDocument> listDocuments(SearchDocumentRequest searchDocumentRequest);
-
+  List<DocumentCountResponse> listDocument(final DocumentCountRequest request) throws Exception ;
 }

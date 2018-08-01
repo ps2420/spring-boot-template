@@ -41,8 +41,8 @@ public class QueryBuilder {
     final BoolQueryBuilder boolQuery = new BoolQueryBuilder();
     Arrays.asList(searchTerm.split(",")).forEach(_keyword -> {
       Arrays.asList(_keyword.trim().toLowerCase().split(" ")).forEach(keyword -> {
-        boolQuery.must(QueryBuilders.wildcardQuery(field, WILDCARD_STAR + keyword.trim().toLowerCase() + WILDCARD_STAR));
-        boolQuery.must(QueryBuilders.queryStringQuery(field + ":" + keyword));
+        boolQuery.should(QueryBuilders.wildcardQuery(field, WILDCARD_STAR + keyword.trim().toLowerCase() + WILDCARD_STAR));
+        boolQuery.should(QueryBuilders.queryStringQuery(field + ":" + keyword));
       });
     });
     return boolQuery;

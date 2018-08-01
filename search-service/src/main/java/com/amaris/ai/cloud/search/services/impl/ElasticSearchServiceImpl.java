@@ -13,8 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.amaris.ai.cloud.search.configuration.elastic.ESConfiguration;
 import com.amaris.ai.cloud.search.configuration.elastic.ElasticSearchClient;
-import com.amaris.ai.cloud.search.model.SearchDocument;
-import com.amaris.ai.cloud.search.model.SearchDocumentRequest;
+import com.amaris.ai.cloud.search.request.DocumentCountRequest;
+import com.amaris.ai.cloud.search.request.SearchDocumentRequest;
+import com.amaris.ai.cloud.search.response.DocumentCountResponse;
+import com.amaris.ai.cloud.search.response.SearchDocumentResponse;
 import com.amaris.ai.cloud.search.services.ElasticSearchService;
 import com.amaris.ai.cloud.search.util.QueryBuilder;
 import com.amaris.ai.cloud.search.util.SearchUtil;
@@ -31,20 +33,22 @@ public class ElasticSearchServiceImpl implements ElasticSearchService {
   private ESConfiguration esConfiguration;
 
   @Override
-  public List<SearchDocument> listSearchDocument(final String product, final String keyword) {
-    final List<SearchDocument> searchResults = new ArrayList<>();
+  public List<SearchDocumentResponse> listContent(final String product, final String keyword) {
+    final List<SearchDocumentResponse> searchResults = new ArrayList<>();
     try {
       final BoolQueryBuilder boolBuilder = QueryBuilder.buildBoolQueryBuilder("content", keyword);
+      LOGGER.info("BoolBuilder:\n" + boolBuilder.toString());
+      
       final SearchSourceBuilder sourceBuilder = QueryBuilder.defaultSourceBuilder(esConfiguration.getResultSize());
       sourceBuilder.query(boolBuilder);
-
-      SearchRequest searchRequest = new SearchRequest(esConfiguration.getDocumentIndex());
+    
+      final SearchRequest searchRequest = new SearchRequest(esConfiguration.getDocumentIndex());
       searchRequest.source(sourceBuilder);
 
       final SearchResponse response = esClient.searchClient().search(searchRequest);
       Arrays.asList(response.getHits().getHits()).forEach(searchhit -> {
-        LOGGER.info("" + searchhit.getSourceAsString().replaceAll("\\s+", "\\s").trim());
-        final SearchDocument searchDocument = SearchUtil.readData(searchhit.getSourceAsString(), SearchDocument.class);
+        final String jsonData = searchhit.getSourceAsString().replaceAll("\\s+", "\\s").trim();
+        final SearchDocumentResponse searchDocument = SearchUtil.readData(jsonData, SearchDocumentResponse.class);
         searchResults.add(searchDocument);
       });
     } catch (final Exception ex) {
@@ -54,8 +58,14 @@ public class ElasticSearchServiceImpl implements ElasticSearchService {
   }
 
   @Override
-  public List<SearchDocument> listSearchDocument(final SearchDocumentRequest searchDocumentRequest) {
+  public List<SearchDocumentResponse> listContent(final SearchDocumentRequest searchDocumentRequest) {
     return new ArrayList<>();
+  }
+
+  @Override
+  public List<DocumentCountResponse> listContent(DocumentCountRequest request) {
+    // TODO Auto-generated method stub
+    return null;
   }
 
 }

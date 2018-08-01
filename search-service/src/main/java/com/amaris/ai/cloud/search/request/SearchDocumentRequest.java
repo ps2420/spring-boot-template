@@ -1,4 +1,4 @@
-package com.amaris.ai.cloud.search.model;
+package com.amaris.ai.cloud.search.request;
 
 import java.io.Serializable;
 import java.util.ArrayList;

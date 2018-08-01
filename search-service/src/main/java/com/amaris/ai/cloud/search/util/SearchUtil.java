@@ -12,6 +12,7 @@ import org.springframework.core.io.ResourceLoader;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class SearchUtil {
@@ -22,10 +23,11 @@ public class SearchUtil {
   public static final String HTML_CONTENT = "classpath:html-contents/";
   public static final String MOCK_CONTENT = "classpath:mock-data/";
 
+  public static final String DEFAULT_INDEX_TYPE = "_doc";
   static {
     objectMapper = new ObjectMapper();
-    objectMapper.setSerializationInclusion(Include.NON_NULL); 
-    objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false); 
+    objectMapper.setSerializationInclusion(Include.NON_NULL);
+    objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
   }
 
   public static ObjectMapper objectMapper() {
@@ -37,7 +39,7 @@ public class SearchUtil {
       final String jsonData = objectMapper().writeValueAsString(data);
       LOGGER.info("Class:[{}], data:[{}]", data.getClass(), jsonData);
     } catch (final Exception ex) {
-     
+
     }
   }
 
@@ -45,17 +47,16 @@ public class SearchUtil {
     try {
       return objectMapper().readValue(jsondata.getBytes(), clazz);
     } catch (final Exception ex) {
-      LOGGER.error("Error in converting to class:[{}], json-data:[{}]" +ex , clazz, jsondata, ex);
+      LOGGER.error("Error in converting to class:[{}], json-data:[{}]" + ex, clazz, jsondata, ex);
     }
     return null;
   }
 
-  public static <T> List<T> readListData(final String jsondata, final Class<T> clazz) {
+  public static <T> List<T> readListData(final String jsondata, final TypeReference<List<T>> mapType) {
     try {
-      final TypeReference<List<T>> mapType = new TypeReference<List<T>>() {};
-      return objectMapper().readValue(jsondata.getBytes(), mapType);
+      return SearchUtil.objectMapper.readValue(jsondata.getBytes(), mapType);
     } catch (final Exception ex) {
-      LOGGER.error("Error in converting to class:[{}], json-data:[{}]", clazz, jsondata);
+      LOGGER.error("Error in converting to class:[{}], json-data:[{}]", mapType, jsondata);
     }
     return new ArrayList<T>();
   }
@@ -69,5 +70,17 @@ public class SearchUtil {
     } catch (final Exception ex) {
       throw new RuntimeException("Error in loading data from file :" + filename, ex);
     }
+  }
+
+  public static String parseAggregateDocuments(final JsonNode jsonNode) {
+    String jsonnode = null;
+    final JsonNode agJsonNode = jsonNode.get("aggregations");
+    if (agJsonNode.get("sterms#unique_document") != null && agJsonNode != null) {
+      final JsonNode bucketNode = agJsonNode.get("sterms#unique_document").get("buckets");
+      if (bucketNode != null) {
+        jsonnode = bucketNode.toString().replaceAll("\"key\"", "\"name\"").replaceAll("doc_count", "count");
+      }
+    }
+    return jsonnode;
   }
 }

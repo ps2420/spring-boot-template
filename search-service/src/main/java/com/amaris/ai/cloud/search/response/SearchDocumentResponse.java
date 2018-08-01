@@ -1,8 +1,8 @@
-package com.amaris.ai.cloud.search.model;
+package com.amaris.ai.cloud.search.response;
 
 import java.io.Serializable;
 
-public class SearchDocument implements Serializable {
+public class SearchDocumentResponse implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
