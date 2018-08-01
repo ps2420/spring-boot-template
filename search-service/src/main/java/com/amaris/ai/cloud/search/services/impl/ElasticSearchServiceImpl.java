@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.amaris.ai.cloud.search.configuration.elastic.ESConfiguration;
 import com.amaris.ai.cloud.search.configuration.elastic.ElasticSearchClient;
 import com.amaris.ai.cloud.search.model.SearchDocument;
+import com.amaris.ai.cloud.search.model.SearchDocumentRequest;
 import com.amaris.ai.cloud.search.services.ElasticSearchService;
 import com.amaris.ai.cloud.search.util.QueryBuilder;
 import com.amaris.ai.cloud.search.util.SearchUtil;
@@ -25,7 +26,7 @@ public class ElasticSearchServiceImpl implements ElasticSearchService {
 
   @Autowired
   private ElasticSearchClient esClient;
-  
+
   @Autowired
   private ESConfiguration esConfiguration;
 
@@ -50,6 +51,11 @@ public class ElasticSearchServiceImpl implements ElasticSearchService {
       LOGGER.info("Error in searching elastic search with keyword:[{}] " + ex, keyword, ex);
     }
     return searchResults;
+  }
+
+  @Override
+  public List<SearchDocument> listSearchDocument(final SearchDocumentRequest searchDocumentRequest) {
+    return new ArrayList<>();
   }
 
 }

@@ -24,7 +24,7 @@ elastic:
   client:
     authenticated: false
     protocol: http
-    documentIndex: search_pdf
+    documentIndex: searchpdf
     resultSize: 100
     elasticHostConfigs:
       -  

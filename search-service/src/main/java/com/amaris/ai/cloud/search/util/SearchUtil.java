@@ -11,12 +11,12 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class SearchUtil {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(SearchUtil.class);
-
 
   private static ObjectMapper objectMapper;
   public static final String HTML_CONTENT = "classpath:html-contents/";
@@ -24,7 +24,8 @@ public class SearchUtil {
 
   static {
     objectMapper = new ObjectMapper();
-    objectMapper.setSerializationInclusion(Include.NON_NULL);
+    objectMapper.setSerializationInclusion(Include.NON_NULL); 
+    objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false); 
   }
 
   public static ObjectMapper objectMapper() {
@@ -36,6 +37,7 @@ public class SearchUtil {
       final String jsonData = objectMapper().writeValueAsString(data);
       LOGGER.info("Class:[{}], data:[{}]", data.getClass(), jsonData);
     } catch (final Exception ex) {
+     
     }
   }
 
@@ -43,7 +45,7 @@ public class SearchUtil {
     try {
       return objectMapper().readValue(jsondata.getBytes(), clazz);
     } catch (final Exception ex) {
-      LOGGER.error("Error in converting to class:[{}], json-data:[{}]", clazz, jsondata);
+      LOGGER.error("Error in converting to class:[{}], json-data:[{}]" +ex , clazz, jsondata, ex);
     }
     return null;
   }

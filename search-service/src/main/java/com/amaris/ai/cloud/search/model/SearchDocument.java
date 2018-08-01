@@ -6,19 +6,18 @@ public class SearchDocument implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
-  private String product;
-  private String document;
   private String content;
-  private String content_document;
+  private String document;
   private Integer pageNumber;
-  private Integer documentNumber;
+  private String parsedTbls;
+  private String projectName;
 
-  public String getProduct() {
-    return product;
+  public String getContent() {
+    return content;
   }
 
-  public void setProduct(String product) {
-    this.product = product;
+  public void setContent(String content) {
+    this.content = content;
   }
 
   public String getDocument() {
@@ -29,14 +28,6 @@ public class SearchDocument implements Serializable {
     this.document = document;
   }
 
-  public String getContent() {
-    return content;
-  }
-
-  public void setContent(String content) {
-    this.content = content;
-  }
-
   public Integer getPageNumber() {
     return pageNumber;
   }
@@ -45,20 +36,20 @@ public class SearchDocument implements Serializable {
     this.pageNumber = pageNumber;
   }
 
-  public String getContent_document() {
-    return content_document;
+  public String getParsedTbls() {
+    return parsedTbls;
   }
 
-  public void setContent_document(String content_document) {
-    this.content_document = content_document;
+  public void setParsedTbls(String parsedTbls) {
+    this.parsedTbls = parsedTbls;
   }
 
-  public Integer getDocumentNumber() {
-    return documentNumber;
+  public String getProjectName() {
+    return projectName;
   }
 
-  public void setDocumentNumber(Integer documentNumber) {
-    this.documentNumber = documentNumber;
+  public void setProjectName(String projectName) {
+    this.projectName = projectName;
   }
 
 }

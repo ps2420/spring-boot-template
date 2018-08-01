@@ -12,6 +12,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 import com.amaris.ai.cloud.search.model.SearchDocument;
+import com.amaris.ai.cloud.search.model.SearchDocumentRequest;
 import com.amaris.ai.cloud.search.services.ElasticSearchService;
 import com.amaris.ai.cloud.search.services.SearchDocumentService;
 import com.amaris.ai.cloud.search.util.SearchUtil;
@@ -29,9 +30,7 @@ public class SearchDocumentServiceImpl implements SearchDocumentService {
 
   @Override
   public List<SearchDocument> listSearchDocument(final String product, final String keyword) {
-    final List<SearchDocument> searchResults = new ArrayList<>();
-    
-    return searchResults;
+    return elasticSearchService.listSearchDocument(product, keyword);
   }
 
   @Override
@@ -47,6 +46,11 @@ public class SearchDocumentServiceImpl implements SearchDocumentService {
       LOGGER.error("Error in converting json data back to object " + ex, ex);
     }
     return searchResults;
+  }
+
+  @Override
+  public List<SearchDocument> listDocuments(final SearchDocumentRequest searchDocumentRequest) {
+    return elasticSearchService.listSearchDocument(searchDocumentRequest);
   }
 
 

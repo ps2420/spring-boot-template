@@ -16,10 +16,10 @@ public class BaseSetup {
 
   protected SearchDocument mockSearchDocument(final String product, final String document, final String content) {
     final SearchDocument result = new SearchDocument();
-    result.setProduct(product);
+    result.setProjectName(product);
     result.setContent(content);
     result.setDocument(document);
-    result.setContent_document(document);
+    result.setParsedTbls(document);
     result.setPageNumber(-1);
     return result;
   }
