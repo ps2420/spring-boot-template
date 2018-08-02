@@ -24,6 +24,9 @@ public class SearchUtil {
   public static final String MOCK_CONTENT = "classpath:mock-data/";
 
   public static final String DEFAULT_INDEX_TYPE = "_doc";
+  public static final String SLASH_REMOVAL = ".*\\/";
+  
+  
   static {
     objectMapper = new ObjectMapper();
     objectMapper.setSerializationInclusion(Include.NON_NULL);

@@ -11,7 +11,7 @@ public class BaseSetup {
   public final static String ES_HOST = "192.168.1.119";
   public final static Integer ES_PORT = 9200;
   public final static String PROTOCOL = "http";
-  
+
   public final static String KEYWORD = "keyword";
 
   public final static String DEBT_EQUITY_RATIO = "debt_equity_ratio";
@@ -35,6 +35,10 @@ public class BaseSetup {
   public static String esCountURL(final String indexname, final String indexType) {
     return PROTOCOL + "://" + ES_HOST + ":9200/" + indexname + "/" + indexType + "/_count";
   }
- 
+
+  public static void main(String[] args) throws Exception {
+    final String value = "/home/junda/Documents/debt_equity_ratio/data/etechaces.pdf";
+    System.out.println(value.replaceAll(".*\\/", ""));
+  }
 
 }

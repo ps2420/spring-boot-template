@@ -1,5 +1,7 @@
 package com.amaris.ai.cloud.search.services.impl;
 
+import static com.amaris.ai.cloud.search.util.SearchUtil.SLASH_REMOVAL;
+import static org.springframework.util.StringUtils.isEmpty;
 import java.util.List;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
@@ -10,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import com.amaris.ai.cloud.search.configuration.elastic.ESConfiguration;
 import com.amaris.ai.cloud.search.configuration.elastic.ElasticSearchClient;
 import com.amaris.ai.cloud.search.request.DocumentCountRequest;
@@ -47,7 +50,11 @@ public class SearchDocumentServiceImpl implements SearchDocumentService {
     final JsonNode fullDocument = SearchUtil.objectMapper().readTree(response.toString().replaceAll("\\s+", " ").trim().getBytes());
 
     final String jsondata = SearchUtil.parseAggregateDocuments(fullDocument);
-    return SearchUtil.readListData(jsondata, new TypeReference<List<DocumentCountResponse>>() {});
+    final List<DocumentCountResponse> docList = SearchUtil.readListData(jsondata, new TypeReference<List<DocumentCountResponse>>() {});
+    docList.parallelStream().filter(document -> !isEmpty(document.getName())).forEach(document -> {
+      document.setName(document.getName().replaceAll(SLASH_REMOVAL, "")); //replace untill last occurence
+    });
+    return docList;
   }
 
   @Override

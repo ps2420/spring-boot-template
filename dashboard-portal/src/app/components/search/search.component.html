@@ -15,18 +15,23 @@
 				</li>
 			</ul>
 		</div>
-		<div class="col-sm-5" style="align:left" title="{{fileNameSelected}}">
+		<div class="col-sm-3" style="align:left" title="{{fileNameSelected}}">
 			<ng-template #customItemTemplate let-model="item" let-index="index">
-			    <div title="{{model.filename}}">{{model.filename}} </div>
+			    <div title="{{model.name}}" [ngStyle]="{'width': '16rem'}">
+			    	<div style="float:left;" [innerHTML]=  
+			    	     "((model.name.length > 20) ? ((model.name | slice:1:17) + '...') : (model.name)) | highlight:fileNameSelected">
+			    	</div>
+                    <div style="float:right;"> {{model.count}} </div>
+			    </div>
 			</ng-template>
 			<input [(ngModel)]="fileNameSelected"
-			       [typeahead]="dataSource"
+			       [typeahead]="fileDataSource"
 			       (typeaheadLoading)="changeTypeaheadLoading($event)"
 			       (typeaheadOnSelect)="typeaheadOnSelect($event)"
 			       [typeaheadItemTemplate]="customItemTemplate"
 			       [typeaheadScrollable]="true"
        			   [typeaheadOptionsInScrollableView]="10"
-       			   [typeaheadWaitMs]="500"
+       			   [typeaheadWaitMs]="100"
 			       placeholder="Search for file names"
 			       class="form-control">
 		</div>

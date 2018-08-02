@@ -17,6 +17,7 @@ import { UploadComponent } from './components/upload/upload.component';
 
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { HighlightPipe } from './pipe/highlight.pipe';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     HomePageComponent, 
     SearchComponent,
     DownloadComponent,
-    UploadComponent
+    UploadComponent,
+    HighlightPipe
   ],
   imports: [
     BrowserModule,

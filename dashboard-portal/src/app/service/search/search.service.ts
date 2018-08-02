@@ -27,7 +27,7 @@ export class SearchService {
     }
 
     loadGridData(product: string, keyword: string) : any {
-        let url = this.app_context['api_config']['search-document'] + "/" + product + "?keyword=" + keyword;
+        let url = this.app_context['api_config']['search-grid'] + "/" + product + "?keyword=" + keyword;
         return this.http.get(url);
     }
  
@@ -41,7 +41,7 @@ export class SearchService {
     }
 
     listFilesByProduct(product: string) : Observable<any> {
-        let url = this.app_context['api_config']['file_by_product'] + '/' + product;
+        let url = this.app_context['api_config']['search-document'] + '/' + product;
         return this.http.get(url);
     }
 

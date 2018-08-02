@@ -22,14 +22,13 @@ export class AppContextService {
 
     api_config : any = {
         'finance-product'   : this.buildUrl('/db-service/html/products'),
-        'file_by_product'   : this.buildUrl('/db-service/html/files'),
+      
         'doc-audit'         : this.buildUrl('/db-service/docaudit/list'),
-        
-        'search-document'   : this.buildUrl('/web-api/search/documents'),
-        'search-grid'       : this.buildUrl('/search-service/..'),
-        
         'upload-document'   : this.buildUrl('/file-handler/uploadFile'),
-        'download-document' : this.buildUrl('/file-handler/downloadFile')
+        'download-document' : this.buildUrl('/file-handler/downloadFile'),
+ 
+        'search-document'   : this.buildUrl('/search-service/search/documentCount'),
+        'search-grid'       : this.buildUrl('/search-service/search/listContent')
     }
 
     getAppContext(): any {

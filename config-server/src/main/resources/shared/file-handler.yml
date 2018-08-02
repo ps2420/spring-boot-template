@@ -21,8 +21,8 @@ eureka:
    waitTimeInMsWhenSyncEmpty: 0
    
 file:
-  uploadDir: /tmp/file-upload
-  downloadDir: /tmp/file-upload/zip
+  uploadDir: ${FILE_UPLOAD_DIR:/tmp/file-upload}
+  downloadDir: ${FILE_DOWNLOAD_DIR:/tmp/file-upload}
   
 elastic:
   client:

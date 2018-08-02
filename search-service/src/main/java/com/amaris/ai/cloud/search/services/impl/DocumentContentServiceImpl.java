@@ -1,5 +1,6 @@
 package com.amaris.ai.cloud.search.services.impl;
 
+import static com.amaris.ai.cloud.search.util.SearchUtil.SLASH_REMOVAL;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -42,7 +43,12 @@ public class DocumentContentServiceImpl implements DocumentContentService {
       try (final InputStream ios = resource.getInputStream();) {
         final String jsondata = IOUtils.toString(ios, Charset.defaultCharset());
         final TypeReference<List<SearchDocumentResponse>> mapType = new TypeReference<List<SearchDocumentResponse>>() {};
-        searchResults.addAll(SearchUtil.readListData(jsondata, mapType));
+        final List<SearchDocumentResponse> docList = SearchUtil.readListData(jsondata, mapType);
+        docList.parallelStream().forEach(document -> {
+          document.setDocument(document.getDocument().replaceAll(SLASH_REMOVAL, "")); 
+          document.setParsedTbls(document.getParsedTbls().replaceAll(SLASH_REMOVAL, ""));
+        });
+        searchResults.addAll(docList);
       }
     } catch (final Exception ex) {
       LOGGER.error("Error in converting json data back to object " + ex, ex);
@@ -54,5 +60,5 @@ public class DocumentContentServiceImpl implements DocumentContentService {
   public List<SearchDocumentResponse> listDocuments(final SearchDocumentRequest searchDocumentRequest) {
     return elasticSearchService.listContent(searchDocumentRequest);
   }
- 
+
 }

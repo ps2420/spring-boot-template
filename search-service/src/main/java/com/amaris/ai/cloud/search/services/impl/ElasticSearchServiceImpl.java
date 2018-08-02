@@ -1,5 +1,6 @@
 package com.amaris.ai.cloud.search.services.impl;
 
+import static com.amaris.ai.cloud.search.util.SearchUtil.SLASH_REMOVAL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -49,6 +50,8 @@ public class ElasticSearchServiceImpl implements ElasticSearchService {
       Arrays.asList(response.getHits().getHits()).forEach(searchhit -> {
         final String jsonData = searchhit.getSourceAsString().replaceAll("\\s+", " ").trim();
         final SearchDocumentResponse searchDocument = SearchUtil.readData(jsonData, SearchDocumentResponse.class);
+        searchDocument.setDocument(searchDocument.getDocument().replaceAll(SLASH_REMOVAL, "")); 
+        searchDocument.setParsedTbls(searchDocument.getParsedTbls().replaceAll(SLASH_REMOVAL, ""));
         searchResults.add(searchDocument);
       });
     } catch (final Exception ex) {

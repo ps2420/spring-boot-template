@@ -12,8 +12,6 @@ export class ColDefBuilderService {
    buildSearchGridColDef () : any {
       let columnDefs = [
          {
-          headerName: 'Product', field: 'product' },
-          {
             headerName: 'Document',   field: 'document', 'downloadDocument' : true,
             cellRenderer : function(params) {
               if(params.value === '' || !params.value) {
@@ -23,10 +21,25 @@ export class ColDefBuilderService {
             }
           },
           {
-            headerName: 'Description', field: 'content'
+            headerName: 'Page Number', field: 'pageNumber', 'width' : 130
           },
           {
-            headerName: 'Page Number', field: 'pageNumber'
+            headerName: 'Content', field: 'parsedTbls',
+            cellRenderer : function(params) {
+              if(params.value === '' || !params.value) {
+                   return '<div></div>';
+              }
+              return '<div title="Click to download" style="cursor:pointer;">' + '<i class="fa fa-download" aria-hidden="true" (click)="downloadFile()"></i>&nbsp;<span title="Click to download">'+params.value+'</span></div>';
+            }
+          },
+          {
+            headerName: 'Description', field: 'content', 'width' : 5000, 
+            cellRenderer : function(params) {
+              if(params.value === '' || !params.value) {
+                   return '<div></div>';
+              }
+              return '<div data-toggle="tooltip" title="' + params.value + '"> ' + (params.value) + '</span></div>';
+            }
           }
       ];
       return columnDefs;
