@@ -1,4 +1,4 @@
-package com.amaris.ai.cloud.web;
+package com.amaris.ai.cloud.db;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
@@ -9,7 +9,7 @@ import com.amaris.ai.cloud.db.DBServiceRunner;
 
 @SpringBootApplication
 @Configuration
-@ComponentScan(basePackages = {}, excludeFilters = {@Filter(type = FilterType.ASSIGNABLE_TYPE, value = {DBServiceRunner.class})})
+@ComponentScan(basePackages = {"com.amaris.ai.cloud.db"}, excludeFilters = {@Filter(type = FilterType.ASSIGNABLE_TYPE, value = {DBServiceRunner.class})})
 public class ITTestSetup {
 
 }

@@ -5,10 +5,8 @@ import com.amaris.ai.cloud.db.model.DocumentAudit;
 
 public interface DocumentAuditService {
 
-  List<DocumentAudit> listDocumentAudits(final String domain);
+  List<DocumentAudit> listDocumentAudits() throws Exception;
 
-  List<DocumentAudit> listDocumentAudits();
-
-  void auditDocument(final DocumentAudit docAudit);
+  DocumentAudit auditDocument(final DocumentAudit docAudit) throws Exception;
 
 }

@@ -1,6 +1,7 @@
 package com.amaris.ai.cloud.db.model;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 
 public class DocumentAudit implements Serializable {
@@ -12,7 +13,7 @@ public class DocumentAudit implements Serializable {
   private String document;
   private String uploadedBy;
   private String comments;
-  private Date uploadDate;
+  private Date uploadDate = Calendar.getInstance().getTime();
 
   public String getId() {
     return id;

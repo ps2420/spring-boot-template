@@ -27,7 +27,7 @@ environment:
     
 kafka:
   brokers:
-    servers: 192.168.1.119:6067,192.168.1.35:6067
-    file_topic: t_file_upload_file_event
+    servers: 192.168.1.119:6667,192.168.1.35:6667
+    docKafkaAudit: document_upload_event
     clientId: ${spring.application.name}
          

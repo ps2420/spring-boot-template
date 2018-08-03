@@ -11,7 +11,7 @@ public class KafkaConfiguration implements Serializable {
   private static final long serialVersionUID = 1L;
 
   private String servers;
-  private String file_topic;
+  private String docKafkaAudit;
   private String clientId;
 
   public String getServers() {
@@ -22,12 +22,12 @@ public class KafkaConfiguration implements Serializable {
     this.servers = servers;
   }
 
-  public String getFile_topic() {
-    return file_topic;
+  public String getDocKafkaAudit() {
+    return docKafkaAudit;
   }
 
-  public void setFile_topic(String file_topic) {
-    this.file_topic = file_topic;
+  public void setDocKafkaAudit(String docKafkaAudit) {
+    this.docKafkaAudit = docKafkaAudit;
   }
 
   public String getClientId() {

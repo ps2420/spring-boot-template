@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import com.amaris.ai.cloud.db.config.EnvironmentMatrix;
-import com.amaris.ai.cloud.db.model.DocumentAudit;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -81,9 +80,9 @@ public class CommonUtil {
     }
   }
 
-  public static void logJsonData(final Object docList) {
+  public static void logJsonData(final Object value) {
     try {
-      final String jsondata = objectMapper().writeValueAsString(docList);
+      final String jsondata = objectMapper().writeValueAsString(value);
       LOGGER.info("json-data:[{}]", jsondata);
     } catch (final Exception ex) {
       LOGGER.error("Error in writing json-data : " + ex, ex);
