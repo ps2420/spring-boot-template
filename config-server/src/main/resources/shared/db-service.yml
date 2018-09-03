@@ -1,5 +1,5 @@
 server:
-  port: ${SERVER_PORT:5021}
+  port: ${SERVER_PORT:3086}
 
 eureka:
  instance:
@@ -16,18 +16,53 @@ eureka:
    healthcheck:
      enabled: true
    serviceUrl:
-     defaultZone: ${EUREKA_URL:http://${SERVER_HOST:localhost}:${EUREKA_SERVER_PORT:5012}}/eureka/
+     defaultZone: ${EUREKA_URL:http://${SERVER_HOST:localhost}:${EUREKA_SERVER_PORT:3082}}/eureka/
  server:
    waitTimeInMsWhenSyncEmpty: 0
    
-environment:
-  matrix:
-    protocol: http
-    searchReference: search-service
-    
+
+---
+spring:
+  profiles: local
+  datasource:
+    url: jdbc:mysql://localhost:3306/temasek
+    username: amaris
+    password: P@55w0rd1234
+    driverClassName: com.mysql.jdbc.Driver
+    maximumPoolSize: 5
+    minimumIdle: 2
+    hibernate:
+      ddl-auto: update
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+      dialect: org.hibernate.dialect.MySQL5Dialect
+      show-sql: true
+      format_sql: true
+
 kafka:
   brokers:
-    servers: 192.168.1.119:6667,192.168.1.35:6667
+    servers: localhost:9092
     docKafkaAudit: document_upload_event
     clientId: ${spring.application.name}
-         
+    
+---
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:mysql://192.168.1.119:3306/temasek
+    username: amaris
+    password: P@55w0rd1234
+    driverClassName: com.mysql.jdbc.Driver
+    maximumPoolSize: 5
+    minimumIdle: 2
+    hibernate:
+      ddl-auto: update
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+      dialect: org.hibernate.dialect.MySQL5Dialect
+      show-sql: true
+      format_sql: true
+
+kafka:
+  brokers:
+    servers: 192.1681.119:6667,192.168.1.35:6667
+    docKafkaAudit: document_upload_event
+    clientId: ${spring.application.name}    

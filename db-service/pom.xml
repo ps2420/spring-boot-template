@@ -28,7 +28,24 @@
 		<kafka.clients>0.10.2.0</kafka.clients>
 		<commons.io>2.6</commons.io>
 		<spring-kafka.version>1.2.1.RELEASE</spring-kafka.version>
+		<mysql.version>5.1.46</mysql.version>
+		<postgresql.version>7.4.1</postgresql.version>
+		<hikari.version>3.2.0</hikari.version>
 	</properties>
+
+	<!--
+	<scm>
+	   <connection>scm:git:https://github.com/AmarisAI/document-upload.git</connection>
+	   <url>https://github.com/AmarisAI/document-upload.git</url>
+	   <developerConnection>scm:git:https://github.com/AmarisAI/document-upload.git</developerConnection>
+	</scm>
+    -->
+
+	<scm>
+	   <connection>scm:git:git@github.com:AmarisAI/document-upload.git</connection>
+	   <url>scm:git:git@github.com:AmarisAI/document-upload.git</url>
+	   <developerConnection>scm:git:git@github.com:AmarisAI/document-upload.git</developerConnection>
+	</scm>
 
 	<dependencies>
 		<dependency>
@@ -40,10 +57,6 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-zipkin</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>de.codecentric</groupId>
 			<artifactId>spring-boot-admin-starter-client</artifactId>
 			<version>${spring.boot.admin}</version>
@@ -51,6 +64,10 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-config-client</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -62,10 +79,18 @@
 			<version>${commons.io}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.kafka</groupId>
-			<artifactId>kafka-clients</artifactId>
-			<version>${kafka.clients}</version>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+			<version>${hikari.version}</version>
+		</dependency>
+
+		<!-- <dependency> <groupId>org.apache.kafka</groupId> <artifactId>kafka-clients</artifactId> 
+			<version>${kafka.clients}</version> </dependency> -->
 		<dependency>
 			<groupId>org.apache.kafka</groupId>
 			<artifactId>connect-json</artifactId>

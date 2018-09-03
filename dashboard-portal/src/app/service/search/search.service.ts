@@ -26,22 +26,19 @@ export class SearchService {
         return this.app_context;
     }
 
-    loadGridData(product: string, keyword: string) : any {
-        let url = this.app_context['api_config']['search-grid'] + "/" + product + "?keyword=" + keyword;
-        return this.http.get(url);
+    loadGridData(document: string, keyword: string) : any { 
+        let url = this.app_context['api_config']['search-document'] + "?document=" + document + "&keyword=" + keyword;
+        this.logService.log("loading grid-data from url : " + url);
+        return this.http.get(url); 
     }
- 
-    loadFinancialproducts() : any {
-        let url = this.app_context['api_config']['finance-product'];
-        return this.http.get(url);
-    }
-
+  
     downloadFile(filename: string): Observable<any> {
         return this.documentService.downloadFile(filename);
     }
 
     listFilesByProduct(product: string) : Observable<any> {
-        let url = this.app_context['api_config']['search-document'] + '/' + product;
+        let url = this.app_context['api_config']['unique-document'];
+        this.logService.log("search-service loading data from url : " + url);
         return this.http.get(url);
     }
 

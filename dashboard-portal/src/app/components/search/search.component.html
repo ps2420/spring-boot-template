@@ -6,15 +6,7 @@
 	</div>
 	 
 	<div style="margin-top:10px;" class="row">
-		<div class="col-sm-3" >
-             <input type="text" placeholder="Select financial product.." class="form-control" style="width:15rem;font-style: italic"
-		    [(ngModel)]="productSearch" (ngModelChange)="filterFinancialProducts()" disabled> 
-			 <ul class="list-group">
-			    <li class="list-group-item" *ngFor="let item of financialProducts; let i = index" (click)="financialProductSelected(item)">
-				     {{item.label}} 
-				</li>
-			</ul>
-		</div>
+		 
 		<div class="col-sm-3" style="align:left" title="{{fileNameSelected}}">
 			<ng-template #customItemTemplate let-model="item" let-index="index">
 			    <div title="{{model.name}}" [ngStyle]="{'width': '16rem'}">
@@ -27,11 +19,11 @@
 			<input [(ngModel)]="fileNameSelected"
 			       [typeahead]="fileDataSource"
 			       (typeaheadLoading)="changeTypeaheadLoading($event)"
-			       (typeaheadOnSelect)="typeaheadOnSelect($event)"
+			       (typeaheadOnSelect)="fileNameOnSelect($event)"
 			       [typeaheadItemTemplate]="customItemTemplate"
 			       [typeaheadScrollable]="true"
        			   [typeaheadOptionsInScrollableView]="10"
-       			   [typeaheadWaitMs]="100"
+       			   [typeaheadWaitMs]="300"
 			       placeholder="Search for file names"
 			       class="form-control">
 		</div>
@@ -43,8 +35,6 @@
 		        style="width:15rem;display:inline;"
 		        [(ngModel)]="keywordSearch" (ngModelChange)="keywordSearchChange()" /> 
 		</div>
-
-		
 	</div>
 
 	<div style="margin-top:2rem;">

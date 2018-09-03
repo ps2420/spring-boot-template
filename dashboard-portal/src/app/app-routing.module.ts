@@ -8,10 +8,11 @@ import { DownloadComponent }   from './components/download/download.component';
 import { SearchComponent }   from './components/search/search.component';
 
 const routes: Routes = [
-  { path: '',  component: HomePageComponent },
-  { path: 'upload',  component: UploadComponent },
-  { path: 'search',  component: SearchComponent },
-  { path: 'download',  component: DownloadComponent }
+  { path: 'dashboard-portal',  component: HomePageComponent },
+  { path: 'dashboard-portal',  component: HomePageComponent },
+  { path: 'dashboard-portal/upload',  component: UploadComponent },
+  { path: 'dashboard-portal/search',  component: SearchComponent },
+  { path: 'dashboard-portal/download',  component: DownloadComponent }
 ];
 
 @NgModule({

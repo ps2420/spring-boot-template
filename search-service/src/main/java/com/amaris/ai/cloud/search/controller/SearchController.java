@@ -2,7 +2,6 @@ package com.amaris.ai.cloud.search.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +12,8 @@ import com.amaris.ai.cloud.search.request.DocumentCountRequest;
 import com.amaris.ai.cloud.search.response.DocumentCountResponse;
 import com.amaris.ai.cloud.search.response.SearchDocumentResponse;
 import com.amaris.ai.cloud.search.services.DocumentContentService;
-import com.amaris.ai.cloud.search.services.SearchDocumentService;
+import com.amaris.ai.cloud.search.services.DocumentCountService;
+import com.amaris.ai.cloud.search.util.SearchUtil;
 
 @RestController
 @RequestMapping("/search/")
@@ -23,22 +23,22 @@ public class SearchController {
   private DocumentContentService documentContentService;
 
   @Autowired
-  private SearchDocumentService searchDocumentService;
+  private DocumentCountService documentCountService;
 
-  @RequestMapping(value = "/listContent/{product}", method = RequestMethod.GET)
-  public List<SearchDocumentResponse> listContent(@PathVariable String product,
+  @RequestMapping(value = "/searchDocuments", method = RequestMethod.GET)
+  public List<SearchDocumentResponse> searchDocuments(final @RequestParam(name = "document", defaultValue = "") String document,
       @RequestParam(name = "keyword", defaultValue = "") final String keyword) {
-    return this.documentContentService.listContent(product, keyword);
+    return this.documentContentService.searchDocuments(SearchUtil.prepareSearchRequest(document, keyword));
   }
 
-  @RequestMapping(value = "/documentCount/{product}", method = RequestMethod.GET)
-  public List<DocumentCountResponse> documentCount(final @PathVariable String product) throws Exception {
-    return this.searchDocumentService.documentCountInfo(product);
+  @RequestMapping(value = "/uniqueDocuments", method = RequestMethod.GET)
+  public List<DocumentCountResponse> uniqueDocuments() throws Exception {
+    return this.documentCountService.documentCountAcrossIndex(new DocumentCountRequest());
   }
 
-  @PostMapping(value = "/listDocument")
-  public List<DocumentCountResponse> listDocument(final @RequestBody DocumentCountRequest request) throws Exception {
-    return this.searchDocumentService.listDocument(request);
+  @PostMapping(value = "/documentCountInfo")
+  public List<DocumentCountResponse> documentCountInfo(final @RequestBody DocumentCountRequest request) throws Exception {
+    return this.documentCountService.documentCountAcrossIndex(request);
   }
 
 }

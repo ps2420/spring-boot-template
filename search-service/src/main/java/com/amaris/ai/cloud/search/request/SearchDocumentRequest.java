@@ -1,24 +1,22 @@
 package com.amaris.ai.cloud.search.request;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 public class SearchDocumentRequest implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
-  private String product;
-  private int from;
-  private int size;
-  private List<SearchKeyword> keywordList = new ArrayList<>();
+  private String document;
+  private int from = 0;
+  private int to = 200;
+  private String keyword;
 
-  public String getProduct() {
-    return product;
+  public String getDocument() {
+    return document;
   }
 
-  public void setProduct(String product) {
-    this.product = product;
+  public void setDocument(String document) {
+    this.document = document;
   }
 
   public int getFrom() {
@@ -29,44 +27,19 @@ public class SearchDocumentRequest implements Serializable {
     this.from = from;
   }
 
-  public int getSize() {
-    return size;
+  public int getTo() {
+    return to;
   }
 
-  public void setSize(int size) {
-    this.size = size;
+  public void setTo(int to) {
+    this.to = to;
   }
 
-  public List<SearchKeyword> getKeywordList() {
-    return keywordList;
+  public String getKeyword() {
+    return keyword;
   }
 
-  public void setKeywordList(List<SearchKeyword> keywordList) {
-    this.keywordList = keywordList;
+  public void setKeyword(String keyword) {
+    this.keyword = keyword;
   }
-
-  public static class SearchKeyword implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    private String field;
-    private String keyword;
-
-    public String getField() {
-      return field;
-    }
-
-    public void setField(String field) {
-      this.field = field;
-    }
-
-    public String getKeyword() {
-      return keyword;
-    }
-
-    public void setKeyword(String keyword) {
-      this.keyword = keyword;
-    }
-  }
-
 }

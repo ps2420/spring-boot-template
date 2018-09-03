@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.amaris.ai.cloud.db.BaseSetup;
 import com.amaris.ai.cloud.db.ITTestSetup;
 import com.amaris.ai.cloud.db.model.DocumentAudit;
-import com.amaris.ai.cloud.db.util.CommonUtil;
+import com.amaris.ai.cloud.db.util.DBServiceUtil;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {ITTestSetup.class}, webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -32,7 +32,7 @@ public class DBNotificationServiceTest extends BaseSetup {
     final DocumentAudit _doc = notificationService.auditDocument(documentAudit);
     assertNotNull(_doc);
     assertEquals(documentAudit.getProduct(), _doc.getProduct());
-    LOGGER.info("response:\n", CommonUtil.objectMapper().writeValueAsString(_doc));
+    LOGGER.info("response:\n", DBServiceUtil.objectMapper().writeValueAsString(_doc));
   }
 
 }

@@ -4,11 +4,14 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
+import com.amaris.ai.cloud.search.configuration.ESConfiguration;
+import com.amaris.ai.cloud.search.request.SearchDocumentRequest;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -25,8 +28,11 @@ public class SearchUtil {
 
   public static final String DEFAULT_INDEX_TYPE = "_doc";
   public static final String SLASH_REMOVAL = ".*\\/";
-  
-  
+  public static final String COUNT_QUERY_TEMPLATE = "{\n\"query\":\nCOUNT_QUERY\n}";
+
+  public static final String CONTENT = "content";
+  public static final String DOCUMENT = "document";
+
   static {
     objectMapper = new ObjectMapper();
     objectMapper.setSerializationInclusion(Include.NON_NULL);
@@ -86,4 +92,19 @@ public class SearchUtil {
     }
     return jsonnode;
   }
+
+  public static List<String> esUrlList(final ESConfiguration configuration) {
+    return configuration.getElasticHostConfigs().stream().map(host -> {
+      return (configuration.getProtocol() + "://" + host.getHost() + ":" + host.getPort());
+    }).collect(Collectors.toList());
+  }
+
+  public static SearchDocumentRequest prepareSearchRequest(final String document, final String keyword) {
+    final SearchDocumentRequest request = new SearchDocumentRequest();
+    request.setDocument(document);
+    request.setKeyword(keyword);
+    return request;
+  }
 }
+
+

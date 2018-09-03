@@ -3,6 +3,7 @@ target
 .okhttpcache
 ELFTesting.properties
 
+node_modules/
 # IDEA Ignores #
 ################
 *.iml

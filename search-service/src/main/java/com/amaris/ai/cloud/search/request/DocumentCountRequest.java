@@ -6,15 +6,15 @@ public class DocumentCountRequest implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
-  private String product;
+  private String document;
   private String keyword;
 
-  public String getProduct() {
-    return product;
+  public String getDocument() {
+    return document;
   }
 
-  public void setProduct(String product) {
-    this.product = product;
+  public void setDocument(String document) {
+    this.document = document;
   }
 
   public String getKeyword() {

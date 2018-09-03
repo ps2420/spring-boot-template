@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -16,7 +17,7 @@ import org.springframework.web.client.RestTemplate;
 import com.amaris.ai.cloud.db.BaseSetup;
 import com.amaris.ai.cloud.db.ITTestSetup;
 import com.amaris.ai.cloud.db.model.DocumentAudit;
-import com.amaris.ai.cloud.db.util.CommonUtil;
+import com.amaris.ai.cloud.db.util.DBServiceUtil;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {ITTestSetup.class}, webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -34,15 +35,13 @@ public class DocumentAuditControllerTest extends BaseSetup {
   public void auditDocument() throws Exception {
     final DocumentAudit docAudit = super.mockDocumentAudit();
     final String httpURL = "http://localhost:" + http_port + "/docaudit/audit";
-    final String jsonData = CommonUtil.objectMapper().writeValueAsString(docAudit);
-    final ResponseEntity<String> entity = restTemplate.postForEntity(httpURL, jsonData, String.class);
+
+    HttpEntity<DocumentAudit> request = new HttpEntity<>(docAudit);
+    final ResponseEntity<String> entity = restTemplate.postForEntity(httpURL, request, String.class);
     final String jsonContent = entity.getBody();
     LOGGER.info("response : \n" + jsonContent);
     assertEquals(200, entity.getStatusCode().value());
     assertNotNull(entity.getBody());
-    CommonUtil.logJsonData(jsonContent);
+    DBServiceUtil.logJsonData(jsonContent);
   }
-
-
-
 }

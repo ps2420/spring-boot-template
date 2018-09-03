@@ -4,14 +4,10 @@ spring:
   boot:
     admin:
       client:
-        url: ${ADMIN_SERVER_URL:http://${SERVER_HOST:localhost}:${EUREKA_SERVER_PORT:5012}}/admin
+        url: ${ADMIN_SERVER_URL:http://${SERVER_HOST:localhost}:${EUREKA_SERVER_PORT:3082}}/admin
   cloud:
-    inetutils:
-      preferred-networks:
-        - localhost
-        - 127.0.0.1
     config:
-      uri: ${CONFIG_SERVER_URI:http://${SERVER_HOST:localhost}:${CONFIG_SERVER_PORT:5011}}
+      uri: ${CONFIG_SERVER_URI:http://${SERVER_HOST:localhost}:${CONFIG_SERVER_PORT:3081}}
       username: ${DEFAULT_USER:admin}
       password: ${DEFAULT_PASSWORD:admin}
         

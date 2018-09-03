@@ -30,22 +30,19 @@ export class SearchComponent implements OnInit {
     fileNameSelected: string = "";
     fileDataSource: Observable<any>;
 
-    public productSearch: string;
+    public documentSearch: string = "";
     public keywordSearch: string;
+   
+    public app_context: any = {};
 
-    public financialProducts: any[] = []; 
-    public financialProducts_data: any[] = []; 
-    
-    private app_context: any = {};
-
-    private gridOptions: GridOptions;
+    public gridOptions: GridOptions;
     //private gridApi: any;
     //private columnApi: any;
  
     constructor(private logService: LogService, private searchService: SearchService,
       private colDefBuilder: ColDefBuilderService) { 
       this.app_context = this.searchService.getAppContext();
-      this.productSearch = this.app_context['app_config']['app_name'];
+      this.documentSearch = this.app_context['app_config']['app_name'];
  
       this.initGrid(); 
 
@@ -63,28 +60,15 @@ export class SearchComponent implements OnInit {
     }
 
     ngOnInit() {
-      this.loadFinancialproducts();
       this.loadGridData();
       //this.gridOptions.api = this.gridApi;
       //this.gridOptions.columnApi = this.columnApi;
     }
 
     public financialProductSelected(item: MenuItem): void {
-      this.productSearch = item.label;
-      this.financialProducts = this.filterFinancialProducts();
+      this.documentSearch = item.label;
     }
-
-    public filterFinancialProducts(): any[] { 
-      if(this.productSearch === '') {
-        this.financialProducts = this.financialProducts_data;
-      } else {
-        this.financialProducts = this.financialProducts_data.filter(item => {
-          return item.label.toLowerCase().indexOf(this.productSearch.toLowerCase()) >= 0; 
-        });
-      }
-      return this.financialProducts;
-    }
-
+ 
     public keywordSearchChange(): void {
       this.logService.log("keyword search: " + this.keywordSearch);
       this.loadGridData();
@@ -94,8 +78,9 @@ export class SearchComponent implements OnInit {
     
     }
    
-    typeaheadOnSelect(data: TypeaheadMatch): void {
+    fileNameOnSelect(data: TypeaheadMatch): void {
       this.fileNameSelected = data.item.name;
+      this.loadGridData();
     }
 
     initGrid(): void {
@@ -118,25 +103,19 @@ export class SearchComponent implements OnInit {
         .catch(error => of("Error in retrieving records.."));
     }
 
-    loadGridData() : void {
-      let product_id = this.app_context['app_config']['product_id'];
-      this.searchService.loadGridData(product_id, this.keywordSearch)
-      .do((response: Response) => {
-         //this.logService.logJsonMsg("inside loadGridData method..", response);
-      })
-      .subscribe (
-        (data: any) => {
-          this.gridOptions.api.setRowData(data);
-      });
+    loadGridData() : void { 
+      if(this.keywordSearch && this.keywordSearch !== '') {
+        this.searchService.loadGridData(this.fileNameSelected, this.keywordSearch)
+        .do((response: Response) => {
+           //this.logService.logJsonMsg("inside loadGridData method..", response);
+        })
+        .subscribe (
+          (data: any) => {
+            this.gridOptions.api.setRowData(data);
+        });
+      }
     }
-
-    loadFinancialproducts(): void {
-      this.searchService.loadFinancialproducts().subscribe (
-        (data: any) => {
-          this.financialProducts_data = data;
-      });
-    } 
-
+ 
     onColumnSelection(object: any, params: any) : void {
       if(params['colDef'].field == "document") {
         this.searchService.downloadFile(params.data.document)

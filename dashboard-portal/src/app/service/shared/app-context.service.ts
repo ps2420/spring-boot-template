@@ -11,9 +11,9 @@ export class AppContextService {
     constructor(private logService: LogService) { }
   
     app_config_local: any = {
-        'app_name'   : 'Debt Equity Ratio', 
+        'app_name'   : '', 
         'product_id' : 'eqdbr',
-        'api_gateway': 'http://localhost:5013', 
+        'api_gateway': 'http://localhost:3083', 
         'mock_data'  : false ,
         'page_title' : 'Financial Datalake Document Management System'
     } ;
@@ -21,14 +21,13 @@ export class AppContextService {
     APP_CONFIG: any  = this.app_config_local;
 
     api_config : any = {
-        'finance-product'   : this.buildUrl('/db-service/html/products'),
-      
-        'doc-audit'         : this.buildUrl('/db-service/docaudit/list'),
-        'upload-document'   : this.buildUrl('/file-handler/uploadFile'),
-        'download-document' : this.buildUrl('/file-handler/downloadFile'),
+        'doc-audit'           : this.buildUrl('/db-service/docaudit/list'),
+        'upload-document'     : this.buildUrl('/file-handler/uploadFile'),
+        'download-document'   : this.buildUrl('/file-handler/downloadFile'),
  
-        'search-document'   : this.buildUrl('/search-service/search/documentCount'),
-        'search-grid'       : this.buildUrl('/search-service/search/listContent')
+        'unique-document'     : this.buildUrl('/search-service/search/uniqueDocuments'),
+        'search-document'     : this.buildUrl('/search-service/search/searchDocuments'),
+        'document-count-info' : this.buildUrl('/search-service/search/documentCountInfo')
     }
 
     getAppContext(): any {

@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import com.amaris.ai.cloud.search.ITTestSetup;
-import com.amaris.ai.cloud.search.configuration.elastic.ElasticSearchClient;
+import com.amaris.ai.cloud.search.configuration.ElasticSearchClient;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {ITTestSetup.class}, webEnvironment = WebEnvironment.RANDOM_PORT)

@@ -14,14 +14,14 @@ status_component () {
    then
      echo " $component_name :[DOWN]"
    else
-     echo " $component_name :[UP]"
+     echo " $component_name :[UP] : [$pid]"
    fi
 }
 
 check_status_component () {
   echo ""
   echo "============ component statuses ================="
-  component_array=("config-server" "api-gateway" "web-api" "service-registry" "search-service" "file-handler" "db-service")
+  component_array=("config-server" "api-gateway" "service-registry" "search-service" "file-handler" "db-service")
   for comp_name in "${component_array[@]}"
   do
      status_component $comp_name

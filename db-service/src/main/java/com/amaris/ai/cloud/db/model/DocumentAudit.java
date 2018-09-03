@@ -13,7 +13,7 @@ public class DocumentAudit implements Serializable {
   private String document;
   private String uploadedBy;
   private String comments;
-  private Date uploadDate = Calendar.getInstance().getTime();
+  private Date createdDate = Calendar.getInstance().getTime();
 
   public String getId() {
     return id;
@@ -55,13 +55,12 @@ public class DocumentAudit implements Serializable {
     return comments;
   }
 
-  public Date getUploadDate() {
-    return uploadDate;
+  public Date getCreatedDate() {
+    return createdDate;
   }
 
-  public void setUploadDate(Date uploadDate) {
-    this.uploadDate = uploadDate;
+  public void setCreatedDate(Date createdDate) {
+    this.createdDate = createdDate;
   }
-
 
 }

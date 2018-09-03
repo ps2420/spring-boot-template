@@ -14,7 +14,7 @@ public class BaseSetup {
 
   public final static String KEYWORD = "keyword";
 
-  public final static String DEBT_EQUITY_RATIO = "debt_equity_ratio";
+  public final static String DOCUMENT_NAME = "mediacorp.pdf";
 
   static RestHighLevelClient esclient;
 

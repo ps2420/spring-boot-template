@@ -15,20 +15,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.amaris.ai.cloud.db.service.DBNotificationServiceTest;
 
-public class ClassicKafkaConsumer {
+public class ClassicKafkaConsumer extends BaseSetup {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(DBNotificationServiceTest.class);
-
-  private final static String BOOTSTRAP_SERVERS = "192.168.1.119:6667,192.168.1.35:6667"; 
-  private final static String TOPIC = "document_upload_event";
 
   private static Consumer<String, Map<String, String>> createConsumer() {
     final Properties props = new Properties();
     props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS);
     props.put(ConsumerConfig.GROUP_ID_CONFIG, UUID.randomUUID().toString());
     props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
-    // props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,
-    // org.apache.kafka.connect.json.JsonDeserializer.class);
+    //props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class.getName());
     props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
 
     props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");

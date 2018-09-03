@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.amaris.ai</groupId>
@@ -11,7 +9,7 @@
 
 	<name>config-server</name>
 	<description>configuration management server</description>
-
+	<!-- https://www.baeldung.com/maven-release-nexus -->
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -27,7 +25,19 @@
 		<spring.boot.admin>2.0.1</spring.boot.admin>
 	</properties>
 
-	<dependencies> 
+
+	<scm>
+		<connection>scm:git:https://github.com/AmarisAI/document-upload.git</connection>
+		<url>https://github.com/AmarisAI/document-upload.git</url>
+		<developerConnection>scm:git:https://github.com/AmarisAI/document-upload.git</developerConnection>
+		<tag>config-server-0.0.3</tag>
+	</scm>
+
+	<!-- <scm> <connection>scm:git:git@github.com:AmarisAI/document-upload.git</connection> 
+		<url>scm:git:git@github.com:AmarisAI/document-upload.git</url> <developerConnection>scm:git:git@github.com:AmarisAI/document-upload.git</developerConnection> 
+		</scm> -->
+
+	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -40,7 +50,7 @@
 			<groupId>de.codecentric</groupId>
 			<artifactId>spring-boot-admin-starter-client</artifactId>
 			<version>${spring.boot.admin}</version>
-		</dependency> 
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
@@ -59,6 +69,7 @@
 			<artifactId>reactor-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 	</dependencies>
 
 	<dependencyManagement>
@@ -86,6 +97,11 @@
 		</resources>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.5.3</version>
+			</plugin>
+			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
@@ -98,6 +114,29 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>buildnumber-maven-plugin</artifactId>
+				<version>1.4</version>
+				<executions>
+					<execution>
+						<id>buildnumber</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>create</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<format>{0,number}</format>
+					<items>
+						<item>buildNumber</item>
+					</items>
+					<doCheck>false</doCheck>
+					<doUpdate>false</doUpdate>
+					<revisionOnScmFailure>unknownbuild</revisionOnScmFailure>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

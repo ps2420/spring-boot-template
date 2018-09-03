@@ -1,5 +1,5 @@
 server:
-  port: ${SERVER_PORT:5024}
+  port: ${SERVER_PORT:3089}
 
 eureka:
  instance:
@@ -16,7 +16,7 @@ eureka:
    healthcheck:
      enabled: true
    serviceUrl:
-     defaultZone: ${EUREKA_URL:http://${SERVER_HOST:localhost}:${EUREKA_SERVER_PORT:5012}}/eureka/
+     defaultZone: ${EUREKA_URL:http://${SERVER_HOST:localhost}:${EUREKA_SERVER_PORT:3082}}/eureka/
  server:
    waitTimeInMsWhenSyncEmpty: 0
    

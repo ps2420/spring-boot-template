@@ -35,7 +35,7 @@ public class SearchControllerTest extends BaseSetup {
   @Test
   public void searchContentsByProductAndKeyWord() throws Exception {
     LOGGER.info("initialized http_port : " + http_port);
-    final String httpURL = "http://localhost:" + http_port + "/search/listContent/eq?keyword=de";
+    final String httpURL = "http://localhost:" + http_port + "/search/searchDocuments?keyword=de";
     final ResponseEntity<String> response = restTemplate.getForEntity(httpURL, String.class);
     LOGGER.info("response-content:\n" + response.getBody());
     assertEquals(response.getStatusCode().value(), 200);
@@ -43,9 +43,9 @@ public class SearchControllerTest extends BaseSetup {
   }
 
   @Test
-  public void searchDistinctDocuments_byProduct() throws Exception {
+  public void search_unique_documents() throws Exception {
     LOGGER.info("initialized http_port : " + http_port);
-    final String httpURL = "http://localhost:" + http_port + "/search/documentCount/eq";
+    final String httpURL = "http://localhost:" + http_port + "/search/uniqueDocuments";
     final ResponseEntity<String> response = restTemplate.getForEntity(httpURL, String.class);
     LOGGER.info("response-content:\n" + response.getBody());
     assertEquals(response.getStatusCode().value(), 200);

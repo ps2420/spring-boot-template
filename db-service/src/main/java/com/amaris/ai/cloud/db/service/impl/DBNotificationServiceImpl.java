@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import com.amaris.ai.cloud.db.config.KafkaConfiguration;
 import com.amaris.ai.cloud.db.model.DocumentAudit;
 import com.amaris.ai.cloud.db.service.DBNotificationService;
-import com.amaris.ai.cloud.db.util.CommonUtil;
+import com.amaris.ai.cloud.db.util.DBServiceUtil;
 
 @Service
 public class DBNotificationServiceImpl implements DBNotificationService {
@@ -21,7 +21,7 @@ public class DBNotificationServiceImpl implements DBNotificationService {
   @Override
   public DocumentAudit auditDocument(final DocumentAudit documentAudit) throws Exception {
     final ProducerRecord<String, Object> record = new ProducerRecord<String, Object>(kConfiguration.getDocKafkaAudit(),
-        java.util.UUID.randomUUID().toString(), CommonUtil.objectMapper().writeValueAsString(documentAudit));
+        java.util.UUID.randomUUID().toString(), DBServiceUtil.objectMapper().writeValueAsString(documentAudit));
     kafkaProducer.send(record);
     return documentAudit;
   }

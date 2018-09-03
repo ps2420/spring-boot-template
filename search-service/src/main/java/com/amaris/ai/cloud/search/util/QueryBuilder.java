@@ -1,5 +1,7 @@
 package com.amaris.ai.cloud.search.util;
 
+import static com.amaris.ai.cloud.search.util.SearchUtil.CONTENT;
+import static com.amaris.ai.cloud.search.util.SearchUtil.DOCUMENT;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 import org.elasticsearch.action.search.SearchRequest;
@@ -9,6 +11,7 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.sort.ScoreSortBuilder;
 import org.elasticsearch.search.sort.SortOrder;
+import org.springframework.util.StringUtils;
 
 public class QueryBuilder {
 
@@ -21,40 +24,35 @@ public class QueryBuilder {
    * 
    * @return
    */
-  public static SearchSourceBuilder defaultSourceBuilder(final Integer resultSize) {
+  public static SearchSourceBuilder defaultSourceBuilder(final Integer from, final Integer to) {
     final SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
     sourceBuilder.timeout(new TimeValue(2000, TimeUnit.SECONDS));
-    sourceBuilder.from(0);
+    sourceBuilder.from(from);
+    sourceBuilder.size(to);
     sourceBuilder.sort(new ScoreSortBuilder().order(SortOrder.DESC));
-    sourceBuilder.size(resultSize);
     return sourceBuilder;
   }
 
   public SearchRequest defaultSearchRequest(final String indexName, final SearchSourceBuilder sourceBuilder) {
     final SearchRequest searchRequest = new SearchRequest(indexName);
-    // searchRequest.types("_doc");
     searchRequest.source(sourceBuilder);
     return searchRequest;
   }
 
-  public static BoolQueryBuilder buildBoolQueryBuilder(final String field, final String searchTerm) {
+  public static BoolQueryBuilder buildBoolQueryBuilder(final String document, final String searchTerm) {
     final BoolQueryBuilder boolQuery = new BoolQueryBuilder();
+    if (!StringUtils.isEmpty(document)) {
+      boolQuery.must(QueryBuilders.wildcardQuery(DOCUMENT, WILDCARD_STAR + document.trim().toLowerCase() + WILDCARD_STAR));
+    }
     Arrays.asList(searchTerm.split(",")).forEach(_keyword -> {
+      final BoolQueryBuilder _boolQuery = new BoolQueryBuilder();
       Arrays.asList(_keyword.trim().toLowerCase().split(" ")).forEach(keyword -> {
-        boolQuery.should(QueryBuilders.wildcardQuery(field, WILDCARD_STAR + keyword.trim().toLowerCase() + WILDCARD_STAR));
-        boolQuery.should(QueryBuilders.queryStringQuery(field + ":" + keyword));
+        _boolQuery.should(QueryBuilders.wildcardQuery(CONTENT, WILDCARD_STAR + keyword.trim().toLowerCase() + WILDCARD_STAR));
+        _boolQuery.should(QueryBuilders.queryStringQuery(CONTENT + ":" + keyword));
       });
+      boolQuery.must(_boolQuery);
     });
     return boolQuery;
   }
   
-  public static BoolQueryBuilder buildMustQueryBuilder(final String field, final String searchTerm) {
-    final BoolQueryBuilder query = new BoolQueryBuilder();
-    Arrays.asList(searchTerm.split(" ")).forEach(keyword -> {
-      query.must(QueryBuilders.wildcardQuery(field, WILDCARD_STAR + keyword.trim().toLowerCase() + WILDCARD_STAR));
-      query.must(QueryBuilders.queryStringQuery(field + ":" + keyword));
-    });
-    return query;
-  }
-
 }
