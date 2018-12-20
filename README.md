@@ -1,6 +1,8 @@
 
  # Welcome to document-upload github repo
 
+Spring boot 2.0 based microserices example of config-server, api-gateway, and other components.
+
 ## Installation location
 ```
 git clone <this-repo>
@@ -28,3 +30,13 @@ component orders config-server service-registry (followed by component in any or
 ./start_stop.sh start <comp-name>. (printed from ./status.sh on console)
 TO-DO dockerize and docker compose..
 ``` 
+
+## Application Flow
+```
+User uploads the document from dashboard-portal (angular 6 based UI)
+api-gateway route this requests to file-handler--> db-service --> send notification to downstream system.
+Search-service: User can search any content from UI where document is indexed on elastic search.
+Take a look at config-service src/main/resources for moreclarification.
+```
+
+

@@ -26,8 +26,8 @@ spring:
   profiles: local
   datasource:
     url: jdbc:mysql://localhost:3306/temasek
-    username: amaris
-    password: P@55w0rd1234
+    username: 
+    password: 
     driverClassName: com.mysql.jdbc.Driver
     maximumPoolSize: 5
     minimumIdle: 2
@@ -48,9 +48,9 @@ kafka:
 spring:
   profiles: dev
   datasource:
-    url: jdbc:mysql://192.168.1.119:3306/temasek
-    username: amaris
-    password: P@55w0rd1234
+    url: jdbc:mysql://.168.1.119:3306/temasek
+    username: 
+    password: 
     driverClassName: com.mysql.jdbc.Driver
     maximumPoolSize: 5
     minimumIdle: 2
