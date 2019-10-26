@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.pk.ai.cloud.domain.Customer;
+import com.pk.ai.cloud.domain.CustomerAddress;
 
 public interface CustomerDAO {
 
@@ -14,4 +15,6 @@ public interface CustomerDAO {
 	Customer saveCustomer(Customer product);
 
     void deleteCustomer(String uuid);
+    
+    List<CustomerAddress> listAddressesByCustomerId(String customerId);
 }

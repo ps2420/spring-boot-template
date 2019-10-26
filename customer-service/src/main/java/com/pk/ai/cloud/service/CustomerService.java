@@ -16,14 +16,7 @@ public interface CustomerService {
 	Customer saveCustomer(Customer customer);
 
 	void deleteCustomer(String uuid);
-
-	/** Methods related to customer address */
-	List<CustomerAddress> listAllCustomerAddress(String customerId);
-
-	Optional<CustomerAddress> getCustomerAddressByCustomerId(String customerId);
-
-	List<CustomerAddress> saveCustomerAddress(List<CustomerAddress> customerAddressList);
-
-	void deleteCustomerAddressByCustomerId(String customerId);
+	
+	List<CustomerAddress> listAddressesByCustomerId(String customerId);
 
 }

@@ -4,11 +4,16 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModelProperty;
 
@@ -25,10 +30,12 @@ public class CustomerAddress implements Serializable {
 	@ApiModelProperty(notes = "Customer address unique-id allocated by system")
 	private String uuid;
 
-	@Column(name = "CUSTOMER_ID")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "CUSTOMER_ID", nullable = false)
 	@ApiModelProperty(notes = "Customer Id of postal address")
-	private String customerId;
-
+	@JsonIgnore
+	private Customer customer;
+ 
 	@ApiModelProperty(notes = "Customer address type for ex: Office/Personal")
 	@Column(name = "TYPE")
 	private String type;
@@ -73,6 +80,14 @@ public class CustomerAddress implements Serializable {
 		this.uuid = uuid;
 	}
 
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+ 
 	public String getType() {
 		return type;
 	}

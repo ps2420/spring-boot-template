@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.pk.ai.cloud.dao.CustomerAddressDAO;
 import com.pk.ai.cloud.dao.CustomerDAO;
 import com.pk.ai.cloud.domain.Customer;
 import com.pk.ai.cloud.domain.CustomerAddress;
@@ -19,10 +18,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Autowired
 	private CustomerDAO customerDAO;
-
-	@Autowired
-	private CustomerAddressDAO customerAddressDAO;
-
+ 
 	public List<Customer> listAllCustomer() {
 		return customerDAO.listAllCustomer();
 	}
@@ -46,23 +42,7 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public List<CustomerAddress> listAllCustomerAddress(final String customerId) {
-		return customerAddressDAO.listAllCustomerAddress();
+	public List<CustomerAddress> listAddressesByCustomerId(final String customerId) { 
+		return customerDAO.listAddressesByCustomerId(customerId);
 	}
-
-	@Override
-	public Optional<CustomerAddress> getCustomerAddressByCustomerId(final String customerId) {
-		return customerAddressDAO.getCustomerAddressByCustomerId(customerId);
-	}
-
-	@Override
-	public List<CustomerAddress> saveCustomerAddress(final List<CustomerAddress> customerAddressList) {
-		return customerAddressDAO.saveCustomerAddress(customerAddressList);
-	}
-
-	@Override
-	public void deleteCustomerAddressByCustomerId(final String customerId) {
-		customerAddressDAO.deleteCustomerAddressByCustomerId(customerId);
-	}
-
 }

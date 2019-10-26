@@ -9,8 +9,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.pk.ai.cloud.dao.CustomerDAO;
+import com.pk.ai.cloud.dao.repository.CustomerAddressRepository;
 import com.pk.ai.cloud.dao.repository.CustomerRepository;
 import com.pk.ai.cloud.domain.Customer;
+import com.pk.ai.cloud.domain.CustomerAddress;
 
 @Repository
 @Transactional
@@ -18,6 +20,9 @@ public class CustomerDAOImpl implements CustomerDAO {
 
 	@Autowired
 	private CustomerRepository customerRepository;
+
+	@Autowired
+	private CustomerAddressRepository customerAddressRepository;
 
 	public List<Customer> listAllCustomer() {
 		final List<Customer> customerList = new ArrayList<>();
@@ -34,13 +39,20 @@ public class CustomerDAOImpl implements CustomerDAO {
 	@Override
 	@Transactional
 	public Customer saveCustomer(final Customer customer) {
-		return customerRepository.save(customer);
+		customer.getAddresses().parallelStream().forEach(customerAddress -> customerAddress.setCustomer(customer));
+		customerRepository.save(customer); 
+		return customer;
 	}
 
 	@Override
 	@Transactional
 	public void deleteCustomer(final String uuid) {
 		customerRepository.deleteById(uuid);
+	}
+
+	@Override
+	public List<CustomerAddress> listAddressesByCustomerId(String customerId) {
+		return customerAddressRepository.findAllAddressesByCustomerId(customerId);
 	}
 
 }

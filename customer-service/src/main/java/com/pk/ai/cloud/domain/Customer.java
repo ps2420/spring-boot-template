@@ -1,11 +1,16 @@
 package com.pk.ai.cloud.domain;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -60,6 +65,17 @@ public class Customer implements java.io.Serializable {
 	@ApiModelProperty(notes = "Customer segment for ex: Retail/Private Bank")
 	@Column(name = "CUSTOMER_SEGMENT")
 	private String customerSegment;
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "customer", cascade = CascadeType.ALL)
+	private Set<CustomerAddress> addresses = new HashSet<>();
+
+	public Set<CustomerAddress> getAddresses() {
+		return addresses;
+	}
+
+	public void setAddresses(Set<CustomerAddress> addresses) {
+		this.addresses = addresses;
+	}
 
 	public String getUuid() {
 		return uuid;

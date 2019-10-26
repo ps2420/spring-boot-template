@@ -18,7 +18,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.pk.ai.cloud.BaseSetup;
 import com.pk.ai.cloud.ITTestSetup;
+import com.pk.ai.cloud.dao.repository.CustomerAddressRepository;
 import com.pk.ai.cloud.domain.Customer;
+import com.pk.ai.cloud.util.CustomerServiceUtil;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = { ITTestSetup.class }, webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -30,6 +32,9 @@ public class CustomerDAOTest extends BaseSetup {
  
 	@Autowired
 	private CustomerDAO customerDAO;
+	
+	@Autowired
+	private CustomerAddressRepository customerAddressRepository;
 	
 	@Test
 	@Transactional
@@ -67,6 +72,13 @@ public class CustomerDAOTest extends BaseSetup {
 		final Optional<Customer> customerOpt = customerDAO.getCustomerById(customer.getUuid());
 		LOGGER.info("inside insertcustomer retrieved successfully customer");
 		assertTrue(!customerOpt.isPresent()); 
+	}
+	
+	@Test
+	public void customerAddressRepositoryTest() {
+		customerAddressRepository.findAll().forEach(customerAddress -> {
+			LOGGER.info("customerAddress >> " + CustomerServiceUtil.writeJsonData(customerAddress));
+		});
 	}
 
 }

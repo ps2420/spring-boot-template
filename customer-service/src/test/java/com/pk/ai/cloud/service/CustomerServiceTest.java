@@ -3,8 +3,10 @@ package com.pk.ai.cloud.service;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.pk.ai.cloud.BaseSetup;
 import com.pk.ai.cloud.ITTestSetup;
 import com.pk.ai.cloud.domain.Customer;
+import com.pk.ai.cloud.domain.CustomerAddress;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = { ITTestSetup.class }, webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -28,15 +31,26 @@ import com.pk.ai.cloud.domain.Customer;
 public class CustomerServiceTest extends BaseSetup {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(CustomerServiceTest.class);
- 
+
 	@Autowired
 	private CustomerService customerService;
 
-	@Test 
-	public void insertCutomer() throws Exception {
+	@Test
+	public void insertCustomer() throws Exception {
 		final Customer customer = new Customer();
 		customer.setFirstName("FIRST_NAME_" + java.util.UUID.randomUUID().toString());
 		customer.setLastName("LAST_NAME_" + java.util.UUID.randomUUID().toString());
+		
+		final CustomerAddress address = new CustomerAddress();
+		address.setAddressLine1(customer.getFirstName());
+		address.setAddressLine2(customer.getLastName());
+		address.setAddressLine3("addressLine3");
+		address.setCustomer(customer);
+		
+		final Set<CustomerAddress> set = new HashSet<>();
+		set.add(address);
+		customer.setAddresses(set);
+		
 		customerService.saveCustomer(customer);
 		BaseSetup.consolelog(customer);
 		final Optional<Customer> customerOpt = customerService.getCustomerById(customer.getUuid());
@@ -44,8 +58,8 @@ public class CustomerServiceTest extends BaseSetup {
 		assertTrue(customerOpt.get().getUuid().equalsIgnoreCase(customer.getUuid()));
 		BaseSetup.consolelog(customerOpt.get());
 	}
-	
-	@Test 
+
+	@Test
 	public void insertAndDeleteCutomer() throws Exception {
 		final Customer customer = new Customer();
 		customer.setFirstName("FIRST_NAME_" + java.util.UUID.randomUUID().toString());
@@ -54,22 +68,27 @@ public class CustomerServiceTest extends BaseSetup {
 		BaseSetup.consolelog(customer);
 		final Optional<Customer> customerOpt = customerService.getCustomerById(customer.getUuid());
 		LOGGER.info("inside insertcustomer retrieved successfully customer");
-		assertTrue(customerOpt.get().getUuid().equalsIgnoreCase(customer.getUuid())); 
-		
+		assertTrue(customerOpt.get().getUuid().equalsIgnoreCase(customer.getUuid()));
+
 		customerService.deleteCustomer(customer.getUuid());
 		final Optional<Customer> searchCustomerOpt = customerService.getCustomerById(customer.getUuid());
-		assertFalse(searchCustomerOpt.isPresent()); 
+		assertFalse(searchCustomerOpt.isPresent());
 	}
-	
-	@Test 
+
+	@Test
 	public void searchAllCustomers() throws Exception {
 		final Customer customer = new Customer();
 		customer.setFirstName("FIRST_NAME_" + java.util.UUID.randomUUID().toString());
 		customer.setLastName("LAST_NAME_" + java.util.UUID.randomUUID().toString());
 		customerService.saveCustomer(customer);
 		BaseSetup.consolelog(customer);
-		final List<Customer> customerList = customerService.listAllCustomer(); 
-		assertTrue(customerList.size() > 0) ; ; 
+		final List<Customer> customerList = customerService.listAllCustomer();
+		assertTrue(customerList.size() > 0);
 	}
 	
+	@Test
+	public void searchCustomerAddressByCustomerId() throws Exception {
+		//customerService.listAddressesByCustomerId(customerId)
+	}
+
 }
