@@ -3,10 +3,8 @@ package com.pk.ai.cloud.service;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,20 +35,7 @@ public class CustomerServiceTest extends BaseSetup {
 
 	@Test
 	public void insertCustomer() throws Exception {
-		final Customer customer = new Customer();
-		customer.setFirstName("FIRST_NAME_" + java.util.UUID.randomUUID().toString());
-		customer.setLastName("LAST_NAME_" + java.util.UUID.randomUUID().toString());
-		
-		final CustomerAddress address = new CustomerAddress();
-		address.setAddressLine1(customer.getFirstName());
-		address.setAddressLine2(customer.getLastName());
-		address.setAddressLine3("addressLine3");
-		address.setCustomer(customer);
-		
-		final Set<CustomerAddress> set = new HashSet<>();
-		set.add(address);
-		customer.setAddresses(set);
-		
+		final Customer customer = prepareCustomerData();
 		customerService.saveCustomer(customer);
 		BaseSetup.consolelog(customer);
 		final Optional<Customer> customerOpt = customerService.getCustomerById(customer.getUuid());
@@ -61,9 +46,7 @@ public class CustomerServiceTest extends BaseSetup {
 
 	@Test
 	public void insertAndDeleteCutomer() throws Exception {
-		final Customer customer = new Customer();
-		customer.setFirstName("FIRST_NAME_" + java.util.UUID.randomUUID().toString());
-		customer.setLastName("LAST_NAME_" + java.util.UUID.randomUUID().toString());
+		final Customer customer = prepareCustomerData();
 		customerService.saveCustomer(customer);
 		BaseSetup.consolelog(customer);
 		final Optional<Customer> customerOpt = customerService.getCustomerById(customer.getUuid());
@@ -85,10 +68,15 @@ public class CustomerServiceTest extends BaseSetup {
 		final List<Customer> customerList = customerService.listAllCustomer();
 		assertTrue(customerList.size() > 0);
 	}
-	
+
 	@Test
 	public void searchCustomerAddressByCustomerId() throws Exception {
-		//customerService.listAddressesByCustomerId(customerId)
+		final Customer customer = prepareCustomerData();
+		customerService.saveCustomer(customer);
+
+		final List<CustomerAddress> customerAddressList = customerService.listAddressesByCustomerId(customer.getUuid());
+		assertTrue(customerAddressList.size() > 0);
+		assertTrue(customerAddressList.get(0).getCustomer().getUuid().equalsIgnoreCase(customer.getUuid()));
 	}
 
 }

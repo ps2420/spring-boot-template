@@ -39,7 +39,7 @@ public class CustomerController {
 	public ResponseEntity<String> getCustomerById(@PathVariable String uuid) {
 		final Optional<Customer> customerOpt = customerService.getCustomerById(uuid);
 		if (customerOpt.isPresent()) {
-			return new ResponseEntity<String>(CustomerServiceUtil.writeJsonData(customerOpt), HttpStatus.OK);
+			return new ResponseEntity<String>(CustomerServiceUtil.writeJsonData(customerOpt.get()), HttpStatus.OK);
 		}
 		return new ResponseEntity<String>("Customer record not found", HttpStatus.OK);
 	}

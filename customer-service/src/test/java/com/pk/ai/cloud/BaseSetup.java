@@ -1,8 +1,13 @@
 package com.pk.ai.cloud;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
+import com.pk.ai.cloud.domain.Customer;
+import com.pk.ai.cloud.domain.CustomerAddress;
 import com.pk.ai.cloud.util.CustomerServiceUtil;
 
 public class BaseSetup {
@@ -29,6 +34,25 @@ public class BaseSetup {
 
 	public static void consolelog(final Object payload) {
 		CustomerServiceUtil.writeJsonData(payload);
+	}
+
+	protected Customer prepareCustomerData() {
+		final Customer customer = new Customer();
+		customer.setFirstName("FIRST_NAME_" + java.util.UUID.randomUUID().toString());
+		customer.setLastName("LAST_NAME_" + java.util.UUID.randomUUID().toString());
+		CustomerServiceUtil.readData(CustomerServiceUtil.writeJsonData(customer), Customer.class);
+
+		final CustomerAddress address = new CustomerAddress();
+		address.setAddressLine1(customer.getFirstName());
+		address.setAddressLine2(customer.getLastName());
+		address.setAddressLine3("addressLine3");
+		address.setCustomer(customer);
+		CustomerServiceUtil.readData(CustomerServiceUtil.writeJsonData(address), CustomerAddress.class);
+
+		final Set<CustomerAddress> set = new HashSet<>();
+		set.add(address);
+		customer.setAddresses(set);
+		return customer;
 	}
 
 }
