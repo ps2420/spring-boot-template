@@ -119,14 +119,14 @@
   <classpathentry kind="var" path="M2_REPO/com/github/vlsi/compactmap/compactmap/1.2.1/compactmap-1.2.1.jar" sourcepath="M2_REPO/com/github/vlsi/compactmap/compactmap/1.2.1/compactmap-1.2.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/github/andrewoma/dexx/dexx-collections/0.2/dexx-collections-0.2.jar" sourcepath="M2_REPO/com/github/andrewoma/dexx/dexx-collections/0.2/dexx-collections-0.2-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/netflix/eureka/eureka-core/1.9.2/eureka-core-1.9.2.jar" sourcepath="M2_REPO/com/netflix/eureka/eureka-core/1.9.2/eureka-core-1.9.2-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/com/amazonaws/aws-java-sdk-core/1.11.336/aws-java-sdk-core-1.11.336.jar" sourcepath="M2_REPO/com/amazonaws/aws-java-sdk-core/1.11.336/aws-java-sdk-core-1.11.336-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/software/amazon/ion/ion-java/1.0.2/ion-java-1.0.2.jar" sourcepath="M2_REPO/software/amazon/ion/ion-java/1.0.2/ion-java-1.0.2-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/amazonaws/aws-java-sdk-core/1.11.336/aws-java-sdk-core-1.11.336.jar"/>
+  <classpathentry kind="var" path="M2_REPO/software/amazon/ion/ion-java/1.0.2/ion-java-1.0.2.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/fasterxml/jackson/dataformat/jackson-dataformat-cbor/2.9.5/jackson-dataformat-cbor-2.9.5.jar" sourcepath="M2_REPO/com/fasterxml/jackson/dataformat/jackson-dataformat-cbor/2.9.5/jackson-dataformat-cbor-2.9.5-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/com/amazonaws/aws-java-sdk-ec2/1.11.336/aws-java-sdk-ec2-1.11.336.jar" sourcepath="M2_REPO/com/amazonaws/aws-java-sdk-ec2/1.11.336/aws-java-sdk-ec2-1.11.336-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/com/amazonaws/jmespath-java/1.11.336/jmespath-java-1.11.336.jar" sourcepath="M2_REPO/com/amazonaws/jmespath-java/1.11.336/jmespath-java-1.11.336-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/com/amazonaws/aws-java-sdk-autoscaling/1.11.336/aws-java-sdk-autoscaling-1.11.336.jar" sourcepath="M2_REPO/com/amazonaws/aws-java-sdk-autoscaling/1.11.336/aws-java-sdk-autoscaling-1.11.336-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/com/amazonaws/aws-java-sdk-sts/1.11.336/aws-java-sdk-sts-1.11.336.jar" sourcepath="M2_REPO/com/amazonaws/aws-java-sdk-sts/1.11.336/aws-java-sdk-sts-1.11.336-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/com/amazonaws/aws-java-sdk-route53/1.11.336/aws-java-sdk-route53-1.11.336.jar" sourcepath="M2_REPO/com/amazonaws/aws-java-sdk-route53/1.11.336/aws-java-sdk-route53-1.11.336-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/amazonaws/aws-java-sdk-ec2/1.11.336/aws-java-sdk-ec2-1.11.336.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/amazonaws/jmespath-java/1.11.336/jmespath-java-1.11.336.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/amazonaws/aws-java-sdk-autoscaling/1.11.336/aws-java-sdk-autoscaling-1.11.336.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/amazonaws/aws-java-sdk-sts/1.11.336/aws-java-sdk-sts-1.11.336.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/amazonaws/aws-java-sdk-route53/1.11.336/aws-java-sdk-route53-1.11.336.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/codehaus/woodstox/woodstox-core-asl/4.4.1/woodstox-core-asl-4.4.1.jar" sourcepath="M2_REPO/org/codehaus/woodstox/woodstox-core-asl/4.4.1/woodstox-core-asl-4.4.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/codehaus/woodstox/stax2-api/3.1.4/stax2-api-3.1.4.jar" sourcepath="M2_REPO/org/codehaus/woodstox/stax2-api/3.1.4/stax2-api-3.1.4-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/springframework/cloud/spring-cloud-starter-netflix-archaius/2.0.0.RELEASE/spring-cloud-starter-netflix-archaius-2.0.0.RELEASE.jar" sourcepath="M2_REPO/org/springframework/cloud/spring-cloud-starter-netflix-archaius/2.0.0.RELEASE/spring-cloud-starter-netflix-archaius-2.0.0.RELEASE-sources.jar"/>
