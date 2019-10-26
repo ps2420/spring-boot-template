@@ -1,8 +1,6 @@
 package com.pk.ai.cloud.domain;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,24 +34,31 @@ public class Customer implements java.io.Serializable {
 	private String lastName;
 
 	@ApiModelProperty(notes = "Customer middle name")
+	@Column(name = "MIDDLE_NAME")
 	private String middleName;
 
 	@ApiModelProperty(notes = "Customer date of birth")
+	@Column(name = "DATE_OF_BIRTH")
 	private Date dateOfBirth;
 
 	@ApiModelProperty(notes = "Customer mobile number with country code")
+	@Column(name = "MOBILE_NB")
 	private String mobileNb;
 
 	@ApiModelProperty(notes = "Customer number For ex: <CountryCode>10042001")
+	@Column(name = "CUSTOMER_NB")
 	private String customerNb;
 
 	@ApiModelProperty(notes = "Customer country of birth")
+	@Column(name = "COUNTRY_OF_BIRTH")
 	private String countryOfBirth;
 
 	@ApiModelProperty(notes = "Customer country of residence")
+	@Column(name = "COUNTRY_OF_RESIDENCE")
 	private String countryOfResidence;
 
 	@ApiModelProperty(notes = "Customer segment for ex: Retail/Private Bank")
+	@Column(name = "CUSTOMER_SEGMENT")
 	private String customerSegment;
 
 	public String getUuid() {

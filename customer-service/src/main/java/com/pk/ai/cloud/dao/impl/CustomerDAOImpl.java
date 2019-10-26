@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.pk.ai.cloud.dao.CustomerDAO;
-import com.pk.ai.cloud.dao.CustomerRepository;
+import com.pk.ai.cloud.dao.repository.CustomerRepository;
 import com.pk.ai.cloud.domain.Customer;
 
 @Repository

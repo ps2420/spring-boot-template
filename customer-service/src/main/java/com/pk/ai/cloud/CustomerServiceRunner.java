@@ -10,11 +10,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = "com.pk.ai.cloud.dao")
-public class DBServiceRunner {
+public class CustomerServiceRunner {
 
   // https://github.com/spring-cloud/spring-cloud-commons/issues/355
   public static void main(String[] args) {
-    SpringApplication.run(DBServiceRunner.class, args);
+    SpringApplication.run(CustomerServiceRunner.class, args);
   }
 
 }

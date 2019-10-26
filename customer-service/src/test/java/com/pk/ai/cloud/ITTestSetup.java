@@ -8,7 +8,7 @@ import org.springframework.context.annotation.FilterType;
 
 @SpringBootApplication
 @Configuration
-@ComponentScan(basePackages = {"com.pk.ai.cloud"}, excludeFilters = {@Filter(type = FilterType.ASSIGNABLE_TYPE, value = {DBServiceRunner.class})})
+@ComponentScan(basePackages = {"com.pk.ai.cloud"}, excludeFilters = {@Filter(type = FilterType.ASSIGNABLE_TYPE, value = {CustomerServiceRunner.class})})
 public class ITTestSetup {
 
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pk.ai.cloud.domain.Customer;
+import com.pk.ai.cloud.domain.CustomerAddress;
 import com.pk.ai.cloud.service.CustomerService;
 import com.pk.ai.cloud.util.CustomerServiceUtil;
 
@@ -44,7 +45,7 @@ public class CustomerController {
 	}
 
 	@ApiOperation(value = "Save customer")
-	@RequestMapping(value = "/save", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "/saveCustomer", method = RequestMethod.POST, produces = "application/json")
 	public ResponseEntity<String> saveCustomer(@RequestBody Customer customer) {
 		customerService.saveCustomer(customer);
 		return new ResponseEntity<String>("Customer saved successfully", HttpStatus.OK);
@@ -55,7 +56,38 @@ public class CustomerController {
 	public ResponseEntity<String> delete(final @PathVariable String uuid) {
 		customerService.deleteCustomer(uuid);
 		return new ResponseEntity<String>("Customer deleted successfully", HttpStatus.OK);
+	}
 
+	/** methods related to customer postal address */
+
+	@ApiOperation(value = "List all customer addresses by customer id", response = CustomerAddress.class)
+	@RequestMapping(value = "/listAllCustomerAddress/{uuid}", method = RequestMethod.GET, produces = "application/json")
+	public List<CustomerAddress> listAllCustomerAddress(@PathVariable String uuid) {
+		return customerService.listAllCustomerAddress(uuid);
+	}
+
+	@ApiOperation(value = "Search a customer address by customer id", response = Customer.class)
+	@RequestMapping(value = "/customerAddressById/{uuid}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<String> getCustomerAddressById(@PathVariable String uuid) {
+		final Optional<CustomerAddress> customerOpt = customerService.getCustomerAddressByCustomerId(uuid);
+		if (customerOpt.isPresent()) {
+			return new ResponseEntity<String>(CustomerServiceUtil.writeJsonData(customerOpt), HttpStatus.OK);
+		}
+		return new ResponseEntity<String>("Customer address records are not found", HttpStatus.OK);
+	}
+
+	@ApiOperation(value = "Save customer address")
+	@RequestMapping(value = "/saveCustomerAddress", method = RequestMethod.POST, produces = "application/json")
+	public ResponseEntity<String> saveCustomerAddress(final @RequestBody List<CustomerAddress> customerAddressList) {
+		customerService.saveCustomerAddress(customerAddressList);
+		return new ResponseEntity<String>("Customer addresses saved successfully", HttpStatus.OK);
+	}
+
+	@ApiOperation(value = "Delete customer address by customer id")
+	@RequestMapping(value = "/deleteCustomerAddress/{uuid}", method = RequestMethod.DELETE, produces = "application/json")
+	public ResponseEntity<String> deleteCustomerAddress(final @PathVariable String uuid) {
+		customerService.deleteCustomerAddressByCustomerId(uuid);
+		return new ResponseEntity<String>("Customer deleted successfully", HttpStatus.OK);
 	}
 
 }

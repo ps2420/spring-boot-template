@@ -1,4 +1,4 @@
-package com.pk.ai.cloud.dao;
+package com.pk.ai.cloud.dao.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
