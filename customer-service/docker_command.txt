@@ -1,5 +1,5 @@
 docker build -t $app_name:latest -f ${app_name}/Dockerfile --build-arg tag_version=${tag_version} --build-arg app_name=${app_name} --no-cache .
 
-docker run -p 8081:8080 --env="DB_PASSWORD=<user-name>" --env="DB_USERNAME=<password>" customer-service:latest
+docker run -p 8081:8080 --env="DB_PASSWORD=<password>" --env="DB_USERNAME=<user-name>" customer-service:latest
 
-docker run -p 8081:8080 --e DB_PASSWORD=<user-name> -e DB_USERNAME=<password> customer-service:latest
+docker run -p 8081:8080 --e DB_PASSWORD=<user-name> -e DB_USERNAME=<user-name> -e DB_PASSWORD=<password> customer-service:latest
