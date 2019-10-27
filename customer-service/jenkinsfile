@@ -8,6 +8,8 @@ node('master') {
 
   echo "I am node ${env.NODE_NAME}"
   def tag_version
+  def DB_USERNAME = "admin"
+  def db_password
   def app_name = "customer-service"
   def sonar_url = "http://192.168.1.35:9000"
   def developmentVersion = "0.0.1-SNAPSHOT"
@@ -18,12 +20,12 @@ node('master') {
   def today = new Date();
   tag_version = dateFormat.format(today);
 
-  //stage('User inputs') {
-  //  timeout(10) {
-  //     tag_version = input(id: 'version', message: 'Input binary version u want to release! ', ok: 'Ok', 
-  //      parameters: [string(defaultValue: "${tag_version}", description: '', name: 'version')])
-  //  }
-  //}
+  stage('User inputs') {
+    timeout(10) {
+       db_password = input(id: 'version', message: 'input database password to execute test cases! ', ok: 'Ok', 
+       parameters: [string(defaultValue: "${db_password}", description: '', name: 'password')])
+    }
+  }
 
  echo "tag_version : $tag_version"
 
@@ -35,7 +37,7 @@ node('master') {
      
  stage('Build & Execute test case') {
    sh "echo running command: mvn --batch-mode clean install --batch-mode -DSERVER_HOST=192.168.1.119 -f ${app_name}/pom.xml"
-   sh "mvn --batch-mode clean install -Dmaven.test.skip=true --batch-mode -DSERVER_HOST=192.168.1.119 -f ${app_name}/pom.xml"
+   sh "mvn --batch-mode clean install -DDB_USERNAME=admin -DDB_PASSWORD=${db_password} --batch-mode -DSERVER_HOST=192.168.1.119 -f ${app_name}/pom.xml"
  }
  
  stage('Publish the code coverage report') {
