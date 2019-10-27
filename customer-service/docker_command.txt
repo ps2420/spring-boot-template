@@ -3,3 +3,12 @@ docker build -t $app_name:latest -f ${app_name}/Dockerfile --build-arg tag_versi
 docker run -p 8081:8080 --env="DB_PASSWORD=<password>" --env="DB_USERNAME=<user-name>" customer-service:latest
 
 docker run -p 8081:8080 --e DB_PASSWORD=<user-name> -e DB_USERNAME=<user-name> -e DB_PASSWORD=<password> customer-service:latest
+
+
+terraform:
+---------
+
+https://blog.gruntwork.io/how-to-manage-terraform-state-28f5697e68fa
+https://blog.gruntwork.io/an-introduction-to-terraform-f17df9c6d180
+https://blog.gruntwork.io/how-to-create-reusable-infrastructure-with-terraform-modules-25526d65f73d
+https://hackernoon.com/manage-aws-vpc-as-infrastructure-as-code-with-terraform-55f2bdb3de2a
