@@ -13,6 +13,7 @@ node('master') {
   def app_name = "customer-service"
   def sonar_url = "http://192.168.1.35:9000"
   def developmentVersion = "0.0.1-SNAPSHOT"
+  def dockerImage = ''
 
 
   def dateFormat = new SimpleDateFormat("YYYY.MM.dd.HH.mm");
@@ -53,7 +54,17 @@ node('master') {
  stage ('build docker image') {
     sh 'eval "$(docker-machine env default)"'
     //docker.build("${app_name}:${tag_version}", "-f ${app_name}/Dockerfile --build-arg tag_version=${tag_version} --build-arg app_name=${app_name} --no-cache .")
-    docker.build("${app_name}:latest", "-f ${app_name}/Dockerfile --build-arg tag_version=${tag_version} --build-arg app_name=${app_name} --no-cache .")
+    dockerImage = docker.build("${app_name}:latest", "-f ${app_name}/Dockerfile --build-arg tag_version=${tag_version} --build-arg app_name=${app_name} --no-cache .")
  }
+  
+ stage('push docker Image to registry') {
+  steps{
+    script {
+      docker.withRegistry( "https://dockerreg.cloudguru-pk.com", 'docker-registry' ) {
+        dockerImage.push("latest")
+      }
+    }
+  }
+}
 
 }
