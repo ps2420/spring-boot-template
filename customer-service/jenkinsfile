@@ -21,12 +21,12 @@ node('master') {
   def today = new Date();
   tag_version = dateFormat.format(today);
 
-  stage('User inputs') {
-    timeout(10) {
-       db_password = input(id: 'version', message: 'input database password to execute test cases! ', ok: 'Ok', 
-       parameters: [string(defaultValue: "${db_password}", description: '', name: 'password')])
-    }
-  }
+  //stage('User inputs') {
+  //  timeout(10) {
+  //     db_password = input(id: 'version', message: 'input database password to execute test cases! ', ok: 'Ok', 
+  //     parameters: [string(defaultValue: "${db_password}", description: '', name: 'password')])
+  //  }
+  //}
 
  echo "tag_version : $tag_version"
 
@@ -38,7 +38,7 @@ node('master') {
      
  stage('Build & Execute test case') {
    sh "echo running command: mvn --batch-mode clean install --batch-mode -DSERVER_HOST=192.168.1.119 -f ${app_name}/pom.xml"
-   sh "mvn --batch-mode clean install -Dmaven.test.skip=true -DDB_USERNAME=admin -DDB_PASSWORD=${db_password} --batch-mode -DSERVER_HOST=192.168.1.119 -f ${app_name}/pom.xml"
+   sh "mvn --batch-mode clean install -Dmaven.test.skip=true -DDB_USERNAME=admin -DDB_PASSWORD=${PASSWORD} --batch-mode -DSERVER_HOST=192.168.1.119 -f ${app_name}/pom.xml"
  }
  
  stage('Publish the code coverage report') {
@@ -65,6 +65,5 @@ node('master') {
       }
     }
   }
-}
 
 }
