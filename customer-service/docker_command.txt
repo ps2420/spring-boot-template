@@ -20,16 +20,3 @@ https://blog.gruntwork.io/how-to-create-reusable-infrastructure-with-terraform-m
 https://hackernoon.com/manage-aws-vpc-as-infrastructure-as-code-with-terraform-55f2bdb3de2a
 
 https://coreos.com/tectonic/docs/latest/tutorials/aws/deleting-deployment.html
-
-
-password: ktJjXidfi7wqLlMU6sZrLR7LD22eODwX
-kubernets-url: https://api.cloudguru-pk.com/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/login
-token: 
-eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJrdWJlcm5ldGVzLWRhc2hib2FyZC10b2tlbi1icXN2eiIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjgyNWRhNjE5LWY5NjgtMTFlOS1hYjBhLTA2ZWQ3ZTNiODVmYyIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDprdWJlLXN5c3RlbTprdWJlcm5ldGVzLWRhc2hib2FyZCJ9.XeIQToDyntCr-o4nQgv8jieFkdJljik032saGDhhcL9h5uTiSZJNfF8z538fIBOAYsYPNnQG6Pq2EV0RJt-PaTUQD0lUFYCBKsUFd6xO_5mqPiKpzQ_vcK2bYIyvLJwzrC2DRNdTmA6_Pu3xrJZpWx2EZjioOSKgKSGZBwtsgGZgFA52evqKOq9f7MbQF95v1JwQBcOqIAb0lWgdBVcmLoqP3mzQt_b98_jJVlZM6cLv_hsxVgxfA5mojw6N8Su7NX5NdphMIStItCo2N-o0qYOC7Za91Vl_gpWbxNSsSA9mknX1n18UGcYvyb5-V3W6uVB59qkZG9oXD59_dZ3w8Q
-
-kops create cluster --node-count=2 --node-size=t2.medium \
---zones ap-southeast-1a,ap-southeast-1b,ap-southeast-1c \
---master-size t2.medium --name cloudguru-pk.com --master-volume-size 100 --node-volume-size 100 \
---networking calico --topology private --vpc $VPC_ID \
---subnets=subnet-033519a5980c866d4,subnet-0da7aea4ca931707e,subnet-088f03dfe431c776f \
---utility-subnets=subnet-095a423836a3bc964,subnet-0183d7be0a3ce1e16,subnet-0d83fe0410acb2c72 --yes
