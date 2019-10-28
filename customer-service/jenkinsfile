@@ -57,13 +57,9 @@ node('master') {
     dockerImage = docker.build("${app_name}:latest", "-f ${app_name}/Dockerfile --build-arg tag_version=${tag_version} --build-arg app_name=${app_name} --no-cache .")
  }
   
- stage('push docker Image to registry') {
-	  step{
-	    script {
-	      docker.withRegistry( "https://dockerreg.cloudguru-pk.com", 'docker-registry' ) {
-	        dockerImage.push("latest")
-	      }
-	    }
-	  }
+ stage('push docker Image to registry') {	   
+   docker.withRegistry( "https://dockerreg.cloudguru-pk.com", 'docker-registry' ) {
+    dockerImage.push("latest")
+   }
  }
 }
