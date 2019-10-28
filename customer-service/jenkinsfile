@@ -38,7 +38,7 @@ node('master') {
      
  stage('Build & Execute test case') {
    sh "echo running command: mvn --batch-mode clean install --batch-mode -DSERVER_HOST=192.168.1.119 -f ${app_name}/pom.xml"
-   sh "mvn --batch-mode clean install -DDB_USERNAME=admin -DDB_PASSWORD=${db_password} --batch-mode -DSERVER_HOST=192.168.1.119 -f ${app_name}/pom.xml"
+   sh "mvn --batch-mode clean install -Dmaven.test.skip=true -DDB_USERNAME=admin -DDB_PASSWORD=${db_password} --batch-mode -DSERVER_HOST=192.168.1.119 -f ${app_name}/pom.xml"
  }
  
  stage('Publish the code coverage report') {
