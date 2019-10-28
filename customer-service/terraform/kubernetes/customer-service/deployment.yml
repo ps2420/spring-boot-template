@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customer-service
+  labels:
+    app: customer-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: customer-service
+  template:
+    metadata:
+      labels:
+        app: customer-service
+    spec:
+      containers:
+      - name: customer-service
+        image: dockerreg.cloudguru-pk.com/customer-service:latest
+        ports:
+          - containerPort: 8081
+        env:
+          - name: DB_USERNAME
+            value: admin
+          - name: DB_PASSWORD
+            value: welcome123
+      imagePullSecrets:
+        - name: regsecret
+        
