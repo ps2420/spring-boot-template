@@ -58,7 +58,7 @@ node('master') {
  }
   
  stage('push docker Image to registry') {
-  steps{
+  step{
     script {
       docker.withRegistry( "https://dockerreg.cloudguru-pk.com", 'docker-registry' ) {
         dockerImage.push("latest")
