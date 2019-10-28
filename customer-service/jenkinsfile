@@ -58,12 +58,12 @@ node('master') {
  }
   
  stage('push docker Image to registry') {
-  step{
-    script {
-      docker.withRegistry( "https://dockerreg.cloudguru-pk.com", 'docker-registry' ) {
-        dockerImage.push("latest")
-      }
-    }
-  }
-
+	  step{
+	    script {
+	      docker.withRegistry( "https://dockerreg.cloudguru-pk.com", 'docker-registry' ) {
+	        dockerImage.push("latest")
+	      }
+	    }
+	  }
+ }
 }
