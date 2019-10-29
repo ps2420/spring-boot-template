@@ -1,0 +1,65 @@
+#!/groovy
+
+import java.text.SimpleDateFormat;
+
+import java.util.Date;
+
+node('master') {
+
+  echo "I am node ${env.NODE_NAME}"
+  def tag_version
+  def DB_USERNAME = "admin"
+  def db_password
+  def app_name = "customer-service"
+  def sonar_url = "http://192.168.1.35:9000"
+  def developmentVersion = "0.0.1-SNAPSHOT"
+  def dockerImage = ''
+
+
+  def dateFormat = new SimpleDateFormat("YYYY.MM.dd.HH.mm");
+  //dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+  def today = new Date();
+  tag_version = dateFormat.format(today);
+
+  //stage('User inputs') {
+  //  timeout(10) {
+  //     db_password = input(id: 'version', message: 'input database password to execute test cases! ', ok: 'Ok', 
+  //     parameters: [string(defaultValue: "${db_password}", description: '', name: 'password')])
+  //  }
+  //}
+
+ echo "tag_version : $tag_version"
+
+ deleteDir()
+
+ stage('Check out source code') {
+   checkout scm
+ }
+     
+ stage('Build & Execute test case') {
+   sh "echo running command: mvn --batch-mode clean install --batch-mode -DSERVER_HOST=192.168.1.119 -f ${app_name}/pom.xml"
+   sh "mvn --batch-mode clean install -Dmaven.test.skip=true -DDB_USERNAME=admin -DDB_PASSWORD=${PASSWORD} --batch-mode -DSERVER_HOST=192.168.1.119 -f ${app_name}/pom.xml"
+ }
+ 
+ stage('Publish the code coverage report') {
+   sh "echo running command: mvn --batch-mode sonar:sonar -Dsonar.host.url=${sonar_url} -f ${app_name}/pom.xml"
+   //sh "mvn --batch-mode sonar:sonar -Dsonar.host.url=${sonar_url} -f ${app_name}/pom.xml"
+ }
+ 
+ stage('Release the artifact') {
+   sh "echo mvn --batch-mode release:clean release:prepare release:perform -DreleaseVersion=${tag_version} -DdevelopmentVersion=${developmentVersion} -f ${app_name}/pom.xml"
+   sh "mvn --batch-mode release:clean -DreleaseVersion=${tag_version} -DdevelopmentVersion=${developmentVersion} -f ${app_name}/pom.xml"
+ }
+ 
+ stage ('build docker image') {
+    sh 'eval "$(docker-machine env default)"'
+    //docker.build("${app_name}:${tag_version}", "-f ${app_name}/Dockerfile --build-arg tag_version=${tag_version} --build-arg app_name=${app_name} --no-cache .")
+    dockerImage = docker.build("${app_name}:latest", "-f ${app_name}/Dockerfile --build-arg tag_version=${tag_version} --build-arg app_name=${app_name} --no-cache .")
+ }
+  
+ stage('push docker Image to registry') {	   
+   docker.withRegistry( "https://dockerreg.cloudguru-pk.com", 'docker-registry' ) {
+    dockerImage.push("latest")
+   }
+ }
+}

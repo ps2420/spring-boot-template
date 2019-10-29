@@ -1,0 +1,22 @@
+docker build -t $app_name:latest -f ${app_name}/Dockerfile --build-arg tag_version=${tag_version} --build-arg app_name=${app_name} --no-cache .
+
+docker run -p 8081:8080 --env="DB_PASSWORD=<password>" --env="DB_USERNAME=<user-name>" customer-service:latest
+
+docker run -p 8081:8080 --e DB_PASSWORD=<user-name> -e DB_USERNAME=<user-name> -e DB_PASSWORD=<password> customer-service:latest
+
+Creating docker registry:
+------------------------
+docker login -u="<username>" -p="<password>" https://dockerreg.cloudguru-pk.com
+
+kubectl create secret docker-registry regsecret --docker-server=https://dockerreg.cloudguru-pk.com --docker-username=<user-name> --docker-password=<password> --docker-email=pksingh2420@gmail.com
+
+
+terraform:
+---------
+
+https://blog.gruntwork.io/how-to-manage-terraform-state-28f5697e68fa
+https://blog.gruntwork.io/an-introduction-to-terraform-f17df9c6d180
+https://blog.gruntwork.io/how-to-create-reusable-infrastructure-with-terraform-modules-25526d65f73d
+https://hackernoon.com/manage-aws-vpc-as-infrastructure-as-code-with-terraform-55f2bdb3de2a
+
+https://coreos.com/tectonic/docs/latest/tutorials/aws/deleting-deployment.html

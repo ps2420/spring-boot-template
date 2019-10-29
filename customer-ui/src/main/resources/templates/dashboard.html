@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Customer service dashboard</title> 
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<style>
+	    .bs-example{
+	        margin: 20px;        
+	    }
+	</style>
+</head>
+<body>
+<!-- HTML Content starts here -->
+<div role="main" class="container-fluid" ng-app="customerApp" ng-controller="customersCtrl">
+	<div class="navbar navbar-expand-md navbar-dark bg-dark">
+		<nav>
+		    <a class="navbar-brand" href="#">Welcome to Customer service dashboard portal</a>
+		</nav>
+	</div>
+    <div class="container" style="margin:10px;">
+	  <h2>Get customer address by id</h2>   
+	  <div class="col-md row" style="margin:5px;">
+         <input type="text" class="form-control" ng-model="serverUrl" style="width:30%" placeholder="Enter sever url"> 
+      </div>
+      <div class="col-md row" style="margin:5px;">
+         <input type="text" class="form-control" ng-model="customerId" style="width:30%" placeholder="Enter customer id">&nbsp;&nbsp;&nbsp;
+         <button type="button" class="btn btn-info" ng-click="retrieveCustomerinfo()">Retrive customer address</button>
+      </div>  
+      <div class="col-md row" style="margin:5px;">
+         <textarea class="form-control rounded-0" ng-model="customerIdResponse" rows="10"></textarea>
+      </div>
+	</div>
+</div>
+ 
+ <!-- java script content starts here -->
+ <script>
+	var app = angular.module('customerApp', []);
+	app.controller('customersCtrl', function($scope, $http) {
+	     $scope.retrieveCustomerinfo = function () {
+	        var url = $scope.serverUrl + "/customer/customerById/" + $scope.customerId;  
+	        console.log("making server side call : " + url);
+	        $http.get(url).then(function(response) {
+			  $scope.customerIdResponse = angular.toJson(response.data, true);
+			});
+	     }
+	});
+ </script>
+</body>
+</html>
