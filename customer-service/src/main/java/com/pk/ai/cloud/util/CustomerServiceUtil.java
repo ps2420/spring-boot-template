@@ -11,7 +11,6 @@ public class CustomerServiceUtil {
 	private static final Logger LOGGER = LoggerFactory.getLogger(CustomerServiceUtil.class);
 
 	private static ObjectMapper objectMapper;
-	public static final String MOCK_CONTENT = "classpath:mock-data/";
 
 	static {
 		objectMapper = new ObjectMapper();
