@@ -10,7 +10,7 @@ node('master') {
   def tag_version
   def DB_USERNAME = "admin"
   def db_password
-  def app_name = "customer-service"
+  def app_name = "customer-ui"
   def sonar_url = "http://192.168.1.35:9000"
   def developmentVersion = "0.0.1-SNAPSHOT"
   def dockerImage = ''

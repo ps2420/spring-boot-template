@@ -24,7 +24,7 @@ RUN mkdir -p $APP_HOME/logs
 ARG tag_version
 ARG app_name
 
-ADD $app_name/target/customer-service-0.0.1-SNAPSHOT.jar $APP_HOME/app.jar
+ADD $app_name/target/customer-ui-0.0.1-SNAPSHOT.jar $APP_HOME/app.jar
 RUN chown -R $USER_NAME $APP_HOME/
  
 USER $USER_NAME
@@ -33,5 +33,5 @@ RUN bash -c 'touch app.jar'
 
 # Run the app
 ENTRYPOINT ["java", "-Dspring.profiles.active=native", "-DLOG_DIR=/home/pankaj/app/logs", "-DEUREKA_CLIENT_ENABLED=false", \
-"-DAPP_NAME=customer-service", "-DAPP_VERSION=0.0.1", "-Djava.net.preferIPv4Stack=true ", \
+"-DAPP_NAME=customer-ui", "-DAPP_VERSION=0.0.1", "-Djava.net.preferIPv4Stack=true ", \
 "-Xmx2g", "-XX:+HeapDumpOnOutOfMemoryError", "-XX:HeapDumpPath=/home/pankaj/app/logs", "-jar", "app.jar"]
