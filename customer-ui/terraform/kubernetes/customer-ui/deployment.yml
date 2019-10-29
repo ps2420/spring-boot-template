@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customer-ui
+  labels:
+    app: customer-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: customer-ui
+  template:
+    metadata:
+      labels:
+        app: customer-ui
+    spec:
+      containers:
+      - name: customer-ui
+        image: dockerreg.cloudguru-pk.com/customer-ui:latest
+        ports:
+          - containerPort: 8081
+      imagePullSecrets:
+        - name: regsecret
+        

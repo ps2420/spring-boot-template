@@ -26,10 +26,7 @@
 		</nav>
 	</div>
     <div class="container" style="margin:10px;">
-	  <h2>Get customer address by id</h2>   
-	  <div class="col-md row" style="margin:5px;">
-         <input type="text" class="form-control" ng-model="serverUrl" style="width:30%" placeholder="Enter sever url"> 
-      </div>
+	  <h2>Get customer address by id</h2>
       <div class="col-md row" style="margin:5px;">
          <input type="text" class="form-control" ng-model="customerId" style="width:30%" placeholder="Enter customer id">&nbsp;&nbsp;&nbsp;
          <button type="button" class="btn btn-info" ng-click="retrieveCustomerinfo()">Retrive customer address</button>
@@ -45,7 +42,7 @@
 	var app = angular.module('customerApp', []);
 	app.controller('customersCtrl', function($scope, $http) {
 	     $scope.retrieveCustomerinfo = function () {
-	        var url = $scope.serverUrl + "/customer/customerById/" + $scope.customerId;  
+	        var url = "/customer/customerById/" + $scope.customerId;  
 	        console.log("making server side call : " + url);
 	        $http.get(url).then(function(response) {
 			  $scope.customerIdResponse = angular.toJson(response.data, true);

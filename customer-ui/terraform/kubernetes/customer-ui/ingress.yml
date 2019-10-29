@@ -1,14 +1,14 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: customer-service
+  name: customer-ui
   namespace: default
 spec:
   rules:
   - host: customer-service.cloudguru-pk.com
     http:
       paths:
-      - path: /
+      - path: /dashboard
         backend:
-          serviceName: customer-service
+          serviceName: customer-ui
           servicePort: 8080
