@@ -5,12 +5,16 @@ import java.util.Set;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.pk.ai.cloud.domain.Customer;
 import com.pk.ai.cloud.domain.CustomerAddress;
 import com.pk.ai.cloud.util.CustomerServiceUtil;
 
 public class BaseSetup {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(BaseSetup.class);
 
 	public static String RANDOM = "XXX";
 	public static String AMARIS_USER = "amaris";
@@ -40,19 +44,28 @@ public class BaseSetup {
 		final Customer customer = new Customer();
 		customer.setFirstName("FIRST_NAME_" + java.util.UUID.randomUUID().toString());
 		customer.setLastName("LAST_NAME_" + java.util.UUID.randomUUID().toString());
-		CustomerServiceUtil.readData(CustomerServiceUtil.writeJsonData(customer), Customer.class);
+		readData(CustomerServiceUtil.writeJsonData(customer), Customer.class);
 
 		final CustomerAddress address = new CustomerAddress();
 		address.setAddressLine1(customer.getFirstName());
 		address.setAddressLine2(customer.getLastName());
 		address.setAddressLine3("addressLine3");
 		address.setCustomer(customer);
-		CustomerServiceUtil.readData(CustomerServiceUtil.writeJsonData(address), CustomerAddress.class);
+		readData(CustomerServiceUtil.writeJsonData(address), CustomerAddress.class);
 
 		final Set<CustomerAddress> set = new HashSet<>();
 		set.add(address);
 		customer.setAddresses(set);
 		return customer;
+	}
+
+	protected <T> T readData(final String jsondata, final Class<T> clazz) {
+		try {
+			return CustomerServiceUtil.objectMapper().readValue(jsondata.getBytes(), clazz);
+		} catch (final Exception ex) {
+			LOGGER.error("Error in converting to class:[{}], json-data:[{}]" + ex, clazz, jsondata, ex);
+		}
+		return null;
 	}
 
 }

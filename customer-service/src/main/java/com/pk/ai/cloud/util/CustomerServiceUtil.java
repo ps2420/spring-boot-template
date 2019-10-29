@@ -3,7 +3,6 @@ package com.pk.ai.cloud.util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -32,15 +31,6 @@ public class CustomerServiceUtil {
 		} catch (final Exception ex) {
 		}
 		return jsonData;
-	}
-
-	public static <T> T readData(final String jsondata, final Class<T> clazz) {
-		try {
-			return objectMapper().readValue(jsondata.getBytes(), clazz);
-		} catch (final Exception ex) {
-			LOGGER.error("Error in converting to class:[{}], json-data:[{}]" + ex, clazz, jsondata, ex);
-		}
-		return null;
 	}
 
 }

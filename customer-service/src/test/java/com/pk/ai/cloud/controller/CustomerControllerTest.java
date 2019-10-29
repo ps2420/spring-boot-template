@@ -52,7 +52,7 @@ public class CustomerControllerTest extends BaseSetup {
 
 		final ResponseEntity<String> responseEntity = customerController.getCustomerById(customer.getUuid());
 		CustomerServiceUtil.writeJsonData(responseEntity);
-		final Customer searchedData = CustomerServiceUtil.readData(responseEntity.getBody(), Customer.class);
+		final Customer searchedData = readData(responseEntity.getBody(), Customer.class);
 		assertNotNull(searchedData);
 		CustomerServiceUtil.writeJsonData(customer);
 		CustomerServiceUtil.writeJsonData(searchedData);
