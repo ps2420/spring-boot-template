@@ -28,7 +28,7 @@
 		<kafka.clients>0.10.2.0</kafka.clients>
 		<commons.io>2.6</commons.io>
 		<spring-kafka.version>1.2.1.RELEASE</spring-kafka.version>
-		<mysql.version>5.1.46</mysql.version>
+		<mysql.version>8.0.16</mysql.version>
 		<postgresql.version>7.4.1</postgresql.version>
 		<hikari.version>3.2.0</hikari.version>
 	</properties>
