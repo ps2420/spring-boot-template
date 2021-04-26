@@ -26,7 +26,7 @@
 		<spring-cloud.version>Finchley.RELEASE</spring-cloud.version>
 		<spring.boot.admin>2.0.1</spring.boot.admin>
 		<kafka.clients>0.10.2.0</kafka.clients>
-		<commons.io>2.6</commons.io>
+		<commons.io>2.7</commons.io>
 		<spring-kafka.version>1.2.1.RELEASE</spring-kafka.version>
 		<mysql.version>5.1.46</mysql.version>
 		<postgresql.version>7.4.1</postgresql.version>
